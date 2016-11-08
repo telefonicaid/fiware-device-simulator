@@ -1,4 +1,4 @@
-# <a name="top">FIWARE Device Simulator</a>
+# Welcome to the FIWARE Device Simulator documentation.
 
 The FIWARE Device Simulator is a tool which makes it possible to interact with the FIWARE ecosystem of components simulating devices and other elements which may communicate with FIWARE components.
 
@@ -10,11 +10,3 @@ More concretely, the FIWARE Device Simulator includes the following capabilities
 4. Automatic authorization and token management to interact with secured components and infrastructures.
 5. Possibility to run the simulations in real time and fast-forward modes.
 6. Possibility to visualize the evolution of the simulations in [Freeboard.io](http://freeboard.io/) dashboards.
-
-For further information please visit: the official [FIWARE Device Simulator documentation](fiware-sth-comet.readthedocs.io) at ReadTheDocs.
-
-## Contact
-
-* Germán Toro del Valle ([german.torodelvalle@telefonica.com](mailto:german.torodelvalle@telefonica.com), [@gtorodelvalle](http://www.twitter.com/gtorodelvalle))
-
-[Top](#top)

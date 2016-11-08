@@ -1,4 +1,4 @@
-# <a name="top">FIWARE Device Simulator</a>
+# FIWARE Device Simulator
 
 The FIWARE Device Simulator is a tool which makes it possible to interact with the FIWARE ecosystem of components simulating devices and other elements which may communicate with FIWARE components.
 
@@ -16,5 +16,3 @@ For further information please visit: the official [FIWARE Device Simulator docu
 ## Contact
 
 * Germán Toro del Valle ([german.torodelvalle@telefonica.com](mailto:german.torodelvalle@telefonica.com), [@gtorodelvalle](http://www.twitter.com/gtorodelvalle))
-
-[Top](#top)

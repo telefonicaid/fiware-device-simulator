@@ -22,11 +22,10 @@
 FROM node:0.12
 
 RUN mkdir -p /opt/fiware-device-simulator
+WORKDIR /opt/fiware-device-simulator
 
 COPY package.json /opt/fiware-device-simulator
 RUN npm install
 
 COPY bin /opt/fiware-device-simulator/bin
 COPY lib /opt/fiware-device-simulator/lib
-
-WORKDIR /opt/fiware-device-simulator

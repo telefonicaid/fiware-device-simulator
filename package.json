@@ -1,0 +1,68 @@
+{
+  "name": "fiware-device-simulator",
+  "description": "Simulator of FIWARE-compatible devices",
+  "version": "8.2.0",
+  "homepage": "https://github.com/gtorodelvalle/fiware-device-simulator",
+  "author": {
+    "name": "Germán Toro del Valle",
+    "email": "gtorodelvalle@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/gtorodelvalle/fiware-device-simulator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gtorodelvalle/fiware-device-simulator/issues"
+  },
+  "main": "bin/fiwareDeviceSimulatorCLI",
+  "engines": {
+    "node": ">=0.10.22"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "chai": "~1.8.0",
+    "grunt": "~0.4.1",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-dox": "~0.5.0",
+    "grunt-exec": "~0.4.0",
+    "grunt-githooks": "~0.3.1",
+    "grunt-github-pages": "~0.0.3",
+    "grunt-gjslint": "~0.1.0",
+    "grunt-mkdir": "~0.1.1",
+    "grunt-mocha-test": "~0.7.0",
+    "grunt-plato": "~0.2.0",
+    "istanbul": "~0.3.2",
+    "mocha": "~1.13.0",
+    "nock": "^8.0.0",
+    "proxyquire": "0.5.1",
+    "should": "^10.0.0",
+    "sinon": "^1.7.3",
+    "sinon-chai": "2.4.0"
+  },
+  "keywords": [],
+  "dependencies": {
+    "app-root-path": "^1.3.0",
+    "async": "^2.0.1",
+    "commander": "^2.9.0",
+    "dateformat": "^1.0.12",
+    "deasync": "^0.1.8",
+    "eval": "^0.1.1",
+    "google-spreadsheet": "^2.0.3",
+    "humanize-duration": "^3.9.1",
+    "linear-interpolator": "^1.0.2",
+    "logops": "^1.0.1",
+    "lolex": "^1.5.1",
+    "mqtt": "^1.14.0",
+    "node-schedule": "^1.2.0",
+    "npm-install-package": "^1.1.0",
+    "request": "^2.78.0",
+    "time": "^0.11.4",
+    "turf-along": "^3.0.12",
+    "turf-line-distance": "^3.0.12",
+    "turf-linestring": "^1.0.2"
+  }
+}

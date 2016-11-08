@@ -1,0 +1,39 @@
+{
+  "domain": {
+    "service": "theService",
+    "subservice": "/theSubService"
+  },
+  "contextBroker": {
+    "protocol": "https",
+    "host": "localhost",
+    "port": 1026,
+    "ngsiVersion": "1.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "https",
+    "host": "localhost",
+    "port": 5001,
+    "user": "theUser",
+    "password": "thePassword"
+  },
+  "iota": {
+    "json": {
+      "http": {
+        "protocol": "http",
+        "host": "localhost",
+        "port": 8185
+      }
+    }
+  },
+  "devices": [{
+    "schedule": "once",
+    "device_id": "DeviceId1",
+    "protocol": "JSON::HTTP",
+    "api_key": "the-api-key",
+    "attributes": [{
+      "object_id": "attribute1",
+      "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 108000})"
+    }]
+  }]
+}

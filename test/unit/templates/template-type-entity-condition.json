@@ -1,0 +1,6 @@
+[
+  {
+    "content": "the-entity-type",
+    "condition": "${{entity_name==the-.*-name}}"
+  }
+]

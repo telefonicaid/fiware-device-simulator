@@ -1,0 +1,10 @@
+[
+  {
+    "content": "not-matching",
+    "condition": "${{entity_name==the-.*-NAME}}"
+  },
+  {
+    "content": "the-entity-schedule",
+    "condition": "${{entity_name==the-.*-name}}"
+  }
+]

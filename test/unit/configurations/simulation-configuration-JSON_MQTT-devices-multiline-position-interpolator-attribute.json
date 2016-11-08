@@ -1,0 +1,39 @@
+{
+  "domain": {
+    "service": "theService",
+    "subservice": "/theSubService"
+  },
+  "contextBroker": {
+    "protocol": "https",
+    "host": "localhost",
+    "port": 1026,
+    "ngsiVersion": "1.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "https",
+    "host": "localhost",
+    "port": 5001,
+    "user": "theUser",
+    "password": "thePassword"
+  },
+  "iota": {
+    "json": {
+      "mqtt": {
+        "protocol": "mqtt",
+        "host": "localhost",
+        "port": 1883
+      }
+    }
+  },
+  "devices": [{
+    "schedule": "once",
+    "device_id": "DeviceId1",
+    "protocol": "JSON::MQTT",
+    "api_key": "the-api-key",
+    "attributes": [{
+      "object_id": "attribute1",
+      "value": "multiline-position-interpolator({\"coordinates\": [[-6.2683868408203125,36.48948933214638],[-6.257915496826172,36.46478162030615],[-6.252079010009766,36.461744374732085],[-6.2162017822265625,36.456774079889286]],\"speed\": {\"value\": 30,\"units\": \"km/h\"},\"time\": {\"from\": 10,\"to\": 22}})"
+    }]
+  }]
+}

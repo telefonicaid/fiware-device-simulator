@@ -1,0 +1,14 @@
+[
+  {
+    "content": "not-matching",
+    "condition": "${{entity_name==the-.*-NAME}{name==the-.*-name}}"
+  },
+  {
+    "content": "not-matching",
+    "condition": "${{entity_name==the-.*-name}{name==the-.*-NAME}}"
+  },
+  {
+    "content": "the-attribute-value",
+    "condition": "${{entity_name==the-.*-name}{name==the-.*-name}}"
+  }
+]

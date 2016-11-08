@@ -1,0 +1,544 @@
+#!/usr/bin/env node
+
+/*
+ * Copyright 2016 Telefónica Investigación y Desarrollo, S.A.U
+ *
+ * This file is part of the Short Time Historic (STH) component
+ *
+ * STH is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License,
+ * or (at your option) any later version.
+ *
+ * STH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public
+ * License along with STH.
+ * If not, see http://www.gnu.org/licenses/.
+ *
+ * For those usages not covered by the GNU Affero General Public License
+ * please contact with: [german.torodelvalle@telefonica.com]
+ */
+
+'use strict';
+
+var ROOT_PATH = require('app-root-path');
+var async = require('async');
+var commander = require('commander');
+var dateformat = require('dateformat');
+var fs = require('fs');
+var GoogleSheet = require('google-spreadsheet');
+var logops = require('logops');
+var humanizeDuration = require('humanize-duration');
+var path = require('path');
+var request = require('request');
+var time = require('time');
+var deviceSimulator = require(ROOT_PATH + '/lib/fiwareDeviceSimulator');
+
+/**
+ * Array with the last 10 emitted errors
+ * @type {Array}
+ */
+var errors = [];
+
+/**
+ * Last emitted progress information
+ */
+var progressInfo = {};
+
+/**
+ * The concrete Google spread sheet the scheduled updates will be stored into
+ * @type {Object}
+ */
+var googleSheet;
+
+/**
+ * The Google Sheet work sheet where the scheduled updates will be stored
+ * @type {Object}
+ */
+var googleSheetTab;
+
+/**
+ * lolex NPM package clock in case of fast-forward simulations
+ */
+var clock;
+
+/**
+ * The array of scheduled update jobs
+ */
+var updateJobs;
+
+/**
+ * On error event handler
+ * @param  {Object} ev The error event
+ */
+function onError(ev) {
+  errors.slice(0, (errors.length === 10 ? 1 : 0), { timestamp: new Date(), error: JSON.stringify(ev) });
+  logops.error('error event:', ev);
+}
+
+process.on('SIGINT', function() {
+  deviceSimulator.stop();
+});
+
+process.on('uncaughtException', function(exception) {
+  onError(
+    {
+      error: 'uncaughtException: ' + exception
+    }
+  );
+  deviceSimulator.stop();
+});
+
+/**
+ * Helper function to create Dates from the passed argument
+ * @param  {String} date The date string
+ * @return {Date}        The date
+ */
+function createDate(date) {
+  return new Date(date);
+}
+
+/**
+ * Processes a progress-info event and generates the corresponding progress information object
+ * @param  {Object} ev The progress-info event
+ */
+function processProgressInfo(ev) {
+  progressInfo = {
+    totalUpdateRequests: ev.updatesRequested,
+    elapsedTime: humanizeDuration(ev.elapsedTime),
+    throughput: (ev.updatesRequested / (ev.elapsedTime / 1000)).toFixed(2),
+    delayedUpdateRequests: ev.delayedUpdateRequests,
+    delayedUpdateRequestsX100: (ev.updatesProcessed ?
+      (100 * ev.delayedUpdateRequests / ev.updatesProcessed).toFixed(2) :
+      'N/A'),
+    errorUpdateRequests: ev.errorUpdateRequests,
+    errorUpdateRequestsX100: (ev.updatesProcessed ?
+      (100 * ev.errorUpdateRequests / ev.updatesProcessed).toFixed(2) :
+      'N/A'),
+    googleSheetUpdateStatus: (commander.from || commander.to ? 'not supported' : progressInfo.googleSheetUpdateStatus),
+    lastGoogleSheetUpdate: progressInfo.lastGoogleSheetUpdate,
+    googleSheetUpdateInterval: (commander.timeline ? commander.timeline.refreshInterval || 0 : 0),
+    googleSheetKey: (commander.timeline ? commander.timeline.sheetKey || '' : ''),
+    googleSheetUpdateJobs: progressInfo.googleSheetUpdateJobs
+  };
+  if (commander.to) {
+    progressInfo.simulatedPendingTime = humanizeDuration(commander.to - commander.from - ev.simulatedElapsedTime);
+  } else {
+    progressInfo.simulatedPendingTime = 'N/A';
+  }
+  progressInfo.simulatedElapsedTime = humanizeDuration(ev.simulatedElapsedTime);
+  if (commander.to) {
+    progressInfo.pendingTime = humanizeDuration(
+      ((commander.to.getTime() -
+        (commander.from.getTime() + ev.simulatedElapsedTime)) * ev.elapsedTime) /
+        ev.simulatedElapsedTime);
+  } else {
+    progressInfo.pendingTime = 'N/A';
+  }
+}
+
+/**
+ * Writes the simulation progress information to the console if configured
+ */
+function writeToConsole() {
+  if (!commander.silent) {
+    logops.info(
+      'progress-info',
+      {
+        totalUpdateRequests: progressInfo.totalUpdateRequests + ' updates',
+        throughput: progressInfo.throughput + ' updates/sec.',
+        errorUpdateRequests: progressInfo.errorUpdateRequests + ' updates',
+        errorUpdateRequestsX100: progressInfo.errorUpdateRequestsX100 + '%',
+        delayedUpdateRequests: progressInfo.delayedUpdateRequests + ' updates',
+        delayedUpdateRequestsX100: progressInfo.delayedUpdateRequestsX100 + '%',
+        elapsedTime: progressInfo.elapsedTime,
+        pendingTime: progressInfo.pendingTime,
+        simulatedElapsedTime: progressInfo.simulatedElapsedTime,
+        simulatedPendingTime: progressInfo.simulatedPendingTime
+      }
+    );
+  }
+}
+
+/**
+ * Dweets the simulation progress information if configured
+ * @param  {Object}   dweetConfig The dweet.io configuration
+ * @param  {Function} callback    The callback
+ */
+function dweet(dweetConfig, callback) {
+  if (dweetConfig) {
+    progressInfo.errors = errors;
+    request.post(
+      {
+        url: 'https://dweet.io/dweet/for/' + dweetConfig.name +
+          (dweetConfig.apiKey ? '?key=' + dweetConfig.apiKey : ''),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        json: true,
+        body: progressInfo
+      },
+      function(err, response, body) {
+        callback(err || body.because, response, body);
+      }
+    );
+  } else {
+    callback();
+  }
+}
+
+/**
+ * Resolves a path to its final value
+ * @param  {String} path The original path
+ * @return {String}      The resolved path
+ */
+function resolvePath(filePath) {
+  var resolvedPath;
+  if (filePath[0] === '/') {
+    resolvedPath = filePath;
+  } else if (filePath[0] === '.') {
+    resolvedPath = ROOT_PATH + filePath.substring(1);
+  } else {
+    resolvedPath = ROOT_PATH + path.sep + filePath;
+  }
+  return resolvedPath;
+}
+
+/**
+ * Returns true if the file the passed is pointing to exists, false otherwise
+ * @param  {String}  path The path to the file
+ * @return {Boolean}      True if the file pointing by the passed path exists, false otherwise
+ */
+function fileExists(path) {
+  var resolvedPath = resolvePath(path);
+  return fs.existsSync(resolvedPath);
+}
+
+/**
+ * Runs certain function in the next tick using the simulated time clock if available
+ * @param  {Object} func The function to run in a next tick
+ */
+function runInNextTick(func) {
+  process.nextTick(func.bind.apply(func, [null].concat(Array.prototype.slice.call(arguments, 1))));
+  if (clock) {
+    clock.next();
+  }
+}
+
+/**
+ * Google Sheet work sheet addRow() function handler
+ * @param  {Object} error The error if any
+ */
+function onAddRows(err) {
+  if (err) {
+    logops.error('Error when adding a row to Google Sheet work sheet or tab: ' + err);
+    progressInfo.googleSheetUpdateStatus = 'error';
+  } else {
+    progressInfo.googleSheetUpdateStatus = 'complete';
+  }
+  progressInfo.lastGoogleSheetUpdate = time.Date.now();
+}
+
+/**
+ * Google Sheet work sheet setHeaderRow() function handler
+ * @param  {Object} error The error if any
+ */
+function onSetHeaderRow(err) {
+  if (err) {
+    progressInfo.googleSheetUpdateStatus = 'error';
+    progressInfo.lastGoogleSheetUpdate = time.Date.now();
+    return logops.error('Error when setting the header row in the Google Sheet work sheet or tab: ' +
+      err);
+  }
+  var rows = [];
+  for (var ii = 0; ii < updateJobs.length; ii++) {
+    for (var jj = 0; jj < updateJobs[ii].pendingInvocations().length; jj++) {
+      var formattedDateTime = dateformat(
+        updateJobs[ii].pendingInvocations()[jj].fireDate, commander.timeline.dateFormat);
+      rows.push(
+        {
+          'Row Label': 'Scheduled update',
+          'Bar Label': '[' + formattedDateTime + ']: ' + updateJobs[ii].name,
+          'Start': formattedDateTime,
+          'End': formattedDateTime
+        }
+      );
+    }
+  }
+  progressInfo.googleSheetUpdateJobs = rows.length;
+  runInNextTick(async.each, rows, googleSheetTab.addRow, onAddRows);
+}
+
+/**
+ * Google Sheet work sheet resize() function handler
+ * @param  {Object} error The error if any
+ */
+function onResize(err) {
+  if (err) {
+    progressInfo.googleSheetUpdateStatus = 'error';
+    progressInfo.lastGoogleSheetUpdate = time.Date.now();
+    return logops.error('Error when resizing the Google Sheet work sheet or tab: ' + err);
+  }
+  runInNextTick(googleSheetTab.setHeaderRow, ['Row Label', 'Bar Label', 'Start', 'End'], onSetHeaderRow);
+}
+
+/**
+ * Google Sheet work sheet clear() function handler
+ * @param  {Object} error The error if any
+ */
+function onClear(err) {
+  if (err) {
+    progressInfo.googleSheetUpdateStatus = 'error';
+    progressInfo.lastGoogleSheetUpdate = time.Date.now();
+    return logops.error('Error when clearing the Google Sheet work sheet or tab: ' + err);
+  }
+  runInNextTick(googleSheetTab.resize, {rowCount: 1, colCount: 4}, onResize);
+}
+
+/**
+ * Updates the schedule jobs into Google Sheet if configured
+ */
+function updateScheduledJobsInGoogleSheet() {
+  if (googleSheetTab &&
+    (progressInfo.googleSheetUpdateStatus !== 'not supported' && progressInfo.googleSheetUpdateStatus !== 'ongoing') &&
+    ((time.Date.now() - (progressInfo.lastGoogleSheetUpdate || 0)) > commander.timeline.refreshInterval)) {
+    progressInfo.googleSheetUpdateStatus = 'ongoing';
+    runInNextTick(googleSheetTab.clear, onClear);
+  }
+}
+
+/**
+ * Starts the simulation
+ */
+function startSimulation() {
+  var progressEmitter = deviceSimulator.start(
+    require(resolvePath(commander.configuration)), commander.from, commander.to,
+    commander.progressInfoInterval, commander.maximumNotRespondedRequests, commander.delay || 1000);
+
+  progressEmitter.on('token-request', function() {
+    logops.debug('token-request event');
+  });
+
+  progressEmitter.on('token-response', function(ev) {
+    logops.debug('token-response event:', ev);
+  });
+
+  progressEmitter.on('token-request-scheduled', function(ev) {
+    logops.debug('token-request-scheduled:', ev);
+  });
+
+  progressEmitter.on('update-scheduled', function(ev) {
+    logops.debug('update-scheduled event:', ev);
+  });
+
+  progressEmitter.on('update-request', function(ev) {
+    logops.debug('update-request event:', ev);
+  });
+
+  progressEmitter.on('info', function(ev) {
+    logops.info('info event:', ev.message);
+  });
+
+  progressEmitter.on('error', onError);
+
+  progressEmitter.on('update-response', function(ev) {
+    logops.debug('response event:', ev);
+  });
+
+  progressEmitter.on('progress-info', function(ev) {
+    clock = ev.clock;
+    updateJobs = ev.updateJobs;
+    processProgressInfo(ev);
+    writeToConsole();
+    runInNextTick(dweet, commander.dweet, function(err) {
+      if (err) {
+        logops.error('error event: Error when dweeting for \'' + commander.dweet.name + '\': ' + err);
+      }
+      updateScheduledJobsInGoogleSheet();
+    });
+  });
+
+  progressEmitter.on('stop', function() {
+    logops.info('stop event');
+  });
+
+  progressEmitter.on('end', function() {
+    async.retry(
+      { times: 5, interval: 1000},
+      async.apply(dweet, commander.dweet),
+      function(err) {
+        if (err) {
+          logops.error('error event: Error when dweeting for \'' + commander.dweet.name + '\': ' + err);
+        } else {
+          logops.info('end event');
+        }
+        process.exit(0);
+      }
+    );
+  });
+}
+
+/**
+ * Executes the requested commander
+ */
+function executeCommand() {
+  var googleCredentials;
+
+  if (!commander.configuration) {
+    commander.help();
+  }
+
+  if (!fileExists(commander.configuration)) {
+    logops.error('The provided simulation configuration file path (\'' + commander.configuration +
+      '\') does not exist');
+    commander.help();
+  }
+
+  if (commander.to) {
+    if (!commander.from && commander.to <= new Date()) {
+      logops.error('If no fromDate is provided, the toDate must be beyond the current time and date');
+      commander.help();
+    } else {
+      commander.from = commander.from || new Date();
+    }
+  }
+
+  if (commander.dweet) {
+    try {
+      commander.dweet = JSON.parse(commander.dweet);
+      if (!commander.dweet.name || typeof commander.dweet.name !== 'string') {
+        logops.error('The dweet.io configuration information should be an object including a \'name\' property ' +
+          'the thing name');
+        commander.help();
+      }
+    } catch(exception) {
+      logops.error('Error when parsing the dweet.io configuration information: ' + exception);
+      commander.help();
+    }
+  }
+
+  if (commander.timeline) {
+    try {
+      commander.timeline = JSON.parse(commander.timeline);
+      if (!commander.timeline.dateFormat || typeof commander.timeline.dateFormat !== 'string') {
+        logops.error('The Google Sheets configuration information should be an object including a \'dateFormat\' ' +
+          'property with the date format used by Google Sheets in your locale according to the dateformat NPM ' +
+          'package (for further information, please visit: https://github.com/felixge/node-dateformat#mask-options');
+        commander.help();
+      }
+      if (!commander.timeline.refreshInterval || typeof commander.timeline.refreshInterval !== 'number') {
+        logops.error('The Google Sheets configuration information should be an object including a ' +
+          '\'refreshInterval\' property with the minimum interval in milliseconds the scheduled updates will be ' +
+          'refreshed in the associated Google Sheet (i.e., the Google Sheet will be udpated in the next ' +
+          'progress information tick (see the -p option) once this interval has passed since the last refresh)');
+        commander.help();
+      }
+      if (!commander.timeline.sheetKey || typeof commander.timeline.sheetKey !== 'string') {
+        logops.error('The Google Sheets configuration information should be an object including a \'sheetKey\' ' +
+          'property with the long Google Sheet key where the scheduled updates timeline information will be stored');
+        commander.help();
+      }
+      googleSheet = new GoogleSheet(commander.timeline.sheetKey);
+      if (!commander.timeline.credentialsPath || typeof commander.timeline.credentialsPath !== 'string') {
+        logops.error('The Google Sheets configuration information should be an object including a ' +
+          '\'credentialsPath\' property with the path to the Google generated credentials');
+        commander.help();
+      }
+      if (!fileExists(commander.timeline.credentialsPath)) {
+        logops.error('The credentials path passed in the Google Sheet configuration information ' +
+          '(\'googleSheetConfig.credentialsPath\') does not exist: ' + commander.timeline.credentialsPath);
+        commander.help();
+      }
+      try {
+        googleCredentials = require(resolvePath(commander.timeline.credentialsPath));
+      } catch (googleCredentialException) {
+        logops.error('The Google generated credential file (\'' + commander.timeline.credentialsPath + '\') ' +
+          'is not a valid JSON file, error when parsing the file: ' + googleCredentialException);
+        commander.help();
+      }
+      logops.info('Authenticating into Google to update the Google Sheet including the scheduled updates...');
+      googleSheet.useServiceAccountAuth(googleCredentials, function (err) {
+        if (err) {
+          onError({
+            error: 'Error when authenticating with Google using the credential file (\'' +
+              commander.timeline.credentialsPath + '\'): ' + err
+          });
+          process.exit(0);
+        } else {
+          logops.info('Authentication into Google successfully completed');
+          googleSheet.getInfo(function(err, googleSheetInfo) {
+            if (err) {
+              onError({
+                error: 'Error when getting the Google Sheet information to update the data: ' + err
+              });
+              process.exit(0);
+            }
+            googleSheetTab = googleSheetInfo && googleSheetInfo.worksheets &&
+              googleSheetInfo.worksheets.length && googleSheetInfo.worksheets[0];
+            if (!googleSheetTab) {
+              onError({
+                error: 'Error when getting access to the first Google Sheet work sheet or tab to update the data: ' +
+                  err
+              });
+              process.exit(0);
+            } else {
+              startSimulation();
+            }
+          });
+        }
+      });
+    } catch(exception) {
+      logops.error('Error when parsing the Google Sheet configuration information: ' + exception);
+      commander.help();
+    }
+  }
+
+  if (!googleCredentials) {
+    startSimulation();
+  }
+}
+
+commander.
+  version(require(ROOT_PATH + '/package.json').version).
+  option('-c, --configuration <configuration-file-path>',
+    'Absolute or relative path (from the root of the Node application) to the device simulator configuration file ' +
+      '(mandatory)').
+  option('-d, --delay <milliseconds>', 'The delay in milliseconds for future updates when the number of update ' +
+    'requests waiting for response is bigger than the value set with the -m option (defaults to 1 second if -m is ' +
+    'set and -d is not set, it has no effect if -m is not set)',
+    parseInt).
+  option('-m, --maximumNotRespondedRequests <requests>', 'The maximum number of update requests not responded before ' +
+    'applying delay', parseInt).
+  option('-p, --progressInfoInterval <milliseconds>', 'The interval in milliseconds to show progress information ' +
+    ' for fast-forward simulation', parseInt).
+  option('-s, --silent', 'No progress information will be output by the console').
+  option('-w, --dweet <dweetConfiguration>', 'Configuration information to publish the simulation progress ' +
+         'information in dweet.io (it must be an object containing a \'name\' property for the dweet thing and ' +
+         'optionally an \'apiKey\' property in case the thing is locked, for example: ' +
+         '-w "{\\"name\\": \\"fds:Test:001\\"}")').
+  option('-l, --timeline <googleSheetsConfiguration', 'Configuration information to publish the scheduled ' +
+         'updates into Google Sheets for its visualization as a Timeline Google Chart in Freeboard.io (it must ' +
+         'be an object including a \'sheetKey\' property for the long Google Sheet key where the data will be ' +
+         'stored, a \'credentialsPath\' property for the path to the Google generated credentials ' +
+         '(more information about how to generate this credentials is available in the documentation), ' +
+         'a \'dateFormat\' property for the date format used by Google Sheets in your locale according to ' +
+         'the dateformat NPM package (for further information, please visit: ' +
+         'https://github.com/felixge/node-dateformat#mask-options) and a \'refreshInterval\' property for the ' +
+         'minimum interval in milliseconds the scheduled updates will be ' +
+         'refreshed in the associated Google Sheet (i.e., the Google Sheet will be udpated in the next ' +
+         'progress information tick (see the -p option) once this interval has passed since the last refresh), ' +
+         'for example: -l "{\\"sheetKey\": \\"1rGEpgC38kf_AC7FFlM71wev_-fKeuPKEOTvVY9I7e2Y\", ' +
+         '\\"credentialsPath\\": \\"FIWARE Device Simulator-f11816817451.json\\", ' +
+         '\\"dateFormat\": \\"dd/mm/yyyy HH:MM:ss\\", \\"refreshInterval\\": 15000}")').
+  option('-f, --from <fromDate>', 'The start date to begin the fast-forward simulation (if not set, the current ' +
+    'time will be used)', createDate).
+  option('-t, --to <toDate>', 'The end date to stop the fast-forward simulation (if not set, the fast-forward ' +
+    'will progress to the future and never end)', createDate).
+  parse(process.argv);
+
+executeCommand();

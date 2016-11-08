@@ -1,0 +1,39 @@
+{
+  "domain": {
+    "service": "theService",
+    "subservice": "/theSubService"
+  },
+  "contextBroker": {
+    "protocol": "https",
+    "host": "localhost",
+    "port": 1026,
+    "ngsiVersion": "1.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "https",
+    "host": "localhost",
+    "port": 5001,
+    "user": "theUser",
+    "password": "thePassword"
+  },
+  "iota": {
+    "ultralight": {
+      "mqtt": {
+        "protocol": "mqtt",
+        "host": "localhost",
+        "port": 1883
+      }
+    }
+  },
+  "devices": [{
+    "schedule": "once",
+    "device_id": "DeviceId1",
+    "protocol": "UltraLight::MQTT",
+    "api_key": "the-api-key",
+    "attributes": [{
+      "object_id": "attribute1",
+      "value": "time-random-linear-interpolator([[0,0],[20,random(25,45)],[21,random(50,75)],[22,0],[24,0]])"
+    }]
+  }]
+}

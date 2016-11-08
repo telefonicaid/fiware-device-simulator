@@ -1,0 +1,45 @@
+{
+  "domain": {
+    "service": "theService",
+    "subservice": "/theSubService"
+  },
+  "subscriber": {
+    "protocol": "https",
+    "host": "localhost",
+    "port": 1026,
+    "path": "/notify",
+    "ngsiVersion": "1.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "https",
+    "host": "localhost",
+    "port": 5001,
+    "user": "theUser",
+    "password": "thePassword"
+  },
+  "iota": {
+    "ultralight": {
+      "http": {
+        "protocol": "http",
+        "host": "localhost",
+        "port": 8085
+      }
+    }
+  },
+  "entities": [{
+    "schedule": "once",
+    "entity_name": "EntityName1",
+    "entity_type": "EntityType1",
+    "active": [{
+      "name": "active1",
+      "type": "number",
+      "value": "text-rotation-interpolator({\"units\": \"minutes\", \"text\": [[0,\"PENDING\"],[15,\"REQUESTED\"],[30,[[99,\"COMPLETED\"],[1,\"ERROR\"]]],[45,\"REMOVED\"]]})"
+    }],
+    "staticAttributes": [{
+      "name": "static1",
+      "type": "string",
+      "value": "Value of static1"
+    }]
+  }]
+}

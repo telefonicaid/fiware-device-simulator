@@ -1,0 +1,136 @@
+{
+  "exports": {
+    "service": "theService",
+    "subservice": "/theSubService",
+    "contextBroker": {
+      "protocol": "https",
+      "host": "localhost",
+      "port": 1026,
+      "ngsiVersion": "1.0"
+    }
+  },
+  "domain": {
+    "service": "import(service)",
+    "subservice": "import(subservice)"
+  },
+  "contextBroker": "import(contextBroker)",
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "https",
+    "host": "localhost",
+    "port": 5001,
+    "user": "theUser",
+    "password": "thePassword",
+    "retry": {
+      "times": 10,
+      "interval": 100
+    }
+  },
+  "iota": {
+    "ultralight": {
+      "http": {
+        "protocol": "http",
+        "host": "localhost",
+        "port": 8085
+      }
+    },
+    "json": {
+      "http": {
+        "protocol": "http",
+        "host": "localhost",
+        "port": 8185
+      }
+    }
+  },
+  "entities": [{
+    "schedule": "once",
+    "entity_name": "EntityName1",
+    "entity_type": "EntityType1",
+    "active": [{
+      "name": "active1",
+      "type": "number",
+      "value": "time-linear-interpolator({\"spec\": [[0,0],[20,0.25],[21,0.50],[22,0.75],[23,0],[24,0]], \"return\": {\"type\": \"integer\", \"rounding\": \"ceil\"}})"
+    }],
+    "staticAttributes": [{
+      "name": "static1",
+      "type": "string",
+      "value": "Value of static1"
+    }]
+  }, {
+    "schedule": "*/5 * * * * *",
+    "entity_name": "EntityName2",
+    "entity_type": "EntityType2",
+    "active": [{
+      "name": "active1",
+      "type": "number",
+      "value": "time-linear-interpolator({\"spec\": [[0,0],[20,0.25],[21,0.50],[22,0.75],[23,0],[24,0]], \"return\": {\"type\": \"integer\", \"rounding\": \"floor\"}})"
+    }, {
+      "schedule": "*/1 * * * * *",
+      "name": "active2",
+      "type": "number",
+      "value": "time-step-before-interpolator([[0,0],[20,0.25],[21,0.50],[22,0.75],[23,0],[24,0]])"
+    }],
+    "staticAttributes": [{
+      "name": "static1",
+      "type": "string",
+      "value": "Value of static1"
+    }]
+  }, {
+    "count": "3",
+    "entity_type": "EntityType3",
+    "schedule": "*/1 * * * * *",
+    "active": [{
+      "name": "active1",
+      "type": "percentage",
+      "value": "time-random-linear-interpolator({\"spec\": [[0,0],[20,random(25,45)],[21,random(50,75)],[22,0],[24,0]], \"return\": {\"type\": \"integer\", \"rounding\": \"ceil\"}})"
+    }, {
+      "schedule": "*/5 5 * * * *",
+      "object_id": "a2",
+      "name": "active2",
+      "type": "percentage",
+      "value": "time-random-linear-interpolator({\"spec\": [[0,0],[20,random(25,45)],[21,random(50,75)],[22,0],[24,0]], \"return\": {\"type\": \"integer\", \"rounding\": \"floor\"}})"
+    }],
+    "staticAttributes": [{
+      "name": "static1",
+      "type": "percentage",
+      "value": "time-random-linear-interpolator({\"spec\": [[0,0],[20,random(25,45)],[21,random(50,75)],[22,0],[24,0]], \"return\": {\"type\": \"integer\", \"rounding\": \"round\"}})"
+    }]
+  }],
+  "devices": [{
+    "schedule": "once",
+    "device_id": "DeviceId1",
+    "protocol": "UltraLight::HTTP",
+    "api_key": "the-api-key",
+    "attributes": [{
+      "object_id": "a1",
+      "value": "attribute-function-interpolator(${{EntityName1}{active1}} + Math.pow(${{EntityName2}{active2}},2))"
+    }]
+  }, {
+    "schedule": "*/5 * 7 * * *",
+    "device_id": "DeviceId2",
+    "protocol": "UltraLight::HTTP",
+    "api_key": "the-api-key",
+    "attributes": [{
+      "object_id": "a1",
+      "value": "time-linear-interpolator({\"spec\": [[0,0],[20,0.25],[21,0.50],[22,0.75],[23,0],[24,0]], \"return\": {\"type\": \"integer\", \"rounding\": \"ceil\"}})"
+    }, {
+      "schedule": "*/1 * * * * *",
+      "object_id": "a2",
+      "value": "time-step-after-interpolator([[0,0],[20,0.25],[21,0.50],[22,0.75],[23,0],[24,0]])"
+    }]
+  }, {
+    "count": "5",
+    "entity_type": "DeviceType3",
+    "api_key": "the-api-key",
+    "protocol": "UltraLight::HTTP",
+    "schedule": "*/1 * * * * *",
+    "attributes": [{
+      "object_id": "a1",
+      "value": "time-random-linear-interpolator({\"spec\": [[0,0],[20,random(25,45)],[21,random(50,75)],[22,0],[24,0]], \"return\": {\"type\": \"integer\", \"rounding\": \"ceil\"}})"
+    }, {
+      "schedule": "*/5 * * 9 * *",
+      "object_id": "a2",
+      "value": "time-random-linear-interpolator({\"spec\": [[random(0,1),0],[20,random(25,45)],[random(21,22),random(50,75)],[22,0],[24,0]], \"return\": {\"type\": \"integer\", \"rounding\": \"ceil\"}})"
+    }]
+  }]
+}

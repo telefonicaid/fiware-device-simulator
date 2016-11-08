@@ -1,0 +1,30 @@
+language: node_js
+
+node_js:
+  - "0.10"
+  - "4"
+
+branches:
+  only:
+    - master
+
+sudo: false
+
+env:
+  - CXX=g++-4.8
+
+before_install:
+  - npm install -g grunt-cli
+
+install:
+  - npm install
+
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - gcc-4.8
+      - g++-4.8
+  code_climate:
+    repo_token: 3af78c71b999d36106cc3ec8761fa5d664515fef7b8c8698e9d5f091a9d5c5a3

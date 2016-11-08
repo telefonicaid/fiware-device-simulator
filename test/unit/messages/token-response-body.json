@@ -1,0 +1,37 @@
+{
+  "token": {
+    "methods": [
+      "password"
+    ],
+    "roles": [
+      {
+        "id": "070b959e0271426eaff511a9c4c21c96",
+        "name": "c4b26f30149346b1944acb8dd901088c#SubServiceCustomer"
+      },
+      {
+        "id": "25c5673b78794ed6a25086dc4f738a09",
+        "name": "c4b26f30149346b1944acb8dd901088c#SubServiceAdmin"
+      }
+    ],
+    "expires_at": "2016-08-08T11:58:26.401Z",
+    "project": {
+      "domain": {
+        "id": "c4b26f30149346b1944acb8dd901088c",
+        "name": "myService"
+      },
+      "id": "56416a08f97a42f4b2f1cd1bd21612e9",
+      "name": "/mySubService"
+    },
+    "catalog": [],
+    "extras": {},
+    "user": {
+      "domain": {
+        "id": "c4b26f30149346b1944acb8dd901088c",
+        "name": "myService"
+      },
+      "id": "eadb75f6aa3040bb864b35d5b17b2452",
+      "name": "userToGenerateAuthenticationTokens"
+    },
+    "issued_at": "2016-08-08T10:58:26.401Z"
+  }
+}

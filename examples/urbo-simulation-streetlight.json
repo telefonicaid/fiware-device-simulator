@@ -1,0 +1,3501 @@
+{
+   "domain": {
+      "service": "service",
+      "subservice": "/subservice"
+   },
+   "contextBroker": {
+      "protocol": "http",
+      "host": "1.2.3.4",
+      "port": 1026,
+      "ngsiVersion": "1.0"
+   },
+   "authentication": {
+      "provider": "keystone",
+      "protocol": "http",
+      "host": "1.2.3.4",
+      "port": 5001,
+      "user": "user",
+      "password": "password",
+      "retry": {
+         "times": 10,
+         "interval": 5000
+      }
+   },
+   "entities": [
+      {
+         "entity_name": "begonia-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "48 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(13.2,15.399999999999999)],[7,random(16.5,17.6)],[8,0],[20,0],[20.5,random(16.5,17.6)],[24,random(16.5,17.6)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.6367999999999998,1.9095999999999997)],[7,random(2.046,2.1824000000000003)],[8,0],[20,0],[20.5,random(2.046,2.1824000000000003)],[24,random(2.046,2.1824000000000003)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 6 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 22,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.643003092282297,
+                     40.52242592179049
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.653Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "camino-nuevo-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "4 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(8.4,9.799999999999999)],[7,random(10.5,11.200000000000001)],[8,0],[20,0],[20.5,random(10.5,11.200000000000001)],[24,random(10.5,11.200000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.0416,1.2151999999999998)],[7,random(1.302,1.3888)],[8,0],[20,0],[20.5,random(1.302,1.3888)],[24,random(1.302,1.3888)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 13 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 14,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.649892473544252,
+                     40.51794808770004
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.653Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "azalea-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "58 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(12,14)],[7,random(15,16)],[8,0],[20,0],[20.5,random(15,16)],[24,random(15,16)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.488,1.736)],[7,random(1.8599999999999999,1.984)],[8,0],[20,0],[20.5,random(1.8599999999999999,1.984)],[24,random(1.8599999999999999,1.984)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 3 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 20,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.642685695313588,
+                     40.52699570078362
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "golf-park-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "51 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(7.199999999999999,8.399999999999999)],[7,random(9,9.600000000000001)],[8,0],[20,0],[20.5,random(9,9.600000000000001)],[24,random(9,9.600000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(0.8927999999999999,1.0415999999999999)],[7,random(1.116,1.1904000000000001)],[8,0],[20,0],[20.5,random(1.116,1.1904000000000001)],[24,random(1.116,1.1904000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 12 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 12,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.657465658569671,
+                     40.519631745827674
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pemoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "europa-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "17 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(14.399999999999999,16.799999999999997)],[7,random(18,19.200000000000003)],[8,0],[20,0],[20.5,random(18,19.200000000000003)],[24,random(18,19.200000000000003)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.7855999999999999,2.0831999999999997)],[7,random(2.232,2.3808000000000002)],[8,0],[20,0],[20.5,random(2.232,2.3808000000000002)],[24,random(2.232,2.3808000000000002)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 8 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 24,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.65722294324066,
+                     40.51469419653811
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pemoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "francisco-chico-mendes-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "33 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(10.799999999999999,12.6)],[7,random(13.5,14.4)],[8,0],[20,0],[20.5,random(13.5,14.4)],[24,random(13.5,14.4)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.3392,1.5624)],[7,random(1.674,1.7856)],[8,0],[20,0],[20.5,random(1.674,1.7856)],[24,random(1.674,1.7856)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 8 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 18,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.653502864063304,
+                     40.524898892116674
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pemoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "dt-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "34 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(13.2,15.399999999999999)],[7,random(16.5,17.6)],[8,0],[20,0],[20.5,random(16.5,17.6)],[24,random(16.5,17.6)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.6367999999999998,1.9095999999999997)],[7,random(2.046,2.1824000000000003)],[8,0],[20,0],[20.5,random(2.046,2.1824000000000003)],[24,random(2.046,2.1824000000000003)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 9 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 22,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.665466169588206,
+                     40.51672096330546
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "distritotelefonica",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "industria-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "55 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(7.8,9.1)],[7,random(9.75,10.4)],[8,0],[20,0],[20.5,random(9.75,10.4)],[24,random(9.75,10.4)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(0.9672,1.1283999999999998)],[7,random(1.209,1.2896)],[8,0],[20,0],[20.5,random(1.209,1.2896)],[24,random(1.209,1.2896)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 16 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 13,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.656756358856621,
+                     40.53356709264383
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "la-granja-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "45 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(3,3.5)],[7,random(3.75,4)],[8,0],[20,0],[20.5,random(3.75,4)],[24,random(3.75,4)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(0.372,0.434)],[7,random(0.46499999999999997,0.496)],[8,0],[20,0],[20.5,random(0.46499999999999997,0.496)],[24,random(0.46499999999999997,0.496)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 23 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 5,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.658955217203828,
+                     40.52730415182928
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "sepulveda-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "47 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(7.199999999999999,8.399999999999999)],[7,random(9,9.600000000000001)],[8,0],[20,0],[20.5,random(9,9.600000000000001)],[24,random(9,9.600000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(0.8927999999999999,1.0415999999999999)],[7,random(1.116,1.1904000000000001)],[8,0],[20,0],[20.5,random(1.116,1.1904000000000001)],[24,random(1.116,1.1904000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 4 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 12,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.653356062443416,
+                     40.528785945844135
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "calendula-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "27 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(10.2,11.899999999999999)],[7,random(12.75,13.600000000000001)],[8,0],[20,0],[20.5,random(12.75,13.600000000000001)],[24,random(12.75,13.600000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.2648,1.4755999999999998)],[7,random(1.581,1.6864000000000001)],[8,0],[20,0],[20.5,random(1.581,1.6864000000000001)],[24,random(1.581,1.6864000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 25 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 17,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.645592052299929,
+                     40.52695092865284
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "sotomoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "centro-comercial-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "28 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(12,14)],[7,random(15,16)],[8,0],[20,0],[20.5,random(15,16)],[24,random(15,16)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.488,1.736)],[7,random(1.8599999999999999,1.984)],[8,0],[20,0],[20.5,random(1.8599999999999999,1.984)],[24,random(1.8599999999999999,1.984)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 20 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 20,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.649717745281285,
+                     40.52859641587884
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "europa-02",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "27 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(7.199999999999999,8.399999999999999)],[7,random(9,9.600000000000001)],[8,0],[20,0],[20.5,random(9,9.600000000000001)],[24,random(9,9.600000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(0.8927999999999999,1.0415999999999999)],[7,random(1.116,1.1904000000000001)],[8,0],[20,0],[20.5,random(1.116,1.1904000000000001)],[24,random(1.116,1.1904000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 10 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 12,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.660656533009791,
+                     40.519868723073934
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pemoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "parques-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "6 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(9,10.5)],[7,random(11.25,12)],[8,0],[20,0],[20.5,random(11.25,12)],[24,random(11.25,12)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.116,1.302)],[7,random(1.395,1.488)],[8,0],[20,0],[20.5,random(1.395,1.488)],[24,random(1.395,1.488)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 9 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 15,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.654519388050461,
+                     40.51332271353841
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "sotomoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "conde-de-gaitanes-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "52 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(12,14)],[7,random(15,16)],[8,0],[20,0],[20.5,random(15,16)],[24,random(15,16)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.488,1.736)],[7,random(1.8599999999999999,1.984)],[8,0],[20,0],[20.5,random(1.8599999999999999,1.984)],[24,random(1.8599999999999999,1.984)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 16 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 20,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.650336871040029,
+                     40.51586100086436
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "sotomoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "aragoneses-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "59 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(12.6,14.7)],[7,random(15.75,16.8)],[8,0],[20,0],[20.5,random(15.75,16.8)],[24,random(15.75,16.8)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.5624,1.8228)],[7,random(1.953,2.0832)],[8,0],[20,0],[20.5,random(1.953,2.0832)],[24,random(1.953,2.0832)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 7 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 21,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.662244919883699,
+                     40.522479912661076
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "cuestablanca-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "40 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(12,14)],[7,random(15,16)],[8,0],[20,0],[20.5,random(15,16)],[24,random(15,16)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.488,1.736)],[7,random(1.8599999999999999,1.984)],[8,0],[20,0],[20.5,random(1.8599999999999999,1.984)],[24,random(1.8599999999999999,1.984)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 4 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 20,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.655658015449564,
+                     40.521636884875946
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pemoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "azalea-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "23 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(9.6,11.2)],[7,random(12,12.8)],[8,0],[20,0],[20.5,random(12,12.8)],[24,random(12,12.8)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.1904,1.3887999999999998)],[7,random(1.488,1.5872000000000002)],[8,0],[20,0],[20.5,random(1.488,1.5872000000000002)],[24,random(1.488,1.5872000000000002)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 9 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 16,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.649138324325982,
+                     40.521338842213176
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "sotomoraleja",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "ligonde-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "20 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(12.6,14.7)],[7,random(15.75,16.8)],[8,0],[20,0],[20.5,random(15.75,16.8)],[24,random(15.75,16.8)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.5624,1.8228)],[7,random(1.953,2.0832)],[8,0],[20,0],[20.5,random(1.953,2.0832)],[24,random(1.953,2.0832)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 1 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 21,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.667760386740123,
+                     40.51179140026885
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "lastablas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "cebreiro-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "33 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(8.4,9.799999999999999)],[7,random(10.5,11.200000000000001)],[8,0],[20,0],[20.5,random(10.5,11.200000000000001)],[24,random(10.5,11.200000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.0416,1.2151999999999998)],[7,random(1.302,1.3888)],[8,0],[20,0],[20.5,random(1.302,1.3888)],[24,random(1.302,1.3888)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 13 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 14,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.660029319777114,
+                     40.506352919140106
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "lastablas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "tierra-de-melide-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "25 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(12.6,14.7)],[7,random(15.75,16.8)],[8,0],[20,0],[20.5,random(15.75,16.8)],[24,random(15.75,16.8)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.5624,1.8228)],[7,random(1.953,2.0832)],[8,0],[20,0],[20.5,random(1.953,2.0832)],[24,random(1.953,2.0832)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 18 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 21,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.666852063785858,
+                     40.508581729532594
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "lastablas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "maria-tubau",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "45 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(6.6,7.699999999999999)],[7,random(8.25,8.8)],[8,0],[20,0],[20.5,random(8.25,8.8)],[24,random(8.25,8.8)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(0.8183999999999999,0.9547999999999999)],[7,random(1.023,1.0912000000000002)],[8,0],[20,0],[20.5,random(1.023,1.0912000000000002)],[24,random(1.023,1.0912000000000002)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 16 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 11,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.672302001511451,
+                     40.51394155830268
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "lastablas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "dt-02",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "15 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(10.799999999999999,12.6)],[7,random(13.5,14.4)],[8,0],[20,0],[20.5,random(13.5,14.4)],[24,random(13.5,14.4)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.3392,1.5624)],[7,random(1.674,1.7856)],[8,0],[20,0],[20.5,random(1.674,1.7856)],[24,random(1.674,1.7856)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 7 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 18,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.661819547049333,
+                     40.512069176040505
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "distritotelefonica",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "camio-del-cura-01",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "55 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(13.2,15.399999999999999)],[7,random(16.5,17.6)],[8,0],[20,0],[20.5,random(16.5,17.6)],[24,random(16.5,17.6)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.6367999999999998,1.9095999999999997)],[7,random(2.046,2.1824000000000003)],[8,0],[20,0],[20.5,random(2.046,2.1824000000000003)],[24,random(2.046,2.1824000000000003)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 12 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 22,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.649031778988432,
+                     40.51072515448056
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "encinar",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      },
+      {
+         "entity_name": "centro-comercial-02",
+         "entity_type": "StreetlightControlCabinet",
+         "schedule": "53 */15 * * * *",
+         "active": [
+            {
+               "name": "totalActivePower",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(8.4,9.799999999999999)],[7,random(10.5,11.200000000000001)],[8,0],[20,0],[20.5,random(10.5,11.200000000000001)],[24,random(10.5,11.200000000000001)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "reactiveEnergyConsumed",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(2000,3000)],[7,random(4000,5000)],[8,0],[20,random(5000,6000)],[24,random(6000,8000)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "energyCost",
+               "type": "Number",
+               "value": "time-random-linear-interpolator([[0,random(1.0416,1.2151999999999998)],[7,random(1.302,1.3888)],[8,0],[20,0],[20.5,random(1.302,1.3888)],[24,random(1.302,1.3888)]])",
+               "metadata": [
+                  {
+                     "name": "dateUpdated",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  },
+                  {
+                     "name": "TimeInstant",
+                     "type": "DateTime",
+                     "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})"
+                  }
+               ]
+            },
+            {
+               "name": "dateUpdated",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "name": "TimeInstant",
+               "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+               "type": "DateTime"
+            },
+            {
+               "schedule": "0 0 0 1 * *",
+               "name": "lastInvoiceDate",
+               "type": "DateTime",
+               "value": "0 0 6 7 * *"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "workingMode",
+               "value": "semiautomatic",
+               "type": "Text"
+            },
+            {
+               "name": "cupboardMadeOf",
+               "value": "plastic",
+               "type": "Text"
+            },
+            {
+               "name": "brandName",
+               "value": "Simemens",
+               "type": "Text"
+            },
+            {
+               "name": "modelName",
+               "value": "Simatic S7 1200",
+               "type": "Text"
+            },
+            {
+               "name": "maximumPowerAvailable",
+               "value": 14,
+               "type": "Number"
+            },
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.657102781928411,
+                     40.525877953687136
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "areaServed",
+               "value": "pialcobendas",
+               "type": "Text"
+            },
+            {
+               "name": "MeteringStartingDate",
+               "value": "2016-10-10T16:39:29.654Z",
+               "type": "DateTime"
+            }
+         ]
+      }
+   ]
+}

@@ -1,0 +1,6 @@
+[
+  {
+    "content": "the-content",
+    "condition": "${{entity_name==the-.*-name}}"
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "domain": {
+    "service": "theService",
+    "subservice": "/theSubService"
+  },
+  "contextBroker": {
+    "protocol": "https",
+    "host": "localhost",
+    "port": 1026,
+    "ngsiVersion": "1.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "https",
+    "host": "localhost",
+    "port": 5001,
+    "user": "theUser",
+    "password": "thePassword"
+  },
+  "iota": {
+    "ultralight": {
+      "http": {
+        "protocol": "http",
+        "host": "localhost",
+        "port": 8085
+      }
+    }
+  },
+  "entities": [{
+    "entity_name": "EntityName1",
+    "entity_type": "EntityType1",
+    "active": [{
+      "schedule": "once",
+      "name": "active1",
+      "type": "number",
+      "value": "1"
+    }],
+    "staticAttributes": [{
+      "name": "static1",
+      "type": "string",
+      "value": "Value of static1"
+    }]
+  }]
+}

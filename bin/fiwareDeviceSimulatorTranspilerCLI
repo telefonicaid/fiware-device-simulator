@@ -1,0 +1,100 @@
+#!/usr/bin/env node
+
+/*
+ * Copyright 2016 Telefónica Investigación y Desarrollo, S.A.U
+ *
+ * This file is part of the Short Time Historic (STH) component
+ *
+ * STH is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the License,
+ * or (at your option) any later version.
+ *
+ * STH is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public
+ * License along with STH.
+ * If not, see http://www.gnu.org/licenses/.
+ *
+ * For those usages not covered by the GNU Affero General Public License
+ * please contact with: [german.torodelvalle@telefonica.com]
+ */
+
+'use strict';
+
+var ROOT_PATH = require('app-root-path');
+var commander = require('commander');
+var fs = require('fs');
+var logops = require('logops');
+var path = require('path');
+var fiwareDeviceSimulatorTranspiler = require(ROOT_PATH + '/lib/transpilers/fiwareDeviceSimulatorTranspiler');
+
+process.on('SIGINT', function() {
+  process.exit(0);
+});
+
+process.on('uncaughtException', function() {
+  process.exit(1);
+});
+
+/**
+ * Returns the absolute path for a file name or relative path
+ * @param  {String} file File name or file path
+ * @return {String}      The absolute path
+ */
+function getFilePath(file) {
+  return ROOT_PATH + (file.charAt(0) === '.' ? file.substring(1) : path.sep + file);
+}
+
+/**
+ * Executes the requested commander
+ */
+function executeCommand() {
+  if (!commander.configuration) {
+    commander.help();
+  }
+
+  var inputConfigurationFilePath = getFilePath(commander.configuration);
+  if (!fs.existsSync(inputConfigurationFilePath)) {
+    return logops.error('The input file path (\'' + inputConfigurationFilePath + '\') does not exist');
+  }
+
+  if (!commander.output) {
+    commander.help();
+  }
+
+  var outputConfigurationFilePath = getFilePath(commander.output);
+  if (fs.existsSync(outputConfigurationFilePath)) {
+    return logops.error('The output file path (\'' + outputConfigurationFilePath + '\') already exists');
+  }
+
+  fiwareDeviceSimulatorTranspiler.transpile(require(inputConfigurationFilePath), function(err, newConfigurationObj) {
+    if (err) {
+      return logops.error('Error when transpiling the simulation configuration file (\'' +
+        inputConfigurationFilePath + '\'): ' + err);
+    }
+    fs.writeFile(outputConfigurationFilePath, JSON.stringify(newConfigurationObj,  null, '  '), function(err) {
+      if (err) {
+        return logops.error('Error when writing to the output simulation configuration file \'' +
+          outputConfigurationFilePath + '\'): ' + err);
+      }
+      return logops.info('Output simulation configuration file \'' + outputConfigurationFilePath + '\') ' +
+        'successfully created');
+    });
+  });
+}
+
+commander.
+  version(require(ROOT_PATH + '/package.json').version).
+  option('-c, --configuration <configuration-file-path>',
+    'Absolute or relative path (from the root of the Node application) to the device simulator configuration ' +
+    'input file (mandatory)').
+  option('-o, --output <output-file-path>',
+    'Absolute or relative path (from the root of the Node application) to the output device simulator ' +
+    'configuration file (mandatory)').
+  parse(process.argv);
+
+executeCommand();

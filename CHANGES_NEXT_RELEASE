@@ -3,3 +3,4 @@
 - [TASK] LICENCE file included
 - [TASK] LICENCE section included in the main README.md file
 - [BUG] Assure data is available in the Google Sheet before clearing
+- [FEATURE] Offer the possibility to configure the simulator command line tool by file

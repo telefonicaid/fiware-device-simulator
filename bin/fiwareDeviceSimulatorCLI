@@ -301,6 +301,20 @@ function onClear(err) {
 }
 
 /**
+ * Google Sheet work sheet first setHeaderRow() function handler
+ * @param  {Object} err The error if any
+ */
+function onDataAvailable(err) {
+  if (err) {
+    progressInfo.googleSheetUpdateStatus = 'error';
+    progressInfo.lastGoogleSheetUpdate = time.Date.now();
+    return logops.error('Error when setting the header row in the Google Sheet work sheet or tab to assure data ' +
+      'is available: ' + err);
+  }
+  runInNextTick(googleSheetTab.clear, onClear);
+}
+
+/**
  * Updates the schedule jobs into Google Sheet if configured
  */
 function updateScheduledJobsInGoogleSheet() {
@@ -308,7 +322,7 @@ function updateScheduledJobsInGoogleSheet() {
     (progressInfo.googleSheetUpdateStatus !== 'not supported' && progressInfo.googleSheetUpdateStatus !== 'ongoing') &&
     ((time.Date.now() - (progressInfo.lastGoogleSheetUpdate || 0)) > commander.timeline.refreshInterval)) {
     progressInfo.googleSheetUpdateStatus = 'ongoing';
-    runInNextTick(googleSheetTab.clear, onClear);
+    runInNextTick(googleSheetTab.setHeaderRow, ['Row Label', 'Bar Label', 'Start', 'End'], onDataAvailable);
   }
 }
 

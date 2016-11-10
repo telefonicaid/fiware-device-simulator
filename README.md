@@ -13,6 +13,10 @@ More concretely, the FIWARE Device Simulator includes the following capabilities
 
 For further information please visit: the official [FIWARE Device Simulator documentation](fiware-sth-comet.readthedocs.io) at ReadTheDocs.
 
+## Licence
+
+The FIWARE Device Simulator is licensed under Affero General Public License (GPL) version 3.
+
 ## Contact
 
 * Germán Toro del Valle ([german.torodelvalle@telefonica.com](mailto:german.torodelvalle@telefonica.com), [@gtorodelvalle](http://www.twitter.com/gtorodelvalle))

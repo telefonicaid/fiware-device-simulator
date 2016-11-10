@@ -1,0 +1,4848 @@
+{
+   "domain": "import(domain_config.json)",
+   "contextBroker": "import(ctxbroker_config.json)",
+   "authentication": "import(auth_config.json)",
+   "exports": {
+      "now": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+      "workDaysSchedule": "19 */15 * * * 1-5",
+      "weekendSchedule": "19 */15 * * * 0,6",
+      "so2_value_lv": "time-random-linear-interpolator([[0,random(5,10)],[9,random(10,15)],[12,random(60,70)],[14,random(40,50)],[18,random(10,15)],[24,random(5,10)]])",
+      "so2_value_sd": "time-random-linear-interpolator([[0,random(4,8)],[9,random(8,12)],[12,random(40,50)],[14,random(30,40)],[18,random(8,12)],[24,random(4,8)]])",
+      "no2_value_lv": [
+         {
+            "content": "time-random-linear-interpolator([[0,random(30,40)],[6,random(8,10)],[9,random(55,65)],[16,random(30,45)],[22,random(70,78)],[24,random(50,60)]])",
+            "condition": "${{entity_name==^(?!(aq_alcala_zamora|aq_distrito_telefonica)$).*}}"
+         },
+         {
+            "content": "time-random-linear-interpolator([[0,random(50,60)],[6,random(10,20)],[9,random(200,220)],[16,random(40,50)],[22,random(90,100)],[24,random(60,70)]])",
+            "condition": "${{entity_name==^((aq_alcala_zamora|aq_distrito_telefonica)$).*}}"
+         }
+      ],
+      "no2_value_sd": "time-random-linear-interpolator([[0,random(45,55)],[6,random(5,12)],[9,random(40,50)],[16,random(20,30)],[22,random(70,78)],[24,random(55,65)]])",
+      "pm10_value_lv": "time-random-linear-interpolator([[0,random(12,25)],[6,random(25,30)],[12,random(30,40)],[16,random(35,45)],[18,random(50,65)],[22,random(30,40)],[24,random(20,25)]])",
+      "pm10_value_sd": "time-random-linear-interpolator([[0,random(12,22)],[6,random(22,28)],[12,random(28,32)],[16,random(30,35)],[18,random(30,40)],[22,random(20,25)],[24,random(15,20)]])",
+      "pm25_value_lv": "time-random-linear-interpolator([[0,random(10,15)],[6,random(20,25)],[12,random(25,30)],[16,random(30,35)],[18,random(30,45)],[22,random(15,20)],[24,random(10,15)]])",
+      "pm25_value_sd": "time-random-linear-interpolator([[0,random(8,14)],[6,random(20,24)],[12,random(25,30)],[16,random(25,30)],[18,random(30,35)],[22,random(15,20)],[24,random(10,15)]])",
+      "co_value_lv": "time-random-linear-interpolator([[0,random(0.6,0.8)],[6,random(0.15,0.25)],[9,random(0.55,0.65)],[16,random(0.2,0.3)],[18,random(0.6,0.8)],[22,random(0.95,1.2)],[24,random(0.7,0.8)]])",
+      "co_value_sd": "time-random-linear-interpolator([[0,random(0.6,0.8)],[6,random(0.15,0.25)],[9,random(0.55,0.65)],[16,random(0.2,0.3)],[18,random(0.6,0.8)],[22,random(0.95,1.2)],[24,random(0.7,0.8)]])",
+      "o3_value_lv": [
+         {
+            "content": "time-random-linear-interpolator([[0,random(30,50)],[6,random(20,30)],[12,random(70,75)],[15,random(75,79)],[18,random(70,75)],[24,random(55,65)]])",
+            "condition": "${{entity_name==^(?!(aq_alcala_zamora|aq_distrito_telefonica)$).*}}"
+         },
+         {
+            "content": "time-random-linear-interpolator([[0,random(35,55)],[6,random(25,35)],[12,random(120,140)],[15,random(180,200)],[18,random(100,120)],[24,random(60,70)]])",
+            "condition": "${{entity_name==^((aq_alcala_zamora|aq_distrito_telefonica)$).*}}"
+         }
+      ],
+      "o3_value_sd": [
+         {
+            "content": "time-random-linear-interpolator([[0,random(40,50)],[6,random(30,40)],[12,random(85,95)],[15,random(95,105)],[18,random(70,80)],[24,random(55,65)]])",
+            "condition": "${{entity_name==^(?!(aq_alcala_zamora|aq_distrito_telefonica)$).*}}"
+         },
+         {
+            "content": "time-random-linear-interpolator([[0,random(45,55)],[6,random(35,45)],[12,random(140,160)],[15,random(190,210)],[18,random(110,130)],[24,random(65,75)]])",
+            "condition": "${{entity_name==^((aq_alcala_zamora|aq_distrito_telefonica)$).*}}"
+         }
+      ],
+      "springSchedule": "10 */15 * * 4,5 *",
+      "summerSchedule": "10 */15 * * 6-9 *",
+      "autumnSchedule": "10 */15 * * 10,11 *",
+      "winterSchedule": "10 */15 * * 1-3,12 *",
+      "notRainSummerSchedule": "10 */15 * * 6-9 *",
+      "notRainNotSummerSchedule": "10 */15 * 1-4,7-22,25-31 1-5,10-12 *",
+      "rainSchedule": "10 */15 * 5,6,23,24 1-5,10-12 *",
+      "precip_value_nrsu": "0",
+      "precip_value_r": "time-random-linear-interpolator([[0,random(0.25,0.40)],[6,random(0.25,0.4)],[7,random(0,0)],[17,random(0,0)],[18,random(0.3,0.4)],[24,random(0.33,0.45)]])",
+      "precip_value_nrnsu": "0",
+      "temp_value_sp": "time-random-linear-interpolator([[0,random(10,12)],[6,random(8,10)],[14,random(24,28)],[18,random(18,20)],[22,random(14,16)],[24,random(10,12)]])",
+      "temp_value_su": "time-random-linear-interpolator([[0,random(19,21)],[6,random(17,19)],[14,random(30,34)],[18,random(26,30)],[22,random(22,24)],[24,random(19,21)]])",
+      "temp_value_au": "time-random-linear-interpolator([[0,random(8,10)],[6,random(6,8)],[14,random(16,21)],[18,random(12,14)],[22,random(10,12)],[24,random(8,10)]])",
+      "temp_value_wi": "time-random-linear-interpolator([[0,random(4,6)],[6,random(0,4)],[14,random(9,11)],[18,random(8,10)],[22,random(6,8)],[24,random(4,6)]])",
+      "wttype_value_nrsu": "text-rotation-interpolator({\"units\": \"hours\", \"text\": [[0,\"clearNight\"],[6.5,\"sunnyDay\"],[21,\"clearNight\"]]})",
+      "wttype_value_nrnsu": "text-rotation-interpolator({\"units\": \"hours\", \"text\": [[0,\"clearNight\"],[8,\"sunnyDay\"],[19,\"clearNight\"]]})",
+      "wttype_value_r": "text-rotation-interpolator({\"units\": \"hours\", \"text\": [[0,\"lightRain\"],[2,\"heavyRain\"],[7,\"sunnyDay\"],[18,\"lightRain\"],[21,\"heavyRain\"]]})",
+      "vbsl_value_nrsu": "text-rotation-interpolator({\"units\": \"hours\", \"text\": [[0,\"poor\"],[6.5,\"good\"],[21,\"poor\"]]})",
+      "vbsl_value_nrnsu": "text-rotation-interpolator({\"units\": \"hours\", \"text\": [[0,\"poor\"],[8,\"good\"],[19,\"poor\"]]})",
+      "vbsl_value_r": "text-rotation-interpolator({\"units\": \"hours\", \"text\": [[0,\"veryPoor\"],[2,\"veryPoor\"],[7,\"moderate\"],[18,\"veryPoor\"],[21,\"veryPoor\"]]})",
+      "workDaysReducedSchedule": "12 */15 * * * 1-4",
+      "fridaysSchedule": "12 */15 * * * 5",
+      "saturdaysSchedule": "12 */15 * * * 6",
+      "sundaysSchedule": "12 */15 * * * 0",
+      "soundlv_value_lj": [
+         {
+            "content": "time-random-linear-interpolator([[0,random(52,55)],[5,random(45,48)],[6,random(58,65)],[9,random(62,68)],[12,random(64,66)],[14,random(65,70)],[16,random(55,58)],[18,random(64,68)],[21,random(58,60)],[24,random(54,58)]])",
+            "condition": "${{entity_name==^(?!(no_camino_santiago)$).*}}"
+         },
+         {
+            "content": "time-random-linear-interpolator([[0,random(55,58)],[5,random(50,52)],[6,random(65,70)],[9,random(80,84)],[12,random(65,70)],[14,random(78,82)],[16,random(70,72)],[18,random(72,76)],[21,random(65,70)],[24,random(62,65)]])",
+            "condition": "${{entity_name==^((no_camino_santiago)$).*}}"
+         }
+      ],
+      "soundlv_value_v": [
+         {
+            "content": "time-random-linear-interpolator([[0,random(52,55)],[5,random(45,48)],[6,random(58,63)],[9,random(60,65)],[12,random(60,68)],[14,random(65,70)],[16,random(55,58)],[18,random(64,68)],[21,random(58,60)],[24,random(54,58)]])",
+            "condition": "${{entity_name==^(?!(no_san_millan_cogolla|no_camino_santiago)$).*}}"
+         },
+         {
+            "content": "time-random-linear-interpolator([[0,random(70,74)],[5,random(65,70)],[6,random(58,62)],[9,random(60,65)],[14,random(65,70)],[16,random(70,73)],[18,random(72,75)],[21,random(73,76)],[24,random(74,75)]])",
+            "condition": "${{entity_name==^((no_san_millan_cogolla)$).*}}"
+         },
+         {
+            "content": "time-random-linear-interpolator([[0,random(55,58)],[5,random(50,52)],[6,random(65,70)],[9,random(80,84)],[12,random(65,70)],[14,random(78,82)],[16,random(70,72)],[18,random(72,76)],[21,random(65,70)],[24,random(62,65)]])",
+            "condition": "${{entity_name==^((no_camino_santiago)$).*}}"
+         }
+      ],
+      "soundlv_value_s": [
+         {
+            "content": "time-random-linear-interpolator([[0,random(52,55)],[5,random(45,48)],[6,random(58,63)],[9,random(60,65)],[12,random(60,68)],[14,random(65,70)],[16,random(55,58)],[18,random(64,68)],[21,random(58,60)],[24,random(54,58)]])",
+            "condition": "${{entity_name==^(?!(no_san_millan_cogolla)$).*}}"
+         },
+         {
+            "content": "time-random-linear-interpolator([[0,random(70,74)],[5,random(65,70)],[6,random(58,62)],[9,random(60,65)],[14,random(65,70)],[16,random(70,73)],[18,random(72,75)],[21,random(73,76)],[24,random(74,75)]])",
+            "condition": "${{entity_name==^((no_san_millan_cogolla)$).*}}"
+         }
+      ],
+      "soundlv_value_d": "time-random-linear-interpolator([[0,random(52,55)],[5,random(45,48)],[6,random(58,63)],[9,random(60,65)],[12,random(60,68)],[14,random(65,70)],[16,random(55,58)],[18,random(64,68)],[21,random(58,60)],[24,random(54,58)]])"
+   },
+   "entities": [
+      {
+         "entity_name": "aq_jaen",
+         "entity_type": "AirQualityObserved",
+         "schedule": "45 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.641373772834442,
+                     40.55096492039049
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_uam",
+         "entity_type": "AirQualityObserved",
+         "schedule": "9 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.687962375679979,
+                     40.54936191295417
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_alonso_quijano",
+         "entity_type": "AirQualityObserved",
+         "schedule": "19 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.690722949226847,
+                     40.50206548094899
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_alcala_zamora",
+         "entity_type": "AirQualityObserved",
+         "schedule": "7 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.654215118289726,
+                     40.49783473213262
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_camino_del_sur",
+         "entity_type": "AirQualityObserved",
+         "schedule": "24 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.645831711920737,
+                     40.51419105708037
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_salvia",
+         "entity_type": "AirQualityObserved",
+         "schedule": "39 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.632150234077013,
+                     40.52930994700444
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_distrito_telefonica",
+         "entity_type": "AirQualityObserved",
+         "schedule": "2 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.661869827985667,
+                     40.51208276462622
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_nevero",
+         "entity_type": "AirQualityObserved",
+         "schedule": "54 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.658964842327553,
+                     40.53621994021456
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_aragoneses",
+         "entity_type": "AirQualityObserved",
+         "schedule": "57 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.660840106844603,
+                     40.52357652967221
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "aq_ciudad_escolar",
+         "entity_type": "AirQualityObserved",
+         "schedule": "19 */15 * * * *",
+         "active": [
+            {
+               "name": "SO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_lv)"
+            },
+            {
+               "name": "SO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(so2_value_sd)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_lv)"
+            },
+            {
+               "name": "NO2",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(no2_value_sd)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_lv)"
+            },
+            {
+               "name": "PM10",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm10_value_sd)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_lv)"
+            },
+            {
+               "name": "PM2.5",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(pm25_value_sd)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(co_value_lv)"
+            },
+            {
+               "name": "CO",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(co_value_sd)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(workDaysSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_lv)"
+            },
+            {
+               "name": "O3",
+               "schedule": "import(weekendSchedule)",
+               "type": "Number",
+               "value": "import(o3_value_sd)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.686080832375474,
+                     40.524966976149464
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "source",
+               "type": "Text",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "noref"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_monasterio",
+         "entity_type": "WeatherObserved",
+         "schedule": "24 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.695749530867351,
+                     40.510869258157015
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_dt",
+         "entity_type": "WeatherObserved",
+         "schedule": "44 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.665176086592215,
+                     40.517246952849824
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_puente_reina",
+         "entity_type": "WeatherObserved",
+         "schedule": "45 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.670291671749489,
+                     40.50031342418055
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_reyes_catolicos",
+         "entity_type": "WeatherObserved",
+         "schedule": "39 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.6507501364487,
+                     40.536251360972486
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_camino_nuevo",
+         "entity_type": "WeatherObserved",
+         "schedule": "42 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.641644394868751,
+                     40.51894347326957
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_uam",
+         "entity_type": "WeatherObserved",
+         "schedule": "38 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.688925190684864,
+                     40.54449788870447
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_el_pardo_01",
+         "entity_type": "WeatherObserved",
+         "schedule": "48 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.77715718567473,
+                     40.52369734432269
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_rosalia_de_castro",
+         "entity_type": "WeatherObserved",
+         "schedule": "22 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.730880034090993,
+                     40.483710570754496
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_almenara",
+         "entity_type": "WeatherObserved",
+         "schedule": "7 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.704219148323567,
+                     40.590944718564415
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_ctra_burgos",
+         "entity_type": "WeatherObserved",
+         "schedule": "47 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.600568220316123,
+                     40.571302299727435
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_el_alto",
+         "entity_type": "WeatherObserved",
+         "schedule": "30 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.592940076891947,
+                     40.5192495356565
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_ariadna",
+         "entity_type": "WeatherObserved",
+         "schedule": "49 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.612848656889354,
+                     40.471573943933905
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_valconejero",
+         "entity_type": "WeatherObserved",
+         "schedule": "24 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.635851920234127,
+                     40.56431764883044
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_el_pardo_02",
+         "entity_type": "WeatherObserved",
+         "schedule": "1 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.734069286108744,
+                     40.5515771522754
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wo_monovar",
+         "entity_type": "WeatherObserved",
+         "schedule": "10 */15 * * * *",
+         "active": [
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "precipitation",
+               "type": "Number",
+               "value": "import(precip_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_sp)",
+               "schedule": "import(springSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_su)",
+               "schedule": "import(summerSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_au)",
+               "schedule": "import(autumnSchedule)"
+            },
+            {
+               "name": "temperature",
+               "type": "Number",
+               "value": "import(temp_value_wi)",
+               "schedule": "import(winterSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "weatherType",
+               "type": "Text",
+               "value": "import(wttype_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrsu)",
+               "schedule": "import(notRainSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_nrnsu)",
+               "schedule": "import(notRainNotSummerSchedule)"
+            },
+            {
+               "name": "visibility",
+               "type": "Text",
+               "value": "import(vbsl_value_r)",
+               "schedule": "import(rainSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.656449279367523,
+                     40.47724730570977
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_ariadna",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.634606021826135,
+                              40.46166613641176
+                           ],
+                           [
+                              -3.632339007885719,
+                              40.49216301017312
+                           ],
+                           [
+                              -3.617180888459423,
+                              40.50137756732371
+                           ],
+                           [
+                              -3.58845151625995,
+                              40.48938063170021
+                           ],
+                           [
+                              -3.588921933066858,
+                              40.48745334610465
+                           ],
+                           [
+                              -3.598781081601882,
+                              40.47031207135167
+                           ],
+                           [
+                              -3.613921916852096,
+                              40.46147186716867
+                           ],
+                           [
+                              -3.634606021826135,
+                              40.46166613641176
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_ariadna"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_puente_reina",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.69456963946923,
+                              40.47005718577704
+                           ],
+                           [
+                              -3.6958369126485,
+                              40.47468181291798
+                           ],
+                           [
+                              -3.680143880572177,
+                              40.512529225128304
+                           ],
+                           [
+                              -3.65240480879299,
+                              40.5041493070001
+                           ],
+                           [
+                              -3.648293943702253,
+                              40.497828062761236
+                           ],
+                           [
+                              -3.69456963946923,
+                              40.47005718577704
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_puente_reina"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_el_pardo_01",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.768857628283433,
+                              40.56235442426143
+                           ],
+                           [
+                              -3.742375563446283,
+                              40.5171785886919
+                           ],
+                           [
+                              -3.776362554111222,
+                              40.48789515121269
+                           ],
+                           [
+                              -3.777654205023021,
+                              40.48906011772362
+                           ],
+                           [
+                              -3.784696453976609,
+                              40.523596402376405
+                           ],
+                           [
+                              -3.775541530336945,
+                              40.555172157341914
+                           ],
+                           [
+                              -3.768857628283433,
+                              40.56235442426143
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_el_pardo_01"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_monasterio",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.6958369126485,
+                              40.47468181291798
+                           ],
+                           [
+                              -3.729170064410446,
+                              40.51779915427073
+                           ],
+                           [
+                              -3.71399968300745,
+                              40.53207956142201
+                           ],
+                           [
+                              -3.682905858156074,
+                              40.525769615554275
+                           ],
+                           [
+                              -3.680143880572177,
+                              40.512529225128304
+                           ],
+                           [
+                              -3.6958369126485,
+                              40.47468181291798
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_monasterio"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_rosalia_de_castro",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.776362554111222,
+                              40.48789515121269
+                           ],
+                           [
+                              -3.742375563446283,
+                              40.5171785886919
+                           ],
+                           [
+                              -3.729170064410446,
+                              40.51779915427073
+                           ],
+                           [
+                              -3.6958369126485,
+                              40.47468181291798
+                           ],
+                           [
+                              -3.69456963946923,
+                              40.47005718577704
+                           ],
+                           [
+                              -3.694499530641508,
+                              40.462195052719316
+                           ],
+                           [
+                              -3.703710591010345,
+                              40.462275616795694
+                           ],
+                           [
+                              -3.753006333685462,
+                              40.4668296958569
+                           ],
+                           [
+                              -3.776362554111222,
+                              40.48789515121269
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_rosalia_de_castro"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_el_alto",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.58845151625995,
+                              40.48938063170021
+                           ],
+                           [
+                              -3.617180888459423,
+                              40.50137756732371
+                           ],
+                           [
+                              -3.617416729280212,
+                              40.53890738744621
+                           ],
+                           [
+                              -3.613270171386603,
+                              40.54285555456945
+                           ],
+                           [
+                              -3.583036128627153,
+                              40.547286243670754
+                           ],
+                           [
+                              -3.582100856479981,
+                              40.54053197738018
+                           ],
+                           [
+                              -3.582538747967217,
+                              40.51830832905636
+                           ],
+                           [
+                              -3.58508931414053,
+                              40.50315548757046
+                           ],
+                           [
+                              -3.58845151625995,
+                              40.48938063170021
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_el_alto"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_almenara",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.70905509521184,
+                              40.56361094050406
+                           ],
+                           [
+                              -3.745058019929996,
+                              40.58683849208285
+                           ],
+                           [
+                              -3.745058019929993,
+                              40.586838492082826
+                           ],
+                           [
+                              -3.742948142273894,
+                              40.58767740406764
+                           ],
+                           [
+                              -3.717131482020309,
+                              40.59794240954445
+                           ],
+                           [
+                              -3.6746838945975,
+                              40.59691752585408
+                           ],
+                           [
+                              -3.663172992562162,
+                              40.595251333398664
+                           ],
+                           [
+                              -3.670559112638651,
+                              40.57628685247717
+                           ],
+                           [
+                              -3.70905509521184,
+                              40.56361094050406
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_almenara"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_el_pardo_02",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.742375563446283,
+                              40.5171785886919
+                           ],
+                           [
+                              -3.768857628283431,
+                              40.562354424261436
+                           ],
+                           [
+                              -3.746668309627233,
+                              40.586198222102134
+                           ],
+                           [
+                              -3.745058019929976,
+                              40.586838492082805
+                           ],
+                           [
+                              -3.70905509521184,
+                              40.56361094050406
+                           ],
+                           [
+                              -3.71399968300745,
+                              40.53207956142201
+                           ],
+                           [
+                              -3.729170064410446,
+                              40.51779915427073
+                           ],
+                           [
+                              -3.742375563446283,
+                              40.5171785886919
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_el_pardo_02"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_camino_nuevo",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.632339007885719,
+                              40.49216301017312
+                           ],
+                           [
+                              -3.648293943702253,
+                              40.497828062761236
+                           ],
+                           [
+                              -3.65240480879299,
+                              40.5041493070001
+                           ],
+                           [
+                              -3.653806681979588,
+                              40.523594075998105
+                           ],
+                           [
+                              -3.623277520436835,
+                              40.53965557699883
+                           ],
+                           [
+                              -3.617416729280212,
+                              40.53890738744621
+                           ],
+                           [
+                              -3.617180888459423,
+                              40.50137756732371
+                           ],
+                           [
+                              -3.632339007885719,
+                              40.49216301017312
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_camino_nuevo"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_ctra_burgos",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.613270171386603,
+                              40.54285555456945
+                           ],
+                           [
+                              -3.622214052316088,
+                              40.588036511423574
+                           ],
+                           [
+                              -3.600189531392599,
+                              40.5805825009137
+                           ],
+                           [
+                              -3.585116392805961,
+                              40.562309312903466
+                           ],
+                           [
+                              -3.583036128627153,
+                              40.547286243670754
+                           ],
+                           [
+                              -3.613270171386603,
+                              40.54285555456945
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_ctra_burgos"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_monovar",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.694499530641508,
+                              40.462195052719316
+                           ],
+                           [
+                              -3.69456963946923,
+                              40.47005718577704
+                           ],
+                           [
+                              -3.648293943702253,
+                              40.497828062761236
+                           ],
+                           [
+                              -3.632339007885719,
+                              40.49216301017312
+                           ],
+                           [
+                              -3.634606021826135,
+                              40.46166613641176
+                           ],
+                           [
+                              -3.642443025114129,
+                              40.461739743111146
+                           ],
+                           [
+                              -3.694499530641508,
+                              40.462195052719316
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_monovar"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_reyes_catolicos",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.653806681979588,
+                              40.523594075998105
+                           ],
+                           [
+                              -3.670693530931649,
+                              40.53641261996386
+                           ],
+                           [
+                              -3.665187297443719,
+                              40.5619022283021
+                           ],
+                           [
+                              -3.623277520436835,
+                              40.53965557699883
+                           ],
+                           [
+                              -3.653806681979588,
+                              40.523594075998105
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_reyes_catolicos"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_uam",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.682905858156074,
+                              40.525769615554275
+                           ],
+                           [
+                              -3.71399968300745,
+                              40.53207956142201
+                           ],
+                           [
+                              -3.70905509521184,
+                              40.56361094050406
+                           ],
+                           [
+                              -3.670559112638651,
+                              40.57628685247717
+                           ],
+                           [
+                              -3.665187297443719,
+                              40.5619022283021
+                           ],
+                           [
+                              -3.670693530931649,
+                              40.53641261996386
+                           ],
+                           [
+                              -3.682905858156074,
+                              40.525769615554275
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_uam"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_dt",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.65240480879299,
+                              40.5041493070001
+                           ],
+                           [
+                              -3.680143880572177,
+                              40.512529225128304
+                           ],
+                           [
+                              -3.682905858156074,
+                              40.525769615554275
+                           ],
+                           [
+                              -3.670693530931649,
+                              40.53641261996386
+                           ],
+                           [
+                              -3.653806681979588,
+                              40.523594075998105
+                           ],
+                           [
+                              -3.65240480879299,
+                              40.5041493070001
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_dt"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_valconejero",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.617416729280212,
+                              40.53890738744621
+                           ],
+                           [
+                              -3.623277520436835,
+                              40.53965557699883
+                           ],
+                           [
+                              -3.665187297443719,
+                              40.5619022283021
+                           ],
+                           [
+                              -3.670559112638651,
+                              40.57628685247717
+                           ],
+                           [
+                              -3.663172992562162,
+                              40.595251333398664
+                           ],
+                           [
+                              -3.653489451073159,
+                              40.59384964969732
+                           ],
+                           [
+                              -3.632583876579105,
+                              40.591546089648254
+                           ],
+                           [
+                              -3.622214052316088,
+                              40.588036511423574
+                           ],
+                           [
+                              -3.613270171386603,
+                              40.54285555456945
+                           ],
+                           [
+                              -3.617416729280212,
+                              40.53890738744621
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_valconejero"
+            }
+         ]
+      },
+      {
+         "entity_name": "no_camino_santiago",
+         "entity_type": "NoiseObserved",
+         "schedule": "39 */15 * * * *",
+         "active": [
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_lj)",
+               "schedule": "import(workDaysReducedSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_v)",
+               "schedule": "import(fridaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_s)",
+               "schedule": "import(saturdaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_d)",
+               "schedule": "import(sundaysSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.670281510042366,
+                     40.5078733617809
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "no_san_millan_cogolla",
+         "entity_type": "NoiseObserved",
+         "schedule": "43 */15 * * * *",
+         "active": [
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_lj)",
+               "schedule": "import(workDaysReducedSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_v)",
+               "schedule": "import(fridaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_s)",
+               "schedule": "import(saturdaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_d)",
+               "schedule": "import(sundaysSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.667969796094858,
+                     40.502468455985685
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "no_monasterio",
+         "entity_type": "NoiseObserved",
+         "schedule": "3 */15 * * * *",
+         "active": [
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_lj)",
+               "schedule": "import(workDaysReducedSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_v)",
+               "schedule": "import(fridaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_s)",
+               "schedule": "import(saturdaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_d)",
+               "schedule": "import(sundaysSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.696164565012869,
+                     40.50627626411494
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "no_distrito_telefonica",
+         "entity_type": "NoiseObserved",
+         "schedule": "33 */15 * * * *",
+         "active": [
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_lj)",
+               "schedule": "import(workDaysReducedSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_v)",
+               "schedule": "import(fridaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_s)",
+               "schedule": "import(saturdaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_d)",
+               "schedule": "import(sundaysSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.66012851093405,
+                     40.51384418785907
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "no_felicidad",
+         "entity_type": "NoiseObserved",
+         "schedule": "31 */15 * * * *",
+         "active": [
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_lj)",
+               "schedule": "import(workDaysReducedSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_v)",
+               "schedule": "import(fridaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_s)",
+               "schedule": "import(saturdaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_d)",
+               "schedule": "import(sundaysSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.657721642413277,
+                     40.55044967218503
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "no_azalea",
+         "entity_type": "NoiseObserved",
+         "schedule": "58 */15 * * * *",
+         "active": [
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_lj)",
+               "schedule": "import(workDaysReducedSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_v)",
+               "schedule": "import(fridaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_s)",
+               "schedule": "import(saturdaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_d)",
+               "schedule": "import(sundaysSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.649040172305313,
+                     40.52135398267012
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "no_francisco_gervas",
+         "entity_type": "NoiseObserved",
+         "schedule": "28 */15 * * * *",
+         "active": [
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_lj)",
+               "schedule": "import(workDaysReducedSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_v)",
+               "schedule": "import(fridaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_s)",
+               "schedule": "import(saturdaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_d)",
+               "schedule": "import(sundaysSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.650396390393538,
+                     40.52972195782826
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      },
+      {
+         "entity_name": "no_encinar",
+         "entity_type": "NoiseObserved",
+         "schedule": "12 */15 * * * *",
+         "active": [
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_lj)",
+               "schedule": "import(workDaysReducedSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_v)",
+               "schedule": "import(fridaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_s)",
+               "schedule": "import(saturdaysSchedule)"
+            },
+            {
+               "name": "instantSoundLevel",
+               "type": "Number",
+               "value": "import(soundlv_value_d)",
+               "schedule": "import(sundaysSchedule)"
+            },
+            {
+               "name": "dateObserved",
+               "value": "import(now)",
+               "type": "DateTime"
+            },
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "Point",
+                  "coordinates": [
+                     -3.645089911049989,
+                     40.508095873370415
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "source",
+               "type": "URL",
+               "value": "http://urbo.geographica.io/"
+            },
+            {
+               "name": "dataProvider",
+               "type": "Text",
+               "value": "urbo"
+            },
+            {
+               "name": "address",
+               "type": "address",
+               "value": {
+                  "addressCountry": "ES",
+                  "addressLocality": "Madrid",
+                  "streetAddress": "nombre de calle s/n"
+               }
+            },
+            {
+               "name": "refPointOfInterest",
+               "type": "Text",
+               "value": "DistritoTelefonicaStations"
+            }
+         ]
+      }
+   ]
+}

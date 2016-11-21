@@ -11,7 +11,11 @@ More concretely, the FIWARE Device Simulator includes the following capabilities
 5. Possibility to run the simulations in real time and fast-forward modes.
 6. Possibility to visualize the evolution of the simulations in [Freeboard.io](http://freeboard.io/) dashboards.
 
-For further information please visit: the official [FIWARE Device Simulator documentation](fiware-sth-comet.readthedocs.io) at ReadTheDocs.
+For further information please visit: the official [FIWARE Device Simulator documentation](https://fiware-device-simulator.readthedocs.io) at ReadTheDocs.
+
+## Licence
+
+The FIWARE Device Simulator is licensed under Affero General Public License (GPL) version 3.
 
 ## Contact
 

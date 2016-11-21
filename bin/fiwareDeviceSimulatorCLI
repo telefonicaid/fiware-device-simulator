@@ -301,6 +301,20 @@ function onClear(err) {
 }
 
 /**
+ * Google Sheet work sheet first setHeaderRow() function handler
+ * @param  {Object} err The error if any
+ */
+function onDataAvailable(err) {
+  if (err) {
+    progressInfo.googleSheetUpdateStatus = 'error';
+    progressInfo.lastGoogleSheetUpdate = time.Date.now();
+    return logops.error('Error when setting the header row in the Google Sheet work sheet or tab to assure data ' +
+      'is available: ' + err);
+  }
+  runInNextTick(googleSheetTab.clear, onClear);
+}
+
+/**
  * Updates the schedule jobs into Google Sheet if configured
  */
 function updateScheduledJobsInGoogleSheet() {
@@ -308,7 +322,7 @@ function updateScheduledJobsInGoogleSheet() {
     (progressInfo.googleSheetUpdateStatus !== 'not supported' && progressInfo.googleSheetUpdateStatus !== 'ongoing') &&
     ((time.Date.now() - (progressInfo.lastGoogleSheetUpdate || 0)) > commander.timeline.refreshInterval)) {
     progressInfo.googleSheetUpdateStatus = 'ongoing';
-    runInNextTick(googleSheetTab.clear, onClear);
+    runInNextTick(googleSheetTab.setHeaderRow, ['Row Label', 'Bar Label', 'Start', 'End'], onDataAvailable);
   }
 }
 
@@ -389,6 +403,31 @@ function startSimulation() {
 function executeCommand() {
   var googleCredentials;
 
+  if (commander.all) {
+    if (!fileExists(commander.all)) {
+      logops.error('The provided CLI simulator configuration file path (\'' + commander.all +
+        '\') does not exist');
+      commander.help();
+    } else {
+      try {
+        commander.all = require(resolvePath(commander.all));
+      } catch (exception) {
+        logops.error('The provided CLI simulatior configuration file path (\'' + commander.all +
+          '\') is not a valid JSON file');
+        commander.help();
+      }
+      commander.configuration = commander.all.configuration;
+      commander.delay = commander.all.delay;
+      commander.maximumNotRespondedRequests = commander.all.maximumNotRespondedRequests;
+      commander.progressInfoInterval = commander.all.progressInfoInterval;
+      commander.silent = commander.all.silent;
+      commander.dweet = commander.all.dweet;
+      commander.timeline = commander.all.timeline;
+      commander.from = commander.all.from;
+      commander.to = commander.all.to;
+    }
+  }
+
   if (!commander.configuration) {
     commander.help();
   }
@@ -409,93 +448,97 @@ function executeCommand() {
   }
 
   if (commander.dweet) {
-    try {
-      commander.dweet = JSON.parse(commander.dweet);
-      if (!commander.dweet.name || typeof commander.dweet.name !== 'string') {
-        logops.error('The dweet.io configuration information should be an object including a \'name\' property ' +
-          'the thing name');
+    if (typeof commander.dweet === 'string') {
+      try {
+        commander.dweet = JSON.parse(commander.dweet);
+      } catch(exception) {
+        logops.error('Error when parsing the dweet.io configuration information: ' + exception);
         commander.help();
       }
-    } catch(exception) {
-      logops.error('Error when parsing the dweet.io configuration information: ' + exception);
+    }
+    if (!commander.dweet.name || typeof commander.dweet.name !== 'string') {
+      logops.error('The dweet.io configuration information should be an object including a \'name\' property ' +
+        'the thing name');
       commander.help();
     }
   }
 
   if (commander.timeline) {
-    try {
-      commander.timeline = JSON.parse(commander.timeline);
-      if (!commander.timeline.dateFormat || typeof commander.timeline.dateFormat !== 'string') {
-        logops.error('The Google Sheets configuration information should be an object including a \'dateFormat\' ' +
-          'property with the date format used by Google Sheets in your locale according to the dateformat NPM ' +
-          'package (for further information, please visit: https://github.com/felixge/node-dateformat#mask-options');
-        commander.help();
-      }
-      if (!commander.timeline.refreshInterval || typeof commander.timeline.refreshInterval !== 'number') {
-        logops.error('The Google Sheets configuration information should be an object including a ' +
-          '\'refreshInterval\' property with the minimum interval in milliseconds the scheduled updates will be ' +
-          'refreshed in the associated Google Sheet (i.e., the Google Sheet will be udpated in the next ' +
-          'progress information tick (see the -p option) once this interval has passed since the last refresh)');
-        commander.help();
-      }
-      if (!commander.timeline.sheetKey || typeof commander.timeline.sheetKey !== 'string') {
-        logops.error('The Google Sheets configuration information should be an object including a \'sheetKey\' ' +
-          'property with the long Google Sheet key where the scheduled updates timeline information will be stored');
-        commander.help();
-      }
-      googleSheet = new GoogleSheet(commander.timeline.sheetKey);
-      if (!commander.timeline.credentialsPath || typeof commander.timeline.credentialsPath !== 'string') {
-        logops.error('The Google Sheets configuration information should be an object including a ' +
-          '\'credentialsPath\' property with the path to the Google generated credentials');
-        commander.help();
-      }
-      if (!fileExists(commander.timeline.credentialsPath)) {
-        logops.error('The credentials path passed in the Google Sheet configuration information ' +
-          '(\'googleSheetConfig.credentialsPath\') does not exist: ' + commander.timeline.credentialsPath);
-        commander.help();
-      }
+    if (typeof commander.timeline === 'string') {
       try {
-        googleCredentials = require(resolvePath(commander.timeline.credentialsPath));
-      } catch (googleCredentialException) {
-        logops.error('The Google generated credential file (\'' + commander.timeline.credentialsPath + '\') ' +
-          'is not a valid JSON file, error when parsing the file: ' + googleCredentialException);
+        commander.timeline = JSON.parse(commander.timeline);
+      } catch(exception) {
+        logops.error('Error when parsing the Google Sheet configuration information: ' + exception);
         commander.help();
       }
-      logops.info('Authenticating into Google to update the Google Sheet including the scheduled updates...');
-      googleSheet.useServiceAccountAuth(googleCredentials, function (err) {
-        if (err) {
-          onError({
-            error: 'Error when authenticating with Google using the credential file (\'' +
-              commander.timeline.credentialsPath + '\'): ' + err
-          });
-          process.exit(0);
-        } else {
-          logops.info('Authentication into Google successfully completed');
-          googleSheet.getInfo(function(err, googleSheetInfo) {
-            if (err) {
-              onError({
-                error: 'Error when getting the Google Sheet information to update the data: ' + err
-              });
-              process.exit(0);
-            }
-            googleSheetTab = googleSheetInfo && googleSheetInfo.worksheets &&
-              googleSheetInfo.worksheets.length && googleSheetInfo.worksheets[0];
-            if (!googleSheetTab) {
-              onError({
-                error: 'Error when getting access to the first Google Sheet work sheet or tab to update the data: ' +
-                  err
-              });
-              process.exit(0);
-            } else {
-              startSimulation();
-            }
-          });
-        }
-      });
-    } catch(exception) {
-      logops.error('Error when parsing the Google Sheet configuration information: ' + exception);
+    }
+    if (!commander.timeline.dateFormat || typeof commander.timeline.dateFormat !== 'string') {
+      logops.error('The Google Sheets configuration information should be an object including a \'dateFormat\' ' +
+        'property with the date format used by Google Sheets in your locale according to the dateformat NPM ' +
+        'package (for further information, please visit: https://github.com/felixge/node-dateformat#mask-options');
       commander.help();
     }
+    if (!commander.timeline.refreshInterval || typeof commander.timeline.refreshInterval !== 'number') {
+      logops.error('The Google Sheets configuration information should be an object including a ' +
+        '\'refreshInterval\' property with the minimum interval in milliseconds the scheduled updates will be ' +
+        'refreshed in the associated Google Sheet (i.e., the Google Sheet will be udpated in the next ' +
+        'progress information tick (see the -p option) once this interval has passed since the last refresh)');
+      commander.help();
+    }
+    if (!commander.timeline.sheetKey || typeof commander.timeline.sheetKey !== 'string') {
+      logops.error('The Google Sheets configuration information should be an object including a \'sheetKey\' ' +
+        'property with the long Google Sheet key where the scheduled updates timeline information will be stored');
+      commander.help();
+    }
+    googleSheet = new GoogleSheet(commander.timeline.sheetKey);
+    if (!commander.timeline.credentialsPath || typeof commander.timeline.credentialsPath !== 'string') {
+      logops.error('The Google Sheets configuration information should be an object including a ' +
+        '\'credentialsPath\' property with the path to the Google generated credentials');
+      commander.help();
+    }
+    if (!fileExists(commander.timeline.credentialsPath)) {
+      logops.error('The credentials path passed in the Google Sheet configuration information ' +
+        '(\'googleSheetConfig.credentialsPath\') does not exist: ' + commander.timeline.credentialsPath);
+      commander.help();
+    }
+    try {
+      googleCredentials = require(resolvePath(commander.timeline.credentialsPath));
+    } catch (googleCredentialException) {
+      logops.error('The Google generated credential file (\'' + commander.timeline.credentialsPath + '\') ' +
+        'is not a valid JSON file, error when parsing the file: ' + googleCredentialException);
+      commander.help();
+    }
+    logops.info('Authenticating into Google to update the Google Sheet including the scheduled updates...');
+    googleSheet.useServiceAccountAuth(googleCredentials, function (err) {
+      if (err) {
+        onError({
+          error: 'Error when authenticating with Google using the credential file (\'' +
+            commander.timeline.credentialsPath + '\'): ' + err
+        });
+        process.exit(0);
+      } else {
+        logops.info('Authentication into Google successfully completed');
+        googleSheet.getInfo(function(err, googleSheetInfo) {
+          if (err) {
+            onError({
+              error: 'Error when getting the Google Sheet information to update the data: ' + err
+            });
+            process.exit(0);
+          }
+          googleSheetTab = googleSheetInfo && googleSheetInfo.worksheets &&
+            googleSheetInfo.worksheets.length && googleSheetInfo.worksheets[0];
+          if (!googleSheetTab) {
+            onError({
+              error: 'Error when getting access to the first Google Sheet work sheet or tab to update the data: ' +
+                err
+            });
+            process.exit(0);
+          } else {
+            startSimulation();
+          }
+        });
+      }
+    });
   }
 
   if (!googleCredentials) {
@@ -517,11 +560,11 @@ commander.
   option('-p, --progressInfoInterval <milliseconds>', 'The interval in milliseconds to show progress information ' +
     ' for fast-forward simulation', parseInt).
   option('-s, --silent', 'No progress information will be output by the console').
-  option('-w, --dweet <dweetConfiguration>', 'Configuration information to publish the simulation progress ' +
+  option('-w, --dweet <dweet-configuration>', 'Configuration information to publish the simulation progress ' +
          'information in dweet.io (it must be an object containing a \'name\' property for the dweet thing and ' +
          'optionally an \'apiKey\' property in case the thing is locked, for example: ' +
          '-w "{\\"name\\": \\"fds:Test:001\\"}")').
-  option('-l, --timeline <googleSheetsConfiguration', 'Configuration information to publish the scheduled ' +
+  option('-l, --timeline <google-sheets-configuration', 'Configuration information to publish the scheduled ' +
          'updates into Google Sheets for its visualization as a Timeline Google Chart in Freeboard.io (it must ' +
          'be an object including a \'sheetKey\' property for the long Google Sheet key where the data will be ' +
          'stored, a \'credentialsPath\' property for the path to the Google generated credentials ' +
@@ -535,10 +578,14 @@ commander.
          'for example: -l "{\\"sheetKey\": \\"1rGEpgC38kf_AC7FFlM71wev_-fKeuPKEOTvVY9I7e2Y\", ' +
          '\\"credentialsPath\\": \\"FIWARE Device Simulator-f11816817451.json\\", ' +
          '\\"dateFormat\": \\"dd/mm/yyyy HH:MM:ss\\", \\"refreshInterval\\": 15000}")').
-  option('-f, --from <fromDate>', 'The start date to begin the fast-forward simulation (if not set, the current ' +
+  option('-f, --from <from-date>', 'The start date to begin the fast-forward simulation (if not set, the current ' +
     'time will be used)', createDate).
-  option('-t, --to <toDate>', 'The end date to stop the fast-forward simulation (if not set, the fast-forward ' +
+  option('-t, --to <to-date>', 'The end date to stop the fast-forward simulation (if not set, the fast-forward ' +
     'will progress to the future and never end)', createDate).
+  option('-x, --all <cli-configuration-file-path>', 'Absolute or relative path (from the root of the Node ' +
+    'application) to the command line tool configuration file (a JSON file including all the previous configuration ' +
+    'options) (the long option names are used as properties of the JSON object) (options set in the comand line ' +
+    'prevail)').
   parse(process.argv);
 
 executeCommand();

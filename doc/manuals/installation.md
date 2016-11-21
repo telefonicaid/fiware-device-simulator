@@ -22,7 +22,7 @@ The FIWARE Device Simulator is ready to be used.
 
 To ease the testing and deployment of the FIWARE Device Simulator, there also exists Docker images hosted at the [FIWARE Docker Hub](https://hub.docker.com/r/fiware/device-simulator/), including all the information needed to deploy and to try the FIWARE Device Simulator via the execution of a simple Docker command.
 
-To run a docker instance including a FIWARE Device Simulator instance, please run the following commands:
+To run a Docker instance including a FIWARE Device Simulator instance, please run the following commands:
 ```bash
 docker pull fiware/device-simulator
 docker run -t -i fiware/device-simulator /bin/bash

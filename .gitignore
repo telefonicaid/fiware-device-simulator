@@ -5,6 +5,10 @@
 /report/
 /.c9revisions/
 /.settings/
+/rpm/BUILD/
+/rpm/BUILDROOT/
+/rpm/RPMS/
+/rpm/SRPMS/
 
 .settings
 .classpath

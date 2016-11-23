@@ -44,8 +44,10 @@ rm -Rf $RPM_BUILD_ROOT && mkdir -p $RPM_BUILD_ROOT
 [ -d %{_build_root_project} ] || mkdir -p %{_build_root_project}
 
 # Copy src files
-cp -R %{_srcdir}/* \
+shopt -s extglob
+cp -R %{_srcdir}/!(rpm) \
       %{_build_root_project}
+shopt -u extglob
 
 cp -R %{_topdir}/SOURCES/etc %{buildroot}
 

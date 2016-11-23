@@ -60,8 +60,8 @@ BASE_DIR="$(cd ${0%/*} && pwd -P)/.."
 RPM_BASE_DIR="${BASE_DIR}/rpm"
 
 # Cleanup previous RPM build directories
-rm -rf ${RPM_BASE_DIR}/{BUILD,RPMS,SRPMS}
-mkdir -p ${RPM_BASE_DIR}/{BUILD,RPMS,SRPMS}
+rm -rf ${RPM_BASE_DIR}/{BUILD,BUILDROOT,RPMS,SRPMS}
+mkdir -p ${RPM_BASE_DIR}/{BUILD,BUILDROOT,RPMS,SRPMS}
 
 if [[ ! -z ${VERSION_ARG} ]]; then
 	PRODUCT_VERSION=${VERSION_ARG}

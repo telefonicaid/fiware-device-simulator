@@ -59,6 +59,10 @@ done
 BASE_DIR="$(cd ${0%/*} && pwd -P)/.."
 RPM_BASE_DIR="${BASE_DIR}/rpm"
 
+# Cleanup previous RPM build directories
+rm -rf ${RPM_BASE_DIR}/{BUILD,RPMS,SRPMS}
+mkdir -p ${RPM_BASE_DIR}/{BUILD,RPMS,SRPMS}
+
 if [[ ! -z ${VERSION_ARG} ]]; then
 	PRODUCT_VERSION=${VERSION_ARG}
 else
@@ -77,7 +81,7 @@ fi
 
 RPM_USER="fiware-device-simulator"
 
-rpmbuild -ba ${RPM_BASE_DIR}/SPECS/fiware-device-simulator.spec \
+rpmbuild -bb ${RPM_BASE_DIR}/SPECS/fiware-device-simulator.spec \
     --define "_topdir ${RPM_BASE_DIR}" \
     --define "_project_user ${RPM_USER}" \
     --define "_product_version ${PRODUCT_VERSION}" \

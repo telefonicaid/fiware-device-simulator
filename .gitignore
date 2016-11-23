@@ -5,6 +5,7 @@
 /report/
 /.c9revisions/
 /.settings/
+/rpm/{BUILD,RPMS,SRPMS}/
 
 .settings
 .classpath

@@ -143,7 +143,7 @@ get_version_string()
 get_rpm_version_string() {
     local version_string ver rel
     version_string="$(get_version_string)"
-    ver="${version_string%-*-*}"
+    ver="${version_string%-*}"
     rel="${version_string:$((${#ver}+1))}"
     echo "${ver//[[:space:]-\/#]}" "${rel//[-]/.}"
 }

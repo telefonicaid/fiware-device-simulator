@@ -131,11 +131,10 @@ get_version_string()
           echo "${version}-${release}"
         ;;
         *)
-            full_version="$(git describe --tags --long --match "[[:digit:]]*.[[:digit:]]*.[[:digit:]]*")"
-            version="${full_version%%-*}_devel"
-            release="${full_version#*-}"
-            release="${release/-/.}"
-            echo "${version}-${release}"
+          full_version="$(git describe --tags --long --match "[[:digit:]]*.[[:digit:]]*.[[:digit:]]*")"
+          version="${full_version%%-*}_devel"
+          release="${full_version#*-}"
+          echo "${version}-${release}"
            
     esac
 }
@@ -143,7 +142,7 @@ get_version_string()
 get_rpm_version_string() {
     local version_string ver rel
     version_string="$(get_version_string)"
-    ver="${version_string%-*}"
+    ver="${version_string%-*-*}"
     rel="${version_string:$((${#ver}+1))}"
     echo "${ver//[[:space:]-\/#]}" "${rel//[-]/.}"
 }

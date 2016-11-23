@@ -131,8 +131,10 @@ get_version_string()
           echo "${version}-${release}"
         ;;
         *)
-            version="0.0.0"
-            release="error_unknown_branch"
+            full_version="$(git describe --tags --long --match "[[:digit:]]*.[[:digit:]]*.[[:digit:]]*")"
+            version="${full_version%%-*}_devel"
+            release="${full_version#*-}"
+            release="${release/-/.}"
             echo "${version}-${release}"
            
     esac

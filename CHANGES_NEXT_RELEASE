@@ -6,3 +6,4 @@
 - [FEATURE] Offer the possibility to configure the simulator command line tool by file
 - [TASK] Fix the link to the ReadTheDocs documentation in README.md file
 - [TASK] Add rpm builds for the simulator #14
+- [DOC] Add doc RPM builds

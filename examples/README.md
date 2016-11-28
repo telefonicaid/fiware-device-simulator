@@ -8,6 +8,7 @@ Examples provided cover several domain areas:
 - [Parking](#parking)
 - [Waste](#waste)
 - [Street lighting](#street-lighting)
+- [Environment](#environment)
 
 ### Parking
 - File: urbo-simulation-parking.json
@@ -27,3 +28,11 @@ Examples provided cover several domain areas:
 - File: urbo-simulation-streetlight.json
 - Simulation:
   - 25 StreetlightControlCabinet entities.
+
+### Environment
+- File: urbo-simulation-environment.json
+- Simulation:
+  - 10 AirQualityObserved entities.
+  - 8 NoiseObserved entities.
+  - 15 WeatherObserved entities.
+  - 15 WeatherArea entities.

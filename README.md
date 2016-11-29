@@ -1,5 +1,10 @@
 # FIWARE Device Simulator
 
+[![License badge](https://img.shields.io/badge/license-AGPL-blue.svg)](https://opensource.org/licenses/AGPL-3.0)
+[![Documentation badge](https://readthedocs.org/projects/fiware-device-simulator/badge/?version=latest)](http://fiware-device-simulator.readthedocs.io/en/latest/)
+[![Docker badge](https://img.shields.io/docker/pulls/fiware/device-simulator.svg)](https://hub.docker.com/r/fiware/device-simulator/)
+[![Support badge]( https://img.shields.io/badge/support-sof-yellowgreen.svg)](http://stackoverflow.com/questions/tagged/fiware-device-simulator)
+
 The FIWARE Device Simulator is a tool which makes it possible to interact with the FIWARE ecosystem of components simulating devices and other elements which may communicate with FIWARE components.
 
 More concretely, the FIWARE Device Simulator includes the following capabilities:

@@ -435,7 +435,7 @@ describe('multilinePositionInterpolator tests', function() {
     }
   );
 
-  it('should interpolate if a valid specification object is passed',
+  it('should interpolate as GeoJSON point geometry if a valid specification object is passed',
     function(done) {
       try {
         multilinePositionInterpolatorFunction = multilinePositionInterpolator(
@@ -481,6 +481,51 @@ describe('multilinePositionInterpolator tests', function() {
           {type: 'Point'});
         should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).containEql(
           {coordinates: [3.2898394138913325, 4.290919970982591]});
+        done();
+      } catch(exception) {
+        done(exception);
+      }
+    }
+  );
+
+  it('should interpolate as geo:point if a valid specification object is passed',
+    function(done) {
+      try {
+        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+          {
+            coordinates: [[1, 2], [3, 4], [5, 6]],
+            speed: {value: 30, units: 'km/h'},
+            time: {from: 10, to: 22},
+            return: 'geo:point'
+          }
+        );
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 5)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 5)))).equal(
+          [1, 2].toString());
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 7)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 7)))).equal(
+          [1, 2].toString());
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 8)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 8)))).equal(
+          [1, 2].toString());
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 10)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 10)))).equal(
+          [1, 2].toString());
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 17)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 17)))).equal(
+          [2.3351126503586808, 3.3363745940384257].toString());
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20)))).equal(
+          [2.9083307610874596, 3.90859448519012].toString());
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).equal(
+          [3.2898394138913325, 4.290919970982591].toString());
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30)))).equal(
+          [3.2898394138913325, 4.290919970982591].toString());
+        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).equal('string');
+        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).equal(
+          [3.2898394138913325, 4.290919970982591].toString());
         done();
       } catch(exception) {
         done(exception);

@@ -9,3 +9,4 @@
 - [TASK] Adding doc RPM builds
 - [TASK] Adding the FIWARE badges to the README.md file
 - [FEATURE] Possibility to set the return type of the multiline-position-interpolator as geo:point
+- [BUG] Return appropriate point type when mobile elements are stopped

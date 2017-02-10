@@ -4,8 +4,8 @@
    "authentication": "import(auth_config.json)",
    "exports": {
       "now": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
-      "workDaysSchedule": "15 */5 * * * 1-5",
-      "weekendSchedule": "15 */5 * * * 0,6",
+      "workDaysSchedule": "38 */5 * * * 1-5",
+      "weekendSchedule": "38 */5 * * * 0,6",
       "intensity_value_lv": "time-random-linear-interpolator({\"spec\": [[0,random(10,12)],[1,random(8,10)],[2,random(4,6)],[4,random(4,6)],[5,random(10,12)],[6,random(20,30)],[7,random(70,80)],[8,random(90,100)],[9,random(105,120)],[10,random(70,80)],[11,random(50,60)],[12,random(50,60)],[13,random(60,70)],[14,random(80,90)],[15,random(90,100)],[16,random(90,100)],[17,random(70,80)],[18,random(50,60)],[19,random(70,80)],[20,random(80,90)],[21,random(40,60)],[22,random(30,40)],[23,random(20,30)],[24,random(10,15)]]),\"return\": {\"type\": \"integer\"}}",
       "intensity_value_sd": "time-random-linear-interpolator({\"spec\": [[0,random(10,12)],[1,random(8,10)],[2,random(4,6)],[4,random(4,6)],[5,random(10,12)],[6,random(12,18)],[7,random(30,40)],[8,random(40,50)],[9,random(40,55)],[10,random(60,70)],[11,random(50,60)],[12,random(30,40)],[13,random(40,50)],[14,random(40,50)],[15,random(50,60)],[16,random(30,40)],[17,random(30,40)],[18,random(50,60)],[19,random(50,60)],[20,random(40,50)],[21,random(30,40)],[22,random(20,30)],[23,random(15,20)],[24,random(10,12)]]),\"return\": {\"type\": \"integer\"}}",
       "velocity_value_lv": "time-random-linear-interpolator({\"spec\": [[0,random(52,55)],[6,random(50,54)],[7,random(48,50)],[8,random(40,45)],[9,random(30,25)],[10,random(40,45)],[11,random(48,50)],[13,random(48,50)],[14,random(40,45)],[15,random(43,46)],[16,random(48,50)],[18,random(48,50)],[19,random(35,40)],[20,random(38,40)],[21,random(48,50)],[23,random(50,52)],[24,random(50,54)]]),\"return\": {\"type\": \"float\"}}",
@@ -19,13 +19,25 @@
       {
          "entity_name": "ronda_comunicacion_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "23 */5 * * * *",
+         "schedule": "56 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -36,8 +48,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -85,13 +109,25 @@
       {
          "entity_name": "enlace_fuencarral_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "20 */5 * * * *",
+         "schedule": "36 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -102,8 +138,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -151,13 +199,25 @@
       {
          "entity_name": "m40_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "42 */5 * * * *",
+         "schedule": "22 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -168,8 +228,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -217,13 +289,25 @@
       {
          "entity_name": "m40_02",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "14 */5 * * * *",
+         "schedule": "60 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -234,8 +318,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -283,13 +379,25 @@
       {
          "entity_name": "a1_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "3 */5 * * * *",
+         "schedule": "35 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -300,8 +408,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -349,13 +469,25 @@
       {
          "entity_name": "sto_domingo_calzada_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "48 */5 * * * *",
+         "schedule": "24 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -366,8 +498,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -415,13 +559,25 @@
       {
          "entity_name": "alcala_zamora_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "5 */5 * * * *",
+         "schedule": "60 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -432,8 +588,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -481,13 +649,25 @@
       {
          "entity_name": "pi_y_margall_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "50 */5 * * * *",
+         "schedule": "28 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -498,8 +678,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -547,13 +739,25 @@
       {
          "entity_name": "camino_santiago_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "10 */5 * * * *",
+         "schedule": "48 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -564,8 +768,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -613,13 +829,25 @@
       {
          "entity_name": "a1_02",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "7 */5 * * * *",
+         "schedule": "21 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -630,8 +858,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -684,8 +924,20 @@
             {
                "name": "intensity",
                "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "intensity",
+               "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -696,8 +948,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -745,13 +1009,25 @@
       {
          "entity_name": "calendula_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "51 */5 * * * *",
+         "schedule": "22 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -762,8 +1038,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -811,13 +1099,25 @@
       {
          "entity_name": "conde_gaitanes_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "45 */5 * * * *",
+         "schedule": "22 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -828,8 +1128,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -877,13 +1189,25 @@
       {
          "entity_name": "monte_valdelatas",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "48 */5 * * * *",
+         "schedule": "14 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -894,8 +1218,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -943,13 +1279,25 @@
       {
          "entity_name": "fuencarral_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "3 */5 * * * *",
+         "schedule": "37 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -960,8 +1308,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1009,13 +1369,25 @@
       {
          "entity_name": "monte_valdelatas_02",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "59 */5 * * * *",
+         "schedule": "25 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1026,8 +1398,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1075,13 +1459,25 @@
       {
          "entity_name": "monte_valdelatas_03",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "28 */5 * * * *",
+         "schedule": "48 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1092,8 +1488,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1141,13 +1549,25 @@
       {
          "entity_name": "a1_03",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "29 */5 * * * *",
+         "schedule": "33 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1158,8 +1578,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1207,13 +1639,25 @@
       {
          "entity_name": "m40_03",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "27 */5 * * * *",
+         "schedule": "29 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1224,8 +1668,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1273,13 +1729,25 @@
       {
          "entity_name": "ctra_fuencarral_alcobendas_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "37 */5 * * * *",
+         "schedule": "30 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1290,8 +1758,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1339,13 +1819,25 @@
       {
          "entity_name": "camino_cura_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "49 */5 * * * *",
+         "schedule": "14 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1356,8 +1848,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1405,13 +1909,25 @@
       {
          "entity_name": "jazmin_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "26 */5 * * * *",
+         "schedule": "32 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1422,8 +1938,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1471,13 +1999,25 @@
       {
          "entity_name": "camino_nuevo_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "34 */5 * * * *",
+         "schedule": "47 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1488,8 +2028,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1537,13 +2089,25 @@
       {
          "entity_name": "industria_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "37 */5 * * * *",
+         "schedule": "17 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1554,8 +2118,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",
@@ -1603,13 +2179,25 @@
       {
          "entity_name": "valdeparra_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "16 */5 * * * *",
+         "schedule": "39 */5 * * * *",
          "active": [
+            {
+               "name": "intensity",
+               "type": "Number",
+               "value": "import(intensity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
             {
                "name": "intensity",
                "type": "Number",
                "value": "import(intensity_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "averageVehicleSpeed",
+               "type": "Number",
+               "value": "import(velocity_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "averageVehicleSpeed",
@@ -1620,8 +2208,20 @@
             {
                "name": "averageVehicleLength",
                "type": "Number",
+               "value": "import(length_value_lv)",
+               "schedule": "import(workDaysSchedule)"
+            },
+            {
+               "name": "averageVehicleLength",
+               "type": "Number",
                "value": "import(length_value_sd)",
                "schedule": "import(weekendSchedule)"
+            },
+            {
+               "name": "congested",
+               "type": "Number",
+               "value": "import(congested_value_lv)",
+               "schedule": "import(workDaysSchedule)"
             },
             {
                "name": "congested",

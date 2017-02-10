@@ -4,9 +4,9 @@
    "authentication": "import(auth_config.json)",
    "exports": {
       "now": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
-      "workDaysSchedule": "32 */5 * * * 1-5",
-      "weekendSchedule": "32 */5 * * * 0,6",
-      "intensity_value_lv": "time-random-linear-interpolator([[0,random(10,12)],[1,random(8,10)],[2,random(4,6)],[4,random(4,6)],[5,random(10,12)],[6,random(20,30)],[7,random(70,80)],[8,random(90,100)],[9,random(105,120)],[10,random(70,80)],[11,random(50,60)],[12,random(50,60)],[13,random(60,70)],[14,random(80,90)],[15,random(90,100)],[16,random(90,100)],[17,random(70,80)],[18,random(50,60)],[19,random(70,80)],[20,random(80,90)],[21,random(40,60)],[22,random(30,40)],[23,random(20,30)],[24,random(10,15)]],\"return\": {\"type\": \"integer\", \"rounding\": \"ceil\"}})",
+      "workDaysSchedule": "56 */5 * * * 1-5",
+      "weekendSchedule": "56 */5 * * * 0,6",
+      "intensity_value_lv": "time-random-linear-interpolator({\"spec\":[[0,random(10,12)],[1,random(8,10)],[2,random(4,6)],[4,random(4,6)],[5,random(10,12)],[6,random(20,30)],[7,random(70,80)],[8,random(90,100)],[9,random(105,120)],[10,random(70,80)],[11,random(50,60)],[12,random(50,60)],[13,random(60,70)],[14,random(80,90)],[15,random(90,100)],[16,random(90,100)],[17,random(70,80)],[18,random(50,60)],[19,random(70,80)],[20,random(80,90)],[21,random(40,60)],[22,random(30,40)],[23,random(20,30)],[24,random(10,15)]],\"return\": {\"type\": \"integer\", \"rounding\": \"ceil\"}})",
       "intensity_value_sd": "time-random-linear-interpolator({\"spec\": [[0,random(10,12)],[1,random(8,10)],[2,random(4,6)],[4,random(4,6)],[5,random(10,12)],[6,random(12,18)],[7,random(30,40)],[8,random(40,50)],[9,random(40,55)],[10,random(60,70)],[11,random(50,60)],[12,random(30,40)],[13,random(40,50)],[14,random(40,50)],[15,random(50,60)],[16,random(30,40)],[17,random(30,40)],[18,random(50,60)],[19,random(50,60)],[20,random(40,50)],[21,random(30,40)],[22,random(20,30)],[23,random(15,20)],[24,random(10,12)]],\"return\": {\"type\": \"integer\", \"rounding\": \"ceil\"}})",
       "velocity_value_lv": "time-random-linear-interpolator({\"spec\": [[0,random(52,55)],[6,random(50,54)],[7,random(48,50)],[8,random(40,45)],[9,random(30,25)],[10,random(40,45)],[11,random(48,50)],[13,random(48,50)],[14,random(40,45)],[15,random(43,46)],[16,random(48,50)],[18,random(48,50)],[19,random(35,40)],[20,random(38,40)],[21,random(48,50)],[23,random(50,52)],[24,random(50,54)]],\"return\": {\"type\": \"float\"}})",
       "velocity_value_sd": "time-random-linear-interpolator({\"spec\": [[0,random(52,55)],[6,random(50,54)],[7,random(48,50)],[8,random(45,48)],[9,random(40,42)],[10,random(42,46)],[11,random(48,50)],[13,random(48,50)],[14,random(44,46)],[15,random(45,48)],[16,random(48,50)],[18,random(48,50)],[19,random(42,45)],[20,random(45,48)],[21,random(48,50)],[23,random(50,52)],[24,random(50,54)]],\"return\": {\"type\": \"float\"}})",
@@ -19,7 +19,7 @@
       {
          "entity_name": "ronda_comunicacion_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "42 */5 * * * *",
+         "schedule": "23 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -98,7 +98,7 @@
       {
          "entity_name": "enlace_fuencarral_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "20 */5 * * * *",
+         "schedule": "33 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -177,7 +177,7 @@
       {
          "entity_name": "m40_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "28 */5 * * * *",
+         "schedule": "34 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -256,7 +256,7 @@
       {
          "entity_name": "m40_02",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "52 */5 * * * *",
+         "schedule": "34 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -335,7 +335,7 @@
       {
          "entity_name": "a1_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "10 */5 * * * *",
+         "schedule": "51 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -414,7 +414,7 @@
       {
          "entity_name": "sto_domingo_calzada_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "56 */5 * * * *",
+         "schedule": "22 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -493,7 +493,7 @@
       {
          "entity_name": "alcala_zamora_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "57 */5 * * * *",
+         "schedule": "55 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -572,7 +572,7 @@
       {
          "entity_name": "pi_y_margall_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "12 */5 * * * *",
+         "schedule": "59 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -651,7 +651,7 @@
       {
          "entity_name": "camino_santiago_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "49 */5 * * * *",
+         "schedule": "14 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -730,7 +730,7 @@
       {
          "entity_name": "a1_02",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "33 */5 * * * *",
+         "schedule": "58 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -888,7 +888,7 @@
       {
          "entity_name": "calendula_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "31 */5 * * * *",
+         "schedule": "35 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -967,7 +967,7 @@
       {
          "entity_name": "conde_gaitanes_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "35 */5 * * * *",
+         "schedule": "55 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1046,7 +1046,7 @@
       {
          "entity_name": "monte_valdelatas",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "16 */5 * * * *",
+         "schedule": "5 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1125,7 +1125,7 @@
       {
          "entity_name": "fuencarral_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "51 */5 * * * *",
+         "schedule": "14 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1204,7 +1204,7 @@
       {
          "entity_name": "monte_valdelatas_02",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "51 */5 * * * *",
+         "schedule": "7 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1283,7 +1283,7 @@
       {
          "entity_name": "monte_valdelatas_03",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "54 */5 * * * *",
+         "schedule": "55 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1362,7 +1362,7 @@
       {
          "entity_name": "a1_03",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "38 */5 * * * *",
+         "schedule": "22 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1441,7 +1441,7 @@
       {
          "entity_name": "m40_03",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "19 */5 * * * *",
+         "schedule": "41 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1520,7 +1520,7 @@
       {
          "entity_name": "ctra_fuencarral_alcobendas_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "58 */5 * * * *",
+         "schedule": "45 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1599,7 +1599,7 @@
       {
          "entity_name": "camino_cura_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "21 */5 * * * *",
+         "schedule": "12 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1678,7 +1678,7 @@
       {
          "entity_name": "jazmin_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "51 */5 * * * *",
+         "schedule": "11 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1757,7 +1757,7 @@
       {
          "entity_name": "camino_nuevo_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "16 */5 * * * *",
+         "schedule": "10 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1836,7 +1836,7 @@
       {
          "entity_name": "industria_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "58 */5 * * * *",
+         "schedule": "57 */5 * * * *",
          "active": [
             {
                "name": "intensity",
@@ -1915,7 +1915,7 @@
       {
          "entity_name": "valdeparra_01",
          "entity_type": "TrafficFlowObserved",
-         "schedule": "33 */5 * * * *",
+         "schedule": "57 */5 * * * *",
          "active": [
             {
                "name": "intensity",

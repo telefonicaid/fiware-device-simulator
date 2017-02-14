@@ -27,7 +27,7 @@ var should = require('should');
 
 var ROOT_PATH = require('app-root-path');
 var fdsErrors = require(ROOT_PATH + '/lib/errors/fdsErrors');
-var multilinePositionInterpolator = require(ROOT_PATH + '/lib/interpolators/multilinePositionInterpolator');
+var multilineBearingInterpolator = require(ROOT_PATH + '/lib/interpolators/multilineBearingInterpolator');
 
 /**
  * Returns the decimal date associated to certain date
@@ -38,12 +38,12 @@ function toDecimalHours(date) {
   return date.getHours() + (date.getMinutes() / 60) + (date.getSeconds() / 3600);
 }
 
-describe('multilinePositionInterpolator tests', function() {
-  var multilinePositionInterpolatorFunction;
+describe('multilineBearingInterpolator tests', function() {
+  var multilineBearingInterpolatorFunction;
 
   it('should throw an error if a number is passed instead of a valid interpolation array', function(done) {
     try {
-      multilinePositionInterpolatorFunction = multilinePositionInterpolator(666);
+      multilineBearingInterpolatorFunction = multilineBearingInterpolator(666);
       done(new Error('It should throw an InvalidInterpolationSpec error'));
     } catch(exception) {
       should(exception).be.an.instanceof(fdsErrors.InvalidInterpolationSpec);
@@ -54,7 +54,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if a number is passed instead of a valid interpolation array as a string specification',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator('666');
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator('666');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
       } catch(exception) {
         should(exception).be.an.instanceof(fdsErrors.InvalidInterpolationSpec);
@@ -66,7 +66,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if a one level hierarchy array is passed instead of a valid interpolation array',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator([1, 2, 3]);
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator([1, 2, 3]);
         done(new Error('It should throw an InvalidInterpolationSpec error'));
       } catch(exception) {
         should(exception).be.an.instanceof(fdsErrors.InvalidInterpolationSpec);
@@ -79,7 +79,7 @@ describe('multilinePositionInterpolator tests', function() {
      'as a string specification',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator('[1, 2, 3]');
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator('[1, 2, 3]');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
       } catch(exception) {
         should(exception).be.an.instanceof(fdsErrors.InvalidInterpolationSpec);
@@ -91,7 +91,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if a 2 level hierarchy array with one cardinality is passed instead of a ' +
      'valid interpolation array as a string specification', function(done) {
     try {
-      multilinePositionInterpolatorFunction = multilinePositionInterpolator('[[1], [2], [3]]');
+      multilineBearingInterpolatorFunction = multilineBearingInterpolator('[[1], [2], [3]]');
       done(new Error('It should throw an InvalidInterpolationSpec error'));
     } catch(exception) {
       should(exception).be.an.instanceof(fdsErrors.InvalidInterpolationSpec);
@@ -102,7 +102,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if a 2 level hierarchy array with one cardinality is passed instead of a ' +
      'valid interpolation array', function(done) {
     try {
-      multilinePositionInterpolatorFunction = multilinePositionInterpolator([[1], [2], [3]]);
+      multilineBearingInterpolatorFunction = multilineBearingInterpolator([[1], [2], [3]]);
       done(new Error('It should throw an InvalidInterpolationSpec error'));
     } catch(exception) {
       should(exception).be.an.instanceof(fdsErrors.InvalidInterpolationSpec);
@@ -113,7 +113,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if an invalid array is passed instead of a ' +
      'valid interpolation array as a string specification', function(done) {
     try {
-      multilinePositionInterpolatorFunction = multilinePositionInterpolator('[[1], [2], [3]');
+      multilineBearingInterpolatorFunction = multilineBearingInterpolator('[[1], [2], [3]');
       done(new Error('It should throw an InvalidInterpolationSpec error'));
     } catch(exception) {
       should(exception).be.an.instanceof(fdsErrors.InvalidInterpolationSpec);
@@ -124,7 +124,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if no coordinates is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             speed: {value: 30, units: 'km/h'},
             time: {from: 10, to: 22}
@@ -141,7 +141,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if no coordinates is passed in the specification as a string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"speed\": {\"value\": 30, \"units": "km/h"}, \"time\": {\"from\": 10, \"to\": 22}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
       } catch(exception) {
@@ -154,7 +154,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if no speed is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [[1,2], [2,3], [4,5]],
             time: {from: 10, to: 22}
@@ -171,7 +171,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if no speed is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates\": [[1,2], [2,3], [4,5]], \"time\": {\"from\": 10, \"to\": 22}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
       } catch(exception) {
@@ -184,7 +184,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if no time is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [[1,2], [2,3], [4,5]],
             speed: {value: 30, units: 'km/h'}
@@ -201,7 +201,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if no time is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates\": [[1,2], [2,3], [4,5]], \"speed\": {\"value\": 30, \"units\": \"km/h\"}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
       } catch(exception) {
@@ -214,7 +214,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid coordinates is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [1, 2, 3],
             speed: {value: 30, units: 'km/h'},
@@ -232,7 +232,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid coordinates is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates\": [1, 2, 3], \"speed\": {\"value\": 30, \"units\": \"km/h\"}, ' +
             '\"time\": {\"from\": 10, \"to\": 22}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
@@ -246,7 +246,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid coordinates is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [[1], [2], [3]],
             speed: {value: 30, units: 'km/h'},
@@ -264,7 +264,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid coordinates is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates\": [[1], [2], [3], \"speed\": {\"value\": 30, \"units\": \"km/h\"}, ' +
             '\"time\": {\"from\": 10, \"to\": 22}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
@@ -278,7 +278,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid speed is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [[1, 2], [3, 4], [5, 6]],
             speed: {units: 'km/h'},
@@ -296,7 +296,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid speed is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates: [[1, 2], [3, 4], [5, 6]], \"speed\": {\"units\": \"km/h\"}, ' +
             '\"time\": {\"from\": 10, to: 22}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
@@ -310,7 +310,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid speed is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [[1, 2], [3, 4], [5, 6]],
             speed: {value: 30},
@@ -328,7 +328,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid speed is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates\": [[1, 2], [3, 4], [5, 6]], \"speed\": {\"value\": 30}, ' +
             '\"time\": {\"from\": 10, \"to\": 22}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
@@ -342,7 +342,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid speed is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [[1, 2], [3, 4], [5, 6]],
             speed: {value: 30, units: 'invalid-units'},
@@ -360,7 +360,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid speed is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates\": [[1, 2], [3, 4], [5, 6]], \"speed\": {\"value\": 30, \"units\": \"invalid-units\"}, ' +
             '\"time\": {\"from\": 10, \"to\": 22}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
@@ -374,7 +374,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid time is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [[1, 2], [3, 4], [5, 6]],
             speed: {value: 30, units: 'km/h'},
@@ -392,7 +392,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid time is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates\": [[1, 2], [3, 4], [5, 6]], \"speed\": {\"value\": 30, \"units\": \"km/h\"}, ' +
             '\"time\": {\"to\": 22}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
@@ -406,7 +406,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid time is passed in the specification as an object',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
             coordinates: [[1, 2], [3, 4], [5, 6]],
             speed: {value: 30, units: 'km/h'},
@@ -424,7 +424,7 @@ describe('multilinePositionInterpolator tests', function() {
   it('should throw an error if invalid time is passed in the specification as an string',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           '{\"coordinates\": [[1, 2], [3, 4], [5, 6]], \"speed\": {\"value\": 30, \"units\": \"km/h\"}, ' +
             '\"time\": {\"from\": 10}}');
         done(new Error('It should throw an InvalidInterpolationSpec error'));
@@ -438,95 +438,42 @@ describe('multilinePositionInterpolator tests', function() {
   it('should interpolate as GeoJSON point geometry if a valid specification object is passed',
     function(done) {
       try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
+        multilineBearingInterpolatorFunction = multilineBearingInterpolator(
           {
-            coordinates: [[1, 2], [3, 4], [5, 6]],
+            coordinates: [[-6.2683868408203125,36.48948933214638],[-6.257915496826172,36.46478162030615],
+              [-6.252079010009766,36.461744374732085],[-6.2162017822265625,36.456774079889286]],
             speed: {value: 30, units: 'km/h'},
             time: {from: 10, to: 22}
           }
         );
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 5)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 5)))).containEql(
-          {coordinates: [1, 2]});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 7)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 7)))).containEql(
-          {coordinates: [1, 2]});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 8)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 8)))).containEql(
-          {coordinates: [1, 2]});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 10)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 10)))).containEql(
-          {coordinates: [1, 2]});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 17)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 17)))).containEql(
-          {coordinates: [2.3351126503586808, 3.3363745940384257]});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20)))).containEql(
-          {coordinates: [2.9083307610874596, 3.90859448519012]});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).containEql(
-          {coordinates: [3.2898394138913325, 4.290919970982591]});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30)))).containEql(
-          {coordinates: [3.2898394138913325, 4.290919970982591]});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).containEql(
-          {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).containEql(
-          {coordinates: [3.2898394138913325, 4.290919970982591]});
-        done();
-      } catch(exception) {
-        done(exception);
-      }
-    }
-  );
-
-  it('should interpolate as geo:point if a valid specification object is passed',
-    function(done) {
-      try {
-        multilinePositionInterpolatorFunction = multilinePositionInterpolator(
-          {
-            coordinates: [[1, 2], [3, 4], [5, 6]],
-            speed: {value: 30, units: 'km/h'},
-            time: {from: 10, to: 22},
-            return: 'geo:point'
-          }
-        );
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 5)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 5)))).equal(
-          [1, 2].toString());
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 7)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 7)))).equal(
-          [1, 2].toString());
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 8)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 8)))).equal(
-          [1, 2].toString());
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 10)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 10)))).equal(
-          [1, 2].toString());
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 17)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 17)))).equal(
-          [2.3351126503586808, 3.3363745940384257].toString());
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20)))).equal(
-          [2.9083307610874596, 3.90859448519012].toString());
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).equal(
-          [3.2898394138913325, 4.290919970982591].toString());
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30)))).equal(
-          'string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30)))).equal(
-          [3.2898394138913325, 4.290919970982591].toString());
-        should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).equal(
-          [3.2898394138913325, 4.290919970982591].toString());
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 5)))).equal('number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 5))))).equal(
+          161);
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 7)))).equal('number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 7))))).equal(
+          161);
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 8)))).equal('number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 8))))).equal(
+          161);
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 10)))).equal('number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 10))))).equal(
+          161);
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 17)))).equal('number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 17))))).equal(
+          99);
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20)))).equal('number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20))))).equal(
+          161);
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).equal('number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22))))).equal(
+          161);
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30)))).equal(
+          'number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30))))).
+          equal(161);
+        should(typeof multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).equal('number');
+        should(Math.floor(multilineBearingInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23))))).equal(
+          161);
         done();
       } catch(exception) {
         done(exception);

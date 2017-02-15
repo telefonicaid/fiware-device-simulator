@@ -36,3 +36,8 @@ Examples provided cover several domain areas:
   - 8 NoiseObserved entities.
   - 15 WeatherObserved entities.
   - 15 WeatherArea entities.
+
+### Transportation
+- File: urbo-simulation-transport.json
+- Simulation:
+  - 25 TrafficFlowObserved entities.

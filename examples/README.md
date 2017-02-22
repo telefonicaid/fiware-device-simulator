@@ -41,3 +41,4 @@ Examples provided cover several domain areas:
 - File: urbo-simulation-transport.json
 - Simulation:
   - 25 TrafficFlowObserved entities.
+  - 18 Vehicle entities.

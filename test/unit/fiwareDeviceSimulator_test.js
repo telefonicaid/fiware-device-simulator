@@ -109,7 +109,18 @@ function toDecimalHours(date) {
 
 describe('fiwareDeviceSimulator tests', function() {
   /* jshint camelcase: false */
+  var ACTIVE_1 = 'active1',
+      ATTRIBUTE_1 = 'attribute1',
+      ENTITY_NAME_1 = 'EntityName1',
+      ENTITY_TYPE_1 = 'EntityType1',
+      NUMBER = 'number',
+      SOME_TEXT = 'Some text',
+      TEXT = 'Text',
+      THE_SERVICE = 'theService',
+      THE_SUBSERVICE = '/theSubService';
+
   var idm,
+      externalSource,
       isError,
       isTokenRequest,
       isTokenResponse,
@@ -120,6 +131,8 @@ describe('fiwareDeviceSimulator tests', function() {
   idm = nock(simulationConfiguration.authentication.protocol + '://' + simulationConfiguration.authentication.host +
     ':' + simulationConfiguration.authentication.port);
 
+  externalSource = nock('https://www.external-source.com');
+
   describe('simulation configuration validation', function() {
     it('should notify an "error" event if no domain configuration information is provided and ' +
        'entities are included',
@@ -128,11 +141,11 @@ describe('fiwareDeviceSimulator tests', function() {
         {
           entities: [{
             schedule: 'once',
-            entity_name: 'EntityName1',
-            entity_type: 'EntityType1',
+            entity_name: ENTITY_NAME_1,
+            entity_type: ENTITY_TYPE_1,
             active: [{
-              name: 'active1',
-              type: 'number',
+              name: ACTIVE_1,
+              type: NUMBER,
               value: 1
             }]
           }]
@@ -153,11 +166,11 @@ describe('fiwareDeviceSimulator tests', function() {
         domain: {},
         entities: [{
           schedule: 'once',
-          entity_name: 'EntityName1',
-          entity_type: 'EntityType1',
+          entity_name: ENTITY_NAME_1,
+          entity_type: ENTITY_TYPE_1,
           active: [{
-            name: 'active1',
-            type: 'number',
+            name: ACTIVE_1,
+            type: NUMBER,
             value: 1
           }]
         }]
@@ -175,15 +188,15 @@ describe('fiwareDeviceSimulator tests', function() {
     function(done) {
       simulationProgress = fiwareDeviceSimulator.start({
         domain: {
-          service: 'theService'
+          service: THE_SERVICE
         },
         entities: [{
           schedule: 'once',
-          entity_name: 'EntityName1',
-          entity_type: 'EntityType1',
+          entity_name: ENTITY_NAME_1,
+          entity_type: ENTITY_TYPE_1,
           active: [{
-            name: 'active1',
-            type: 'number',
+            name: ACTIVE_1,
+            type: NUMBER,
             value: 1
           }]
         }]
@@ -202,16 +215,16 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           entities: [{
             schedule: 'once',
-            entity_name: 'EntityName1',
-            entity_type: 'EntityType1',
+            entity_name: ENTITY_NAME_1,
+            entity_type: ENTITY_TYPE_1,
             active: [{
-              name: 'active1',
-              type: 'number',
+              name: ACTIVE_1,
+              type: NUMBER,
               value: 1
             }]
           }]
@@ -231,17 +244,17 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {},
           entities: [{
             schedule: 'once',
-            entity_name: 'EntityName1',
-            entity_type: 'EntityType1',
+            entity_name: ENTITY_NAME_1,
+            entity_type: ENTITY_TYPE_1,
             active: [{
-              name: 'active1',
-              type: 'number',
+              name: ACTIVE_1,
+              type: NUMBER,
               value: 1
             }]
           }]
@@ -261,17 +274,17 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {},
           entities: [{
             schedule: 'once',
-            entity_name: 'EntityName1',
-            entity_type: 'EntityType1',
+            entity_name: ENTITY_NAME_1,
+            entity_type: ENTITY_TYPE_1,
             active: [{
-              name: 'active1',
-              type: 'number',
+              name: ACTIVE_1,
+              type: NUMBER,
               value: 1
             }]
           }]
@@ -291,19 +304,19 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https'
           },
           entities: [{
             schedule: 'once',
-            entity_name: 'EntityName1',
-            entity_type: 'EntityType1',
+            entity_name: ENTITY_NAME_1,
+            entity_type: ENTITY_TYPE_1,
             active: [{
-              name: 'active1',
-              type: 'number',
+              name: ACTIVE_1,
+              type: NUMBER,
               value: 1
             }]
           }]
@@ -323,8 +336,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -332,11 +345,11 @@ describe('fiwareDeviceSimulator tests', function() {
           },
           entities: [{
             schedule: 'once',
-            entity_name: 'EntityName1',
-            entity_type: 'EntityType1',
+            entity_name: ENTITY_NAME_1,
+            entity_type: ENTITY_TYPE_1,
             active: [{
-              name: 'active1',
-              type: 'number',
+              name: ACTIVE_1,
+              type: NUMBER,
               value: 1
             }]
           }]
@@ -356,8 +369,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -366,11 +379,11 @@ describe('fiwareDeviceSimulator tests', function() {
           },
           entities: [{
             schedule: 'once',
-            entity_name: 'EntityName1',
-            entity_type: 'EntityType1',
+            entity_name: ENTITY_NAME_1,
+            entity_type: ENTITY_TYPE_1,
             active: [{
-              name: 'active1',
-              type: 'number',
+              name: ACTIVE_1,
+              type: NUMBER,
               value: 1
             }]
           }]
@@ -389,8 +402,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -415,8 +428,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -442,8 +455,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -470,8 +483,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -499,8 +512,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -529,8 +542,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -560,8 +573,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -593,8 +606,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -628,8 +641,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -663,8 +676,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -699,8 +712,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -742,8 +755,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -786,8 +799,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -832,8 +845,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -880,8 +893,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -930,8 +943,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -981,8 +994,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1032,8 +1045,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1076,8 +1089,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1122,8 +1135,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1170,8 +1183,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1220,8 +1233,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1271,8 +1284,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1322,8 +1335,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1368,8 +1381,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1416,8 +1429,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1466,8 +1479,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1517,8 +1530,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1568,8 +1581,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1612,8 +1625,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1658,8 +1671,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1706,8 +1719,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1756,8 +1769,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1807,8 +1820,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1857,8 +1870,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1890,8 +1903,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1923,8 +1936,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1958,8 +1971,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -1996,8 +2009,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2034,8 +2047,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2073,8 +2086,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2113,8 +2126,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2153,8 +2166,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2197,8 +2210,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2242,8 +2255,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2288,8 +2301,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2334,8 +2347,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2381,8 +2394,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2430,8 +2443,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2481,8 +2494,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2533,8 +2546,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2586,8 +2599,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2638,8 +2651,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2685,8 +2698,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2732,8 +2745,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2779,8 +2792,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2826,8 +2839,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2873,8 +2886,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2920,8 +2933,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -2967,8 +2980,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3014,8 +3027,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3061,8 +3074,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3108,8 +3121,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3159,8 +3172,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3212,8 +3225,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3266,8 +3279,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3320,8 +3333,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3374,8 +3387,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3428,8 +3441,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3482,8 +3495,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3536,8 +3549,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3590,8 +3603,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3644,8 +3657,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3698,8 +3711,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3753,8 +3766,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3810,8 +3823,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3869,8 +3882,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3929,8 +3942,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -3990,8 +4003,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4051,8 +4064,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4105,8 +4118,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4160,8 +4173,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4215,8 +4228,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4272,8 +4285,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4331,8 +4344,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4391,8 +4404,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4452,8 +4465,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4514,8 +4527,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4576,8 +4589,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4638,8 +4651,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4703,8 +4716,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4779,8 +4792,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4854,8 +4867,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4921,8 +4934,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -4988,8 +5001,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -5055,8 +5068,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -5122,8 +5135,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -5189,8 +5202,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -5256,8 +5269,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -5323,8 +5336,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -5390,8 +5403,8 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress = fiwareDeviceSimulator.start(
         {
           domain: {
-            service: 'theService',
-            subservice: '/theSubService'
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
           },
           contextBroker: {
             protocol: 'https',
@@ -5450,6 +5463,923 @@ describe('fiwareDeviceSimulator tests', function() {
       simulationProgress.on('end', function() {
         done();
       });
+    });
+
+    it('should notify an "error" event if an invalid external information is provided', function(done) {
+      var isError = false;
+      simulationProgress = fiwareDeviceSimulator.start(
+        {
+          domain: {
+            service: THE_SERVICE,
+            subservice: THE_SUBSERVICE
+          },
+          contextBroker: {
+            protocol: 'https',
+            host: 'localhost',
+            port: '1026',
+            ngsiVersion: '1.0'
+          },
+          authentication: {
+            provider: 'keystone',
+            protocol: 'https',
+            host: 'localhost',
+            port: 5001,
+            user: 'theUser',
+            password: 'thePassword'
+          },
+          entities: [
+            {
+              schedule: 'once',
+              entity_name: 'EntityName',
+              entity_type: 'EntityType',
+              staticAttributes: [
+                {
+                  name: 'StaticName',
+                  type: 'StaticType',
+                  value: 'StaticValue'
+                }
+              ],
+              active: [
+                {
+                  schedule: 'once',
+                  name: 'ActiveName',
+                  type: 'ActiveType',
+                  value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                }
+              ],
+              external: 'invalid-external-information'
+            }
+          ]
+        }
+      );
+      simulationProgress.on('error', function(ev) {
+        should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+        should(ev.error.message.indexOf('invalid \'external\' property (it should be an object)')).not.equal(-1);
+        isError = true;
+      });
+      simulationProgress.on('end', function() {
+        isError ? done() : done(new Error('No error was thrown'));
+      });
+    });
+
+    it('should notify an "error" event if an invalid retry property is provided in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'invalid-active-attribute-schedule',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: 'invalid-retry-information'
+                }
+              },
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the optional \'retry\' subproperty is not an object')).not.equal(-1);
+          isError = true;
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if an invalid times property is provided in the retry property of the ' +
+       'external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 'invalid-times-information'
+                  }
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the optional \'retry\' subproperty does not contain a valid \'times\' ' +
+            'subproperty, it should be a number')).not.equal(-1);
+          isError = true;
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'))
+        });
+    });
+
+    it('should notify an "error" event if an invalid interval property is provided in the retry property of the ' +
+       'external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 'invalid-interval-information'
+                  }
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the optional \'retry\' subproperty does not contain a valid \'interval\' ' +
+            'subproperty, it should be a number')).not.equal(-1);
+          isError = true;
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if the method property is missing in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  }
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the mandatory \'method\' subproperty is missing')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if an invalid method property type is provided in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 123
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the mandatory \'method\' subproperty is not an string')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if an invalid method property is provided in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 'PUT'
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('(the mandatory \'method\' subproperty is not equal to \'GET\' or \'POST\'')).
+            not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if the url property is missing in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 'GET'
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the mandatory \'url\' subproperty is missing')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if an invalid url property is provided in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 'GET',
+                  url: '...'
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the mandatory \'url\' subproperty does not seem to be a valid URL')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if an invalid headers property is provided in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 'GET',
+                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  headers: 'invalid-headers-information'
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the optional \'headers\' subproperty is not an object')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if an invalid body property is provided in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 'GET',
+                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  headers: {
+                    'Cache-Control': 'no-cache'
+                  },
+                  body: 'invalid-body-information'
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the optional \'body\' subproperty is not an object')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if an invalid json property is provided in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 'GET',
+                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  headers: {
+                    'Cache-Control': 'no-cache'
+                  },
+                  body: {
+                    property1: 'value1'
+                  },
+                  json: 'invalid-json-information'
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the optional \'json\' subproperty is not an boolean')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if the collector property is missing in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 'GET',
+                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  headers: {
+                    'Cache-Control': 'no-cache'
+                  },
+                  body: {
+                    property1: 'value1'
+                  }
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the \'collector\' subproperty is missing')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
+    });
+
+    it('should notify an "error" event if an invalid collector property is provided in the external information',
+      function(done) {
+        var isError = false;
+        simulationProgress = fiwareDeviceSimulator.start(
+          {
+            domain: {
+              service: THE_SERVICE,
+              subservice: THE_SUBSERVICE
+            },
+            contextBroker: {
+              protocol: 'https',
+              host: 'localhost',
+              port: '1026',
+              ngsiVersion: '1.0'
+            },
+            authentication: {
+              provider: 'keystone',
+              protocol: 'https',
+              host: 'localhost',
+              port: 5001,
+              user: 'theUser',
+              password: 'thePassword'
+            },
+            entities: [
+              {
+                schedule: 'once',
+                entity_name: 'EntityName',
+                entity_type: 'EntityType',
+                staticAttributes: [
+                  {
+                    name: 'StaticName',
+                    type: 'StaticType',
+                    value: 'StaticValue'
+                  }
+                ],
+                active: [
+                  {
+                    schedule: 'once',
+                    name: 'ActiveName',
+                    type: 'ActiveType',
+                    value: 'time-linear-interpolator([[0,0],[12,0.5],[24,1]])'
+                  }
+                ],
+                external: {
+                  retry: {
+                    times: 5,
+                    interval: 1000
+                  },
+                  method: 'GET',
+                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  headers: {
+                    'Cache-Control': 'no-cache'
+                  },
+                  body: {
+                    property1: 'value1'
+                  },
+                  collector: 123
+                }
+              }
+            ]
+          }
+        );
+        simulationProgress.on('error', function(ev) {
+          should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
+          should(ev.error.message.indexOf('the \'collector\' subproperty is not a string')).not.equal(-1);
+          isError = true
+        });
+        simulationProgress.on('end', function() {
+          isError ? done() : done(new Error('No error was thrown'));
+        });
     });
 
     afterEach(function() {
@@ -5554,6 +6484,34 @@ describe('fiwareDeviceSimulator tests', function() {
                 tokenResponseBody,
                 {
                   'X-Subject-Token': '829136fd6df6418880785016770d46e7'
+                }
+              ];
+            }
+          );
+
+          externalSource.get('/data').reply(
+            function(uri, requestBody) {
+              should(this.req.headers['propietary-header']).equal('propietary-value');
+              should(requestBody).equal('');
+              return [
+                200,
+                [[{name: ATTRIBUTE_1, type: TEXT, value: SOME_TEXT}]],
+                {
+                  'Content-Type': 'application/json'
+                }
+              ];
+            }
+          );
+
+          externalSource.post('/data').reply(
+            function(uri, requestBody) {
+              should(this.req.headers['propietary-header']).equal('propietary-value');
+              should(requestBody).deepEqual({"property1": "value1"});
+              return [
+                200,
+                [[{name: ATTRIBUTE_1, type: TEXT, value: SOME_TEXT}]],
+                {
+                  'Content-Type': 'application/json'
                 }
               ];
             }
@@ -5811,7 +6769,7 @@ describe('fiwareDeviceSimulator tests', function() {
           ++updateResponses;
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).equal('1');
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).equal('1');
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).equal('1');
             }
@@ -5868,7 +6826,7 @@ describe('fiwareDeviceSimulator tests', function() {
             'time-linear-interpolator('.length, attributeValue.length - 1))(decimalHours);
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).equal(value);
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).equal(value);
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).equal(value);
             }
@@ -5928,7 +6886,7 @@ describe('fiwareDeviceSimulator tests', function() {
             'time-linear-interpolator('.length, attributeValue.length - 1))(decimalHours);
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).equal(value);
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).equal(value);
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).equal(value);
             }
@@ -5982,7 +6940,7 @@ describe('fiwareDeviceSimulator tests', function() {
           ++updateRequests;
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).
               lessThanOrEqual(75);
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).lessThanOrEqual(75);
@@ -6037,7 +6995,7 @@ describe('fiwareDeviceSimulator tests', function() {
           ++updateRequests;
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).
               lessThanOrEqual(75);
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).lessThanOrEqual(75);
@@ -6098,7 +7056,7 @@ describe('fiwareDeviceSimulator tests', function() {
             'time-step-before-interpolator('.length, attributeValue.length - 1))(decimalHours);
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).equal(value);
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).equal(value);
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).equal(value);
             }
@@ -6158,7 +7116,7 @@ describe('fiwareDeviceSimulator tests', function() {
             'time-step-after-interpolator('.length, attributeValue.length - 1))(decimalHours);
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).equal(value);
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).equal(value);
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).equal(value);
             }
@@ -6218,7 +7176,7 @@ describe('fiwareDeviceSimulator tests', function() {
             'date-increment-interpolator('.length, attributeValue.length - 1))(decimalHours);
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1').
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1).
                 substring(0, 20)).equal(value.substring(0, 20));
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value.substring(0, 20)).equal(value.substring(0, 20));
@@ -6279,7 +7237,7 @@ describe('fiwareDeviceSimulator tests', function() {
             'multiline-position-interpolator('.length, attributeValue.length - 1))(decimalHours);
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).eql(value);
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).eql(value);
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).eql(value);
             }
@@ -6351,7 +7309,7 @@ describe('fiwareDeviceSimulator tests', function() {
             'text-rotation-interpolator('.length, attributeValue.length - 1))(now);
           if (type === 'entities') {
             if (options.ngsiVersion === '1.0') {
-              should(getAttributeValue(options.destination, ev.request.body, 'EntityName1', 'active1')).eql(value);
+              should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ACTIVE_1)).eql(value);
             } else if (options.ngsiVersion === '2.0') {
               should(ev.request.body.entities[0].active1.value).eql(value);
             }
@@ -6376,6 +7334,134 @@ describe('fiwareDeviceSimulator tests', function() {
           should(updateResponses).equal(1);
           done();
         });
+      });
+
+      it('should load external data using the GET method', function(done) {
+        if (type === 'entities') {
+          var simulationConfiguration =
+            require(ROOT_PATH + '/test/unit/configurations/simulation-configuration-' +
+              // (options.protocol ? encodeFilename(options.protocol) + '-' : '') +
+              type + '-external-data-GET-once' +
+              (options.destination && options.destination !== 'context broker' ? '-' + options.destination: '') +
+              '.json');
+          if (options.ngsiVersion) {
+            if (simulationConfiguration.contextBroker) {
+              simulationConfiguration.contextBroker.ngsiVersion = options.ngsiVersion;
+            } else if (simulationConfiguration.subscriber) {
+              simulationConfiguration.subscriber.ngsiVersion = options.ngsiVersion;
+            }
+          }
+          fiwareDeviceSimulator.start(simulationConfiguration);
+          simulationProgress.on('error', function(ev) {
+            done(ev.error);
+          });
+          simulationProgress.on('token-response', function(ev) {
+            ++tokenResponses;
+            should(ev.expires_at.toISOString()).equal(tokenResponseBody.token.expires_at);
+          });
+          simulationProgress.on('update-request', function(ev) {
+            if (ev.request.url === 'https://www.external-source.com/data') {
+              ++updateRequests;
+            } else {
+              var now = new Date();
+              if (type === 'entities') {
+                if (options.ngsiVersion === '1.0') {
+                  should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ATTRIBUTE_1)).
+                    eql(SOME_TEXT);
+                } else if (options.ngsiVersion === '2.0') {
+                  should(ev.request.body.entities[0][ATTRIBUTE_1].value).eql(SOME_TEXT);
+                }
+              } else {
+                if (options.protocol === 'UltraLight::HTTP') {
+                  should(ev.request.body.split('|')[1]).eql(SOME_TEXT);
+                } else if (options.protocol === 'UltraLight::MQTT') {
+                  should(ev.request.payload.split('|')[1]).eql(SOME_TEXT);
+                } else if (options.protocol === 'JSON::HTTP') {
+                  should(ev.request.body.attribute1).eql(SOME_TEXT);
+                } else if (options.protocol === 'JSON::MQTT') {
+                  should(JSON.parse(ev.request.payload).attribute1).eql(SOME_TEXT);
+                }
+              }
+            }
+          });
+          simulationProgress.on('update-response', function(ev) {
+            if (ev.request.url !== 'https://www.external-source.com/data') {
+              ++updateResponses;
+            }
+          });
+          simulationProgress.on('end', function() {
+            should(tokenResponses).equal(1);
+            should(updateRequests).equal(1);
+            should(updateResponses).equal(1);
+            done();
+          });
+        } else {
+          done();
+        }
+      });
+
+      it('should load external data using the POST method', function(done) {
+        if (type === 'entities') {
+          var simulationConfiguration =
+            require(ROOT_PATH + '/test/unit/configurations/simulation-configuration-' +
+              // (options.protocol ? encodeFilename(options.protocol) + '-' : '') +
+              type + '-external-data-POST-once' +
+              (options.destination && options.destination !== 'context broker' ? '-' + options.destination: '') +
+              '.json');
+          if (options.ngsiVersion) {
+            if (simulationConfiguration.contextBroker) {
+              simulationConfiguration.contextBroker.ngsiVersion = options.ngsiVersion;
+            } else if (simulationConfiguration.subscriber) {
+              simulationConfiguration.subscriber.ngsiVersion = options.ngsiVersion;
+            }
+          }
+          fiwareDeviceSimulator.start(simulationConfiguration);
+          simulationProgress.on('error', function(ev) {
+            done(ev.error);
+          });
+          simulationProgress.on('token-response', function(ev) {
+            ++tokenResponses;
+            should(ev.expires_at.toISOString()).equal(tokenResponseBody.token.expires_at);
+          });
+          simulationProgress.on('update-request', function(ev) {
+            if (ev.request.url === 'https://www.external-source.com/data') {
+              ++updateRequests;
+            } else {
+              var now = new Date();
+              if (type === 'entities') {
+                if (options.ngsiVersion === '1.0') {
+                  should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ATTRIBUTE_1)).
+                    eql(SOME_TEXT);
+                } else if (options.ngsiVersion === '2.0') {
+                  should(ev.request.body.entities[0][ATTRIBUTE_1].value).eql(SOME_TEXT);
+                }
+              } else {
+                if (options.protocol === 'UltraLight::HTTP') {
+                  should(ev.request.body.split('|')[1]).eql(SOME_TEXT);
+                } else if (options.protocol === 'UltraLight::MQTT') {
+                  should(ev.request.payload.split('|')[1]).eql(SOME_TEXT);
+                } else if (options.protocol === 'JSON::HTTP') {
+                  should(ev.request.body.attribute1).eql(SOME_TEXT);
+                } else if (options.protocol === 'JSON::MQTT') {
+                  should(JSON.parse(ev.request.payload).attribute1).eql(SOME_TEXT);
+                }
+              }
+            }
+          });
+          simulationProgress.on('update-response', function(ev) {
+            if (ev.request.url !== 'https://www.external-source.com/data') {
+              ++updateResponses;
+            }
+          });
+          simulationProgress.on('end', function() {
+            should(tokenResponses).equal(1);
+            should(updateRequests).equal(1);
+            should(updateResponses).equal(1);
+            done();
+          });
+        } else {
+          done();
+        }
       });
 
       afterEach(function() {

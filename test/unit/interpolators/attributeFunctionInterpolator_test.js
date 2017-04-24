@@ -26,6 +26,7 @@
 var should = require('should');
 
 var ROOT_PATH = require('app-root-path');
+var path = require('path');
 var nock = require('nock');
 var fdsErrors = require(ROOT_PATH + '/lib/errors/fdsErrors');
 var attributeFunctionInterpolator = require(ROOT_PATH + '/lib/interpolators/attributeFunctionInterpolator');
@@ -383,8 +384,10 @@ describe('attributeFunctionInterpolator tests', function() {
       var
       attributeFunctionInterpolatorFunction =
         attributeFunctionInterpolator(
-          'var linearInterpolator = require("' + ROOT_PATH + '/lib/interpolators/linearInterpolator"); ' +
-          'module.exports = linearInterpolator([[0,0],[10,10]])(5);',
+          'var ROOT_PATH = require("app-root-path");' +
+          'var linearInterpolator = require(ROOT_PATH + \'/lib/interpolators/linearInterpolator\');' +
+          'var interpolator = linearInterpolator({spec: [[0, 0], [10, 10]], return: {type: "float"}});' +
+          'module.exports = interpolator(5);',
           domain, contextBroker);
       should(attributeFunctionInterpolatorFunction(token)).equal(5);
       done();
@@ -399,8 +402,10 @@ describe('attributeFunctionInterpolator tests', function() {
         var
         attributeFunctionInterpolatorFunction =
           attributeFunctionInterpolator(
-            'var linearInterpolator = require("' + ROOT_PATH + '/lib/interpolators/NON-EXISTENT"); ' +
-            'module.exports = linearInterpolator([[0,0],[10,10]])(5);',
+            'var ROOT_PATH = require("app-root-path");' +
+            'var linearInterpolator = require(ROOT_PATH + \'/lib/interpolators/NON-EXISTENT\');' +
+            'var interpolator = linearInterpolator({spec: [[0, 0], [10, 10]], return: {type: "float"}});' +
+            'module.exports = interpolator(5);',
             domain, contextBroker);
         should(attributeFunctionInterpolatorFunction(token)).equal(5);
         done(new Error('It should throw an ValueResolutionError error'));
@@ -436,13 +441,14 @@ describe('attributeFunctionInterpolator tests', function() {
   it('should pass the state and interpolate if it is used in the interpolation specification', function(done) {
     try {
       var attributeFunctionInterpolatorSpec =
-      '/* state: stateful1, stateful2 */ var linearInterpolator = require("' + ROOT_PATH +
-        '/lib/interpolators/linearInterpolator"); ' +
-        'module.exports = { ' +
-          'result: linearInterpolator([[0,0],[10,10]])(5) + (stateful1 = (stateful1 ? ++stateful1 : 1)) + ' +
-            '(stateful2 = (stateful2 ? ++stateful2 : 1)),' +
-          'state: { stateful1: stateful1, stateful2: stateful2}' +
-        ' };';
+      '/* state: stateful1, stateful2 */' +
+      'var ROOT_PATH = require(\'app-root-path\');' +
+      'var linearInterpolator = require(ROOT_PATH + \'/lib/interpolators/linearInterpolator\');' +
+      'module.exports = { ' +
+        'result: linearInterpolator([[0,0],[10,10]])(5) + (stateful1 = (stateful1 ? ++stateful1 : 1)) + ' +
+          '(stateful2 = (stateful2 ? ++stateful2 : 1)),' +
+        'state: { stateful1: stateful1, stateful2: stateful2}' +
+      ' };';
       var
       attributeFunctionInterpolatorFunction =
         attributeFunctionInterpolator(
@@ -461,8 +467,9 @@ describe('attributeFunctionInterpolator tests', function() {
     function(done) {
       try {
         var attributeFunctionInterpolatorSpec =
-        '/* state: stateful1 = 5, stateful2 */ var linearInterpolator = require("' + ROOT_PATH +
-          '/lib/interpolators/linearInterpolator"); ' +
+          '/* state: stateful1 = 5, stateful2 */' +
+          'var ROOT_PATH = require(\'app-root-path\');' +
+          'var linearInterpolator = require(ROOT_PATH + \'/lib/interpolators/linearInterpolator\');' +
           'module.exports = { ' +
             'result: linearInterpolator([[0,0],[10,10]])(5) + stateful1 + ' +
               '(stateful2 = (stateful2 ? ++stateful2 : 1)),' +
@@ -487,20 +494,21 @@ describe('attributeFunctionInterpolator tests', function() {
     function(done) {
       try {
         var attributeFunctionInterpolatorSpec =
-        '/* state: stateful1 = 5, stateful2 =\"tralara\" */ var linearInterpolator = require("' + ROOT_PATH +
-          '/lib/interpolators/linearInterpolator"); ' +
+          '/* state: stateful1 = 1, stateful2 */' +
+          'var ROOT_PATH = require(\'app-root-path\');' +
+          'var linearInterpolator = require(ROOT_PATH + \'/lib/interpolators/linearInterpolator\');' +
           'module.exports = { ' +
-            'result: linearInterpolator([[0,0],[10,10]])(5) + (stateful2 === \"tralara\" ? stateful1 : 0),' +
-            'state: { stateful1: ++stateful1, stateful2: \"\"}' +
+            'result: linearInterpolator([[0,0],[10,10]])(5) + (stateful2 === \'tralara\' ? stateful1 : 0),' +
+            'state: { stateful1: ++stateful1, stateful2: \'tralara\'}' +
           ' };';
         var
         attributeFunctionInterpolatorFunction =
           attributeFunctionInterpolator(
             attributeFunctionInterpolatorSpec,
             domain, contextBroker);
-        should(attributeFunctionInterpolatorFunction(token)).equal(10);
         should(attributeFunctionInterpolatorFunction(token)).equal(5);
-        should(attributeFunctionInterpolatorFunction(token)).equal(5);
+        should(attributeFunctionInterpolatorFunction(token)).equal(7);
+        should(attributeFunctionInterpolatorFunction(token)).equal(8);
         done();
       } catch(exception) {
         done(exception);
@@ -512,21 +520,22 @@ describe('attributeFunctionInterpolator tests', function() {
     function(done) {
       try {
         var attributeFunctionInterpolatorSpec =
-        '/* state: stateful1 = [5], stateful2 */ var linearInterpolator = require("' + ROOT_PATH +
-          '/lib/interpolators/linearInterpolator"); ' +
+          '/* state: stateful1 = [1], stateful2 */' +
+          'var ROOT_PATH = require(\'app-root-path\');' +
+          'var linearInterpolator = require(ROOT_PATH + \'/lib/interpolators/linearInterpolator\');' +
           'module.exports = { ' +
             'result: linearInterpolator([[0,0],[10,10]])(5) + stateful1[0] + ' +
               '(stateful2 = (stateful2 ? ++stateful2 : 1)),' +
-            'state: { stateful1: [++stateful1], stateful2: stateful2}' +
+            'state: { stateful1: [++stateful1[0]], stateful2: stateful2}' +
           ' };';
         var
         attributeFunctionInterpolatorFunction =
           attributeFunctionInterpolator(
             attributeFunctionInterpolatorSpec,
             domain, contextBroker);
+        should(attributeFunctionInterpolatorFunction(token)).equal(7);
+        should(attributeFunctionInterpolatorFunction(token)).equal(9);
         should(attributeFunctionInterpolatorFunction(token)).equal(11);
-        should(attributeFunctionInterpolatorFunction(token)).equal(13);
-        should(attributeFunctionInterpolatorFunction(token)).equal(15);
         done();
       } catch(exception) {
         done(exception);
@@ -538,8 +547,9 @@ describe('attributeFunctionInterpolator tests', function() {
     function(done) {
       try {
         var attributeFunctionInterpolatorSpec =
-        '/* state: stateful1 = {\"value\": 5}, stateful2 */ var linearInterpolator = require("' + ROOT_PATH +
-          '/lib/interpolators/linearInterpolator"); ' +
+          '/* state: stateful1 = {\"value\": 5}, stateful2 */' +
+          'var ROOT_PATH = require(\'app-root-path\');' +
+          'var linearInterpolator = require(ROOT_PATH + \'/lib/interpolators/linearInterpolator\');' +
           'module.exports = { ' +
             'result: linearInterpolator([[0,0],[10,10]])(5) + stateful1.value + ' +
               '(stateful2 = (stateful2 ? ++stateful2 : 1)),' +

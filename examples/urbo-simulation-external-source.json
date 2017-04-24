@@ -1,0 +1,58 @@
+{
+  "require": ["csv-parse"],
+  "domain": {
+    "service": "service",
+    "subservice": "/subservice"
+  },
+  "contextBroker": {
+    "protocol": "http",
+    "host": "1.2.3.4",
+    "port": 1026,
+    "ngsiVersion": "1.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "http",
+    "host": "1.2.3.4",
+    "port": 5001,
+    "user": "user",
+    "password": "password",
+    "retry": {
+      "times": 10,
+      "interval": 5000
+    }
+  },
+  "entities": [
+    {
+      "external": {
+        "retry": {
+          "times": 10,
+          "interval": 1000
+        },
+        "method": "GET",
+        "url": "http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24",
+        "headers": {
+          "Cache-Control": "no-cache"
+        },
+        "collector": "var csvParse = require('csv-parse/lib/sync'); var data = external.response.body; var csvDataIndex = data.indexOf('\"Fecha y hora oficial'); var header = data.substring(0, csvDataIndex); var csvData = data.substring(csvDataIndex); var parsedCSVData = csvParse(csvData, {columns: true}); function getDate(dateString) { return new Date(dateString.substring(6,10), dateString.substring(3,5), dateString.substring(0,2), dateString.substring(11,13), dateString.substring(14));} var dateObserved = getDate(parsedCSVData[0]['Fecha y hora oficial']); module.exports = [[{name: 'dateObserved', type: 'DateTime', value: dateObserved}, {name: 'dateModified', type: 'DateTime', value: dateObserved}, {name: 'temperatura', type: 'Number', value: parsedCSVData[0]['Temperatura (�C)']}, {name: 'vientoVelocidad', type: 'Number', value: parsedCSVData[0]['Velocidad del viento (km/h)']}]];"
+      },
+      "entity_type": "WeatherObserved",
+      "entity_name": "WeatherObserved-001",
+      "schedule": "*/15 * * * * *",
+      "active": [
+        {
+           "name": "currentTime",
+           "value": "date-increment-interpolator({\"origin\": \"now\", \"increment\": 0})",
+           "type": "DateTime"
+        }
+      ],
+      "staticAttributes": [
+        {
+          "name": "staticAttribute-001",
+          "type": "Text",
+          "value": "Some text"
+        }
+      ]
+    }
+  ]
+}

@@ -471,16 +471,22 @@ describe('multilinePositionInterpolator tests', function() {
           {coordinates: [2.9083307610874596, 3.90859448519012]});
         should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).containEql(
           {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).containEql(
-          {coordinates: [3.2898394138913325, 4.290919970982591]});
+        should(parseFloat(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22))).
+          coordinates[0].toFixed(14))).equal(3.28983941389133);
+        should(parseFloat(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22))).
+          coordinates[1].toFixed(14))).equal(4.29091997098259);
         should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).containEql(
           {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30)))).containEql(
-          {coordinates: [3.2898394138913325, 4.290919970982591]});
+        should(parseFloat(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30))).
+          coordinates[0].toFixed(14))).equal(3.28983941389133);
+        should(parseFloat(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30))).
+          coordinates[1].toFixed(14))).equal(4.29091997098259);
         should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).containEql(
           {type: 'Point'});
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).containEql(
-          {coordinates: [3.2898394138913325, 4.290919970982591]});
+        should(parseFloat(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23))).
+          coordinates[0].toFixed(14))).equal(3.28983941389133);
+        should(parseFloat(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23))).
+          coordinates[1].toFixed(14))).equal(4.29091997098259);
         done();
       } catch(exception) {
         done(exception);
@@ -490,6 +496,7 @@ describe('multilinePositionInterpolator tests', function() {
 
   it('should interpolate as geo:point if a valid specification object is passed',
     function(done) {
+      var auxGeoPoint;
       try {
         multilinePositionInterpolatorFunction = multilinePositionInterpolator(
           {
@@ -518,15 +525,18 @@ describe('multilinePositionInterpolator tests', function() {
         should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 20)))).equal(
           [2.9083307610874596, 3.90859448519012].toString());
         should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22)))).equal(
-          [3.2898394138913325, 4.290919970982591].toString());
+        auxGeoPoint = multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22))).split(',');
+        should(parseFloat(auxGeoPoint[0]).toFixed(14)).equal('3.28983941389133');
+        should(parseFloat(auxGeoPoint[1]).toFixed(14)).equal('4.29091997098259');
         should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30)))).equal(
           'string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30)))).equal(
-          [3.2898394138913325, 4.290919970982591].toString());
+        auxGeoPoint = multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 22, 30))).split(',');
+        should(parseFloat(auxGeoPoint[0]).toFixed(14)).equal('3.28983941389133');
+        should(parseFloat(auxGeoPoint[1]).toFixed(14)).equal('4.29091997098259');
         should(typeof multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).equal('string');
-        should(multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23)))).equal(
-          [3.2898394138913325, 4.290919970982591].toString());
+        auxGeoPoint = multilinePositionInterpolatorFunction(toDecimalHours(new Date(2016, 9, 21, 23))).split(',');
+        should(parseFloat(auxGeoPoint[0]).toFixed(14)).equal('3.28983941389133');
+        should(parseFloat(auxGeoPoint[1]).toFixed(14)).equal('4.29091997098259');
         done();
       } catch(exception) {
         done(exception);

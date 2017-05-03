@@ -1,0 +1,37 @@
+{
+  "domain": {
+    "service": "theService",
+    "subservice": "/theSubService"
+  },
+  "contextBroker": {
+    "protocol": "https",
+    "host": "localhost",
+    "port": 1026,
+    "ngsiVersion": "1.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "https",
+    "host": "localhost",
+    "port": 5001,
+    "user": "theUser",
+    "password": "thePassword"
+  },
+  "entities": [{
+    "schedule": "once",
+    "entity_name": "EntityName1",
+    "entity_type": "EntityType1",
+    "external": {
+      "method": "POST",
+      "headers": {
+        "propietary-header": "propietary-value"
+      },
+      "url": "https://www.external-source.com/data",
+      "json": true,
+      "body": {
+        "property1": "value1"
+      },
+      "collector": "module.exports = external.response.body;"
+    }
+  }]
+}

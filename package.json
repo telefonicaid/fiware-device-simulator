@@ -1,7 +1,7 @@
 {
   "name": "fiware-device-simulator",
   "description": "Simulator of FIWARE-compatible devices",
-  "version": "1.2.0-next",
+  "version": "1.1.0-next",
   "licence": "AGPL-3.0",
   "homepage": "https://github.com/gtorodelvalle/fiware-device-simulator",
   "author": {
@@ -17,19 +17,19 @@
   },
   "main": "bin/fiwareDeviceSimulatorCLI",
   "engines": {
-    "node": ">=6"
+    "node": ">=0.10"
   },
   "scripts": {
     "test": "grunt test"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "grunt": "^1.0.1",
-    "grunt-contrib-clean": "^1.1.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-jshint": "^1.1.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-dox": "^0.5.0",
-    "grunt-exec": "^2.0.0",
+    "grunt-exec": "^1.0.0",
     "grunt-githooks": "^0.6.0",
     "grunt-github-pages": "^0.0.4",
     "grunt-gjslint": "^0.2.1",
@@ -37,12 +37,12 @@
     "grunt-mocha-test": "^0.13.2",
     "grunt-plato": "^1.4.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.3.0",
-    "nock": "^9.0.13",
-    "proxyquire": "^1.7.11",
-    "should": "^11.2.1",
-    "sinon": "^2.1.0",
-    "sinon-chai": "^2.9.0"
+    "mocha": "^3.2.0",
+    "nock": "^8.0.0",
+    "proxyquire": "^1.7.10",
+    "should": "^10.0.0",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
   },
   "keywords": [
     "fiware",
@@ -52,26 +52,26 @@
     "data"
   ],
   "dependencies": {
-    "app-root-path": "^2.0.1",
-    "async": "^2.3.0",
-    "check-valid-url": "^0.0.2",
+    "app-root-path": "^1.3.0",
+    "async": "^2.0.1",
+    "check-valid-url": "0.0.2",
     "commander": "^2.9.0",
-    "dateformat": "^2.0.0",
-    "deasync": "^0.1.9",
-    "eval": "^0.1.2",
+    "dateformat": "^1.0.12",
+    "deasync": "^0.1.8",
+    "eval": "^0.1.1",
     "google-spreadsheet": "^2.0.3",
-    "humanize-duration": "^3.10.0",
+    "humanize-duration": "^3.9.1",
     "linear-interpolator": "^1.0.2",
-    "logops": "^1.0.7",
-    "lolex": "^1.6.0",
-    "mqtt": "^2.6.2",
-    "node-schedule": "^1.2.1",
-    "npm-install-package": "^2.1.0",
-    "request": "^2.81.0",
-    "time": "^0.12.0",
-    "@turf/along": "^4.1.0",
-    "@turf/bearing": "^4.1.0",
-    "@turf/line-distance": "^4.1.0",
+    "logops": "^1.0.1",
+    "lolex": "^1.5.1",
+    "mqtt": "^1.14.0",
+    "node-schedule": "^1.2.0",
+    "npm-install-package": "^1.1.0",
+    "request": "^2.78.0",
+    "time": "^0.11.4",
+    "turf-along": "^3.0.12",
+    "turf-bearing": "^3.0.12",
+    "turf-line-distance": "^3.0.12",
     "turf-linestring": "^1.0.2",
     "turf-point": "^2.0.1"
   }

@@ -162,6 +162,930 @@
    },
    "entities": [
       {
+         "entity_name": "wa_ariadna",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.634606021826135,
+                              40.46166613641176
+                           ],
+                           [
+                              -3.632339007885719,
+                              40.49216301017312
+                           ],
+                           [
+                              -3.617180888459423,
+                              40.50137756732371
+                           ],
+                           [
+                              -3.58845151625995,
+                              40.48938063170021
+                           ],
+                           [
+                              -3.588921933066858,
+                              40.48745334610465
+                           ],
+                           [
+                              -3.598781081601882,
+                              40.47031207135167
+                           ],
+                           [
+                              -3.613921916852096,
+                              40.46147186716867
+                           ],
+                           [
+                              -3.634606021826135,
+                              40.46166613641176
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_ariadna"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_puente_reina",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.69456963946923,
+                              40.47005718577704
+                           ],
+                           [
+                              -3.6958369126485,
+                              40.47468181291798
+                           ],
+                           [
+                              -3.680143880572177,
+                              40.512529225128304
+                           ],
+                           [
+                              -3.65240480879299,
+                              40.5041493070001
+                           ],
+                           [
+                              -3.648293943702253,
+                              40.497828062761236
+                           ],
+                           [
+                              -3.69456963946923,
+                              40.47005718577704
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_puente_reina"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_el_pardo_01",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.768857628283433,
+                              40.56235442426143
+                           ],
+                           [
+                              -3.742375563446283,
+                              40.5171785886919
+                           ],
+                           [
+                              -3.776362554111222,
+                              40.48789515121269
+                           ],
+                           [
+                              -3.777654205023021,
+                              40.48906011772362
+                           ],
+                           [
+                              -3.784696453976609,
+                              40.523596402376405
+                           ],
+                           [
+                              -3.775541530336945,
+                              40.555172157341914
+                           ],
+                           [
+                              -3.768857628283433,
+                              40.56235442426143
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_el_pardo_01"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_monasterio",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.6958369126485,
+                              40.47468181291798
+                           ],
+                           [
+                              -3.729170064410446,
+                              40.51779915427073
+                           ],
+                           [
+                              -3.71399968300745,
+                              40.53207956142201
+                           ],
+                           [
+                              -3.682905858156074,
+                              40.525769615554275
+                           ],
+                           [
+                              -3.680143880572177,
+                              40.512529225128304
+                           ],
+                           [
+                              -3.6958369126485,
+                              40.47468181291798
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_monasterio"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_rosalia_de_castro",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.776362554111222,
+                              40.48789515121269
+                           ],
+                           [
+                              -3.742375563446283,
+                              40.5171785886919
+                           ],
+                           [
+                              -3.729170064410446,
+                              40.51779915427073
+                           ],
+                           [
+                              -3.6958369126485,
+                              40.47468181291798
+                           ],
+                           [
+                              -3.69456963946923,
+                              40.47005718577704
+                           ],
+                           [
+                              -3.694499530641508,
+                              40.462195052719316
+                           ],
+                           [
+                              -3.703710591010345,
+                              40.462275616795694
+                           ],
+                           [
+                              -3.753006333685462,
+                              40.4668296958569
+                           ],
+                           [
+                              -3.776362554111222,
+                              40.48789515121269
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_rosalia_de_castro"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_el_alto",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.58845151625995,
+                              40.48938063170021
+                           ],
+                           [
+                              -3.617180888459423,
+                              40.50137756732371
+                           ],
+                           [
+                              -3.617416729280212,
+                              40.53890738744621
+                           ],
+                           [
+                              -3.613270171386603,
+                              40.54285555456945
+                           ],
+                           [
+                              -3.583036128627153,
+                              40.547286243670754
+                           ],
+                           [
+                              -3.582100856479981,
+                              40.54053197738018
+                           ],
+                           [
+                              -3.582538747967217,
+                              40.51830832905636
+                           ],
+                           [
+                              -3.58508931414053,
+                              40.50315548757046
+                           ],
+                           [
+                              -3.58845151625995,
+                              40.48938063170021
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_el_alto"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_almenara",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.70905509521184,
+                              40.56361094050406
+                           ],
+                           [
+                              -3.745058019929996,
+                              40.58683849208285
+                           ],
+                           [
+                              -3.745058019929993,
+                              40.586838492082826
+                           ],
+                           [
+                              -3.742948142273894,
+                              40.58767740406764
+                           ],
+                           [
+                              -3.717131482020309,
+                              40.59794240954445
+                           ],
+                           [
+                              -3.6746838945975,
+                              40.59691752585408
+                           ],
+                           [
+                              -3.663172992562162,
+                              40.595251333398664
+                           ],
+                           [
+                              -3.670559112638651,
+                              40.57628685247717
+                           ],
+                           [
+                              -3.70905509521184,
+                              40.56361094050406
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_almenara"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_el_pardo_02",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.742375563446283,
+                              40.5171785886919
+                           ],
+                           [
+                              -3.768857628283431,
+                              40.562354424261436
+                           ],
+                           [
+                              -3.746668309627233,
+                              40.586198222102134
+                           ],
+                           [
+                              -3.745058019929976,
+                              40.586838492082805
+                           ],
+                           [
+                              -3.70905509521184,
+                              40.56361094050406
+                           ],
+                           [
+                              -3.71399968300745,
+                              40.53207956142201
+                           ],
+                           [
+                              -3.729170064410446,
+                              40.51779915427073
+                           ],
+                           [
+                              -3.742375563446283,
+                              40.5171785886919
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_el_pardo_02"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_camino_nuevo",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.632339007885719,
+                              40.49216301017312
+                           ],
+                           [
+                              -3.648293943702253,
+                              40.497828062761236
+                           ],
+                           [
+                              -3.65240480879299,
+                              40.5041493070001
+                           ],
+                           [
+                              -3.653806681979588,
+                              40.523594075998105
+                           ],
+                           [
+                              -3.623277520436835,
+                              40.53965557699883
+                           ],
+                           [
+                              -3.617416729280212,
+                              40.53890738744621
+                           ],
+                           [
+                              -3.617180888459423,
+                              40.50137756732371
+                           ],
+                           [
+                              -3.632339007885719,
+                              40.49216301017312
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_camino_nuevo"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_ctra_burgos",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.613270171386603,
+                              40.54285555456945
+                           ],
+                           [
+                              -3.622214052316088,
+                              40.588036511423574
+                           ],
+                           [
+                              -3.600189531392599,
+                              40.5805825009137
+                           ],
+                           [
+                              -3.585116392805961,
+                              40.562309312903466
+                           ],
+                           [
+                              -3.583036128627153,
+                              40.547286243670754
+                           ],
+                           [
+                              -3.613270171386603,
+                              40.54285555456945
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_ctra_burgos"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_monovar",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.694499530641508,
+                              40.462195052719316
+                           ],
+                           [
+                              -3.69456963946923,
+                              40.47005718577704
+                           ],
+                           [
+                              -3.648293943702253,
+                              40.497828062761236
+                           ],
+                           [
+                              -3.632339007885719,
+                              40.49216301017312
+                           ],
+                           [
+                              -3.634606021826135,
+                              40.46166613641176
+                           ],
+                           [
+                              -3.642443025114129,
+                              40.461739743111146
+                           ],
+                           [
+                              -3.694499530641508,
+                              40.462195052719316
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_monovar"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_reyes_catolicos",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.653806681979588,
+                              40.523594075998105
+                           ],
+                           [
+                              -3.670693530931649,
+                              40.53641261996386
+                           ],
+                           [
+                              -3.665187297443719,
+                              40.5619022283021
+                           ],
+                           [
+                              -3.623277520436835,
+                              40.53965557699883
+                           ],
+                           [
+                              -3.653806681979588,
+                              40.523594075998105
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_reyes_catolicos"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_uam",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.682905858156074,
+                              40.525769615554275
+                           ],
+                           [
+                              -3.71399968300745,
+                              40.53207956142201
+                           ],
+                           [
+                              -3.70905509521184,
+                              40.56361094050406
+                           ],
+                           [
+                              -3.670559112638651,
+                              40.57628685247717
+                           ],
+                           [
+                              -3.665187297443719,
+                              40.5619022283021
+                           ],
+                           [
+                              -3.670693530931649,
+                              40.53641261996386
+                           ],
+                           [
+                              -3.682905858156074,
+                              40.525769615554275
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_uam"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_dt",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.65240480879299,
+                              40.5041493070001
+                           ],
+                           [
+                              -3.680143880572177,
+                              40.512529225128304
+                           ],
+                           [
+                              -3.682905858156074,
+                              40.525769615554275
+                           ],
+                           [
+                              -3.670693530931649,
+                              40.53641261996386
+                           ],
+                           [
+                              -3.653806681979588,
+                              40.523594075998105
+                           ],
+                           [
+                              -3.65240480879299,
+                              40.5041493070001
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_dt"
+            }
+         ]
+      },
+      {
+         "entity_name": "wa_valconejero",
+         "entity_type": "WeatherArea",
+         "schedule": "once",
+         "active": [
+            {
+               "name": "dateModified",
+               "value": "import(now)",
+               "type": "DateTime"
+            }
+         ],
+         "staticAttributes": [
+            {
+               "name": "location",
+               "value": {
+                  "type": "MultiPolygon",
+                  "coordinates": [
+                     [
+                        [
+                           [
+                              -3.617416729280212,
+                              40.53890738744621
+                           ],
+                           [
+                              -3.623277520436835,
+                              40.53965557699883
+                           ],
+                           [
+                              -3.665187297443719,
+                              40.5619022283021
+                           ],
+                           [
+                              -3.670559112638651,
+                              40.57628685247717
+                           ],
+                           [
+                              -3.663172992562162,
+                              40.595251333398664
+                           ],
+                           [
+                              -3.653489451073159,
+                              40.59384964969732
+                           ],
+                           [
+                              -3.632583876579105,
+                              40.591546089648254
+                           ],
+                           [
+                              -3.622214052316088,
+                              40.588036511423574
+                           ],
+                           [
+                              -3.613270171386603,
+                              40.54285555456945
+                           ],
+                           [
+                              -3.617416729280212,
+                              40.53890738744621
+                           ]
+                        ]
+                     ]
+                  ]
+               },
+               "type": "geo:json"
+            },
+            {
+               "name": "refWeatherStation",
+               "type": "Text",
+               "value": "wo_valconejero"
+            }
+         ]
+      },
+      {
          "entity_name": "aq_jaen",
          "entity_type": "AirQualityObserved",
          "schedule": "0 */15 * * * *",
@@ -4788,930 +5712,6 @@
                "name": "refPointOfInterest",
                "type": "Text",
                "value": "DistritoTelefonicaStations"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_ariadna",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.634606021826135,
-                              40.46166613641176
-                           ],
-                           [
-                              -3.632339007885719,
-                              40.49216301017312
-                           ],
-                           [
-                              -3.617180888459423,
-                              40.50137756732371
-                           ],
-                           [
-                              -3.58845151625995,
-                              40.48938063170021
-                           ],
-                           [
-                              -3.588921933066858,
-                              40.48745334610465
-                           ],
-                           [
-                              -3.598781081601882,
-                              40.47031207135167
-                           ],
-                           [
-                              -3.613921916852096,
-                              40.46147186716867
-                           ],
-                           [
-                              -3.634606021826135,
-                              40.46166613641176
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_ariadna"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_puente_reina",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.69456963946923,
-                              40.47005718577704
-                           ],
-                           [
-                              -3.6958369126485,
-                              40.47468181291798
-                           ],
-                           [
-                              -3.680143880572177,
-                              40.512529225128304
-                           ],
-                           [
-                              -3.65240480879299,
-                              40.5041493070001
-                           ],
-                           [
-                              -3.648293943702253,
-                              40.497828062761236
-                           ],
-                           [
-                              -3.69456963946923,
-                              40.47005718577704
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_puente_reina"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_el_pardo_01",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.768857628283433,
-                              40.56235442426143
-                           ],
-                           [
-                              -3.742375563446283,
-                              40.5171785886919
-                           ],
-                           [
-                              -3.776362554111222,
-                              40.48789515121269
-                           ],
-                           [
-                              -3.777654205023021,
-                              40.48906011772362
-                           ],
-                           [
-                              -3.784696453976609,
-                              40.523596402376405
-                           ],
-                           [
-                              -3.775541530336945,
-                              40.555172157341914
-                           ],
-                           [
-                              -3.768857628283433,
-                              40.56235442426143
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_el_pardo_01"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_monasterio",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.6958369126485,
-                              40.47468181291798
-                           ],
-                           [
-                              -3.729170064410446,
-                              40.51779915427073
-                           ],
-                           [
-                              -3.71399968300745,
-                              40.53207956142201
-                           ],
-                           [
-                              -3.682905858156074,
-                              40.525769615554275
-                           ],
-                           [
-                              -3.680143880572177,
-                              40.512529225128304
-                           ],
-                           [
-                              -3.6958369126485,
-                              40.47468181291798
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_monasterio"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_rosalia_de_castro",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.776362554111222,
-                              40.48789515121269
-                           ],
-                           [
-                              -3.742375563446283,
-                              40.5171785886919
-                           ],
-                           [
-                              -3.729170064410446,
-                              40.51779915427073
-                           ],
-                           [
-                              -3.6958369126485,
-                              40.47468181291798
-                           ],
-                           [
-                              -3.69456963946923,
-                              40.47005718577704
-                           ],
-                           [
-                              -3.694499530641508,
-                              40.462195052719316
-                           ],
-                           [
-                              -3.703710591010345,
-                              40.462275616795694
-                           ],
-                           [
-                              -3.753006333685462,
-                              40.4668296958569
-                           ],
-                           [
-                              -3.776362554111222,
-                              40.48789515121269
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_rosalia_de_castro"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_el_alto",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.58845151625995,
-                              40.48938063170021
-                           ],
-                           [
-                              -3.617180888459423,
-                              40.50137756732371
-                           ],
-                           [
-                              -3.617416729280212,
-                              40.53890738744621
-                           ],
-                           [
-                              -3.613270171386603,
-                              40.54285555456945
-                           ],
-                           [
-                              -3.583036128627153,
-                              40.547286243670754
-                           ],
-                           [
-                              -3.582100856479981,
-                              40.54053197738018
-                           ],
-                           [
-                              -3.582538747967217,
-                              40.51830832905636
-                           ],
-                           [
-                              -3.58508931414053,
-                              40.50315548757046
-                           ],
-                           [
-                              -3.58845151625995,
-                              40.48938063170021
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_el_alto"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_almenara",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.70905509521184,
-                              40.56361094050406
-                           ],
-                           [
-                              -3.745058019929996,
-                              40.58683849208285
-                           ],
-                           [
-                              -3.745058019929993,
-                              40.586838492082826
-                           ],
-                           [
-                              -3.742948142273894,
-                              40.58767740406764
-                           ],
-                           [
-                              -3.717131482020309,
-                              40.59794240954445
-                           ],
-                           [
-                              -3.6746838945975,
-                              40.59691752585408
-                           ],
-                           [
-                              -3.663172992562162,
-                              40.595251333398664
-                           ],
-                           [
-                              -3.670559112638651,
-                              40.57628685247717
-                           ],
-                           [
-                              -3.70905509521184,
-                              40.56361094050406
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_almenara"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_el_pardo_02",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.742375563446283,
-                              40.5171785886919
-                           ],
-                           [
-                              -3.768857628283431,
-                              40.562354424261436
-                           ],
-                           [
-                              -3.746668309627233,
-                              40.586198222102134
-                           ],
-                           [
-                              -3.745058019929976,
-                              40.586838492082805
-                           ],
-                           [
-                              -3.70905509521184,
-                              40.56361094050406
-                           ],
-                           [
-                              -3.71399968300745,
-                              40.53207956142201
-                           ],
-                           [
-                              -3.729170064410446,
-                              40.51779915427073
-                           ],
-                           [
-                              -3.742375563446283,
-                              40.5171785886919
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_el_pardo_02"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_camino_nuevo",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.632339007885719,
-                              40.49216301017312
-                           ],
-                           [
-                              -3.648293943702253,
-                              40.497828062761236
-                           ],
-                           [
-                              -3.65240480879299,
-                              40.5041493070001
-                           ],
-                           [
-                              -3.653806681979588,
-                              40.523594075998105
-                           ],
-                           [
-                              -3.623277520436835,
-                              40.53965557699883
-                           ],
-                           [
-                              -3.617416729280212,
-                              40.53890738744621
-                           ],
-                           [
-                              -3.617180888459423,
-                              40.50137756732371
-                           ],
-                           [
-                              -3.632339007885719,
-                              40.49216301017312
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_camino_nuevo"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_ctra_burgos",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.613270171386603,
-                              40.54285555456945
-                           ],
-                           [
-                              -3.622214052316088,
-                              40.588036511423574
-                           ],
-                           [
-                              -3.600189531392599,
-                              40.5805825009137
-                           ],
-                           [
-                              -3.585116392805961,
-                              40.562309312903466
-                           ],
-                           [
-                              -3.583036128627153,
-                              40.547286243670754
-                           ],
-                           [
-                              -3.613270171386603,
-                              40.54285555456945
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_ctra_burgos"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_monovar",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.694499530641508,
-                              40.462195052719316
-                           ],
-                           [
-                              -3.69456963946923,
-                              40.47005718577704
-                           ],
-                           [
-                              -3.648293943702253,
-                              40.497828062761236
-                           ],
-                           [
-                              -3.632339007885719,
-                              40.49216301017312
-                           ],
-                           [
-                              -3.634606021826135,
-                              40.46166613641176
-                           ],
-                           [
-                              -3.642443025114129,
-                              40.461739743111146
-                           ],
-                           [
-                              -3.694499530641508,
-                              40.462195052719316
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_monovar"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_reyes_catolicos",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.653806681979588,
-                              40.523594075998105
-                           ],
-                           [
-                              -3.670693530931649,
-                              40.53641261996386
-                           ],
-                           [
-                              -3.665187297443719,
-                              40.5619022283021
-                           ],
-                           [
-                              -3.623277520436835,
-                              40.53965557699883
-                           ],
-                           [
-                              -3.653806681979588,
-                              40.523594075998105
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_reyes_catolicos"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_uam",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.682905858156074,
-                              40.525769615554275
-                           ],
-                           [
-                              -3.71399968300745,
-                              40.53207956142201
-                           ],
-                           [
-                              -3.70905509521184,
-                              40.56361094050406
-                           ],
-                           [
-                              -3.670559112638651,
-                              40.57628685247717
-                           ],
-                           [
-                              -3.665187297443719,
-                              40.5619022283021
-                           ],
-                           [
-                              -3.670693530931649,
-                              40.53641261996386
-                           ],
-                           [
-                              -3.682905858156074,
-                              40.525769615554275
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_uam"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_dt",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.65240480879299,
-                              40.5041493070001
-                           ],
-                           [
-                              -3.680143880572177,
-                              40.512529225128304
-                           ],
-                           [
-                              -3.682905858156074,
-                              40.525769615554275
-                           ],
-                           [
-                              -3.670693530931649,
-                              40.53641261996386
-                           ],
-                           [
-                              -3.653806681979588,
-                              40.523594075998105
-                           ],
-                           [
-                              -3.65240480879299,
-                              40.5041493070001
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_dt"
-            }
-         ]
-      },
-      {
-         "entity_name": "wa_valconejero",
-         "entity_type": "WeatherArea",
-         "schedule": "once",
-         "active": [
-            {
-               "name": "dateModified",
-               "value": "import(now)",
-               "type": "DateTime"
-            }
-         ],
-         "staticAttributes": [
-            {
-               "name": "location",
-               "value": {
-                  "type": "MultiPolygon",
-                  "coordinates": [
-                     [
-                        [
-                           [
-                              -3.617416729280212,
-                              40.53890738744621
-                           ],
-                           [
-                              -3.623277520436835,
-                              40.53965557699883
-                           ],
-                           [
-                              -3.665187297443719,
-                              40.5619022283021
-                           ],
-                           [
-                              -3.670559112638651,
-                              40.57628685247717
-                           ],
-                           [
-                              -3.663172992562162,
-                              40.595251333398664
-                           ],
-                           [
-                              -3.653489451073159,
-                              40.59384964969732
-                           ],
-                           [
-                              -3.632583876579105,
-                              40.591546089648254
-                           ],
-                           [
-                              -3.622214052316088,
-                              40.588036511423574
-                           ],
-                           [
-                              -3.613270171386603,
-                              40.54285555456945
-                           ],
-                           [
-                              -3.617416729280212,
-                              40.53890738744621
-                           ]
-                        ]
-                     ]
-                  ]
-               },
-               "type": "geo:json"
-            },
-            {
-               "name": "refWeatherStation",
-               "type": "Text",
-               "value": "wo_valconejero"
             }
          ]
       },

@@ -1,0 +1,167 @@
+{
+  "require": ["tabletojson"],
+  "domain": {
+    "service": "service",
+    "subservice": "/subservice"
+  },
+  "contextBroker": {
+    "protocol": "http",
+    "host": "1.2.3.4",
+    "port": 1026,
+    "ngsiVersion": "1.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "http",
+    "host": "1.2.3.4",
+    "port": 5001,
+    "user": "user",
+    "password": "password",
+    "retry": {
+      "times": 10,
+      "interval": 5000
+    }
+  },
+  "entities": [
+    {
+      "external": {
+        "retry": {
+          "times": 10,
+          "interval": 1000
+        },
+        "method": "GET",
+        "url": "http://www.juntadeandalucia.es/medioambiente/atmosfera/informes_siva/{mmm}@es{YY}/nma{YY}{MM}{DD-1}.htm",
+        "headers": {
+          "Cache-Control": "no-cache"
+        },
+        "collector": "var tabletojson = require('tabletojson'); function getDate(dateString) { return new Date('20' + dateString.substring(6,8), dateString.substring(3,5) - 1, dateString.substring(0,2), dateString.substring(9,11), dateString.substring(12));} if (external.response.statusCode === 200) { var tables = tabletojson.convert(external.response.body); var result = []; for (var ii = 1; ii < tables[2].length - 1; ii++) { var entry = [{'name': 'address', 'type': 'Address', 'value': {'addressCountry': 'ES', 'addressLocality': tables[1][1][1], 'streetAddress': tables[1][3][1]}}, {'name': 'dateObserved', 'type': 'DateTime', 'value': getDate(tables[2][ii][0]).toISOString()}, {'name': 'S02', 'type': 'Number', 'value': tables[2][ii][1]}, {'name': 'PM10', 'type': 'Number', 'value': tables[2][ii][2]}, {'name': 'NO2', 'type': 'Number', 'value': tables[2][ii][3]}, {'name': 'CO2', 'type': 'Number', 'value': tables[2][ii][4]}, {'name': 'O3', 'type': 'Number', 'value': tables[2][ii][5]}, {'name': 'measurand', 'type': 'List', 'value': ['SO2,' + tables[2][ii][1] + ',GQ,Sulfur Dioxide', 'PM10,' + tables[2][ii][2] + ',GQ,Suspended Particles', 'NO2,' + tables[2][ii][3] + ',GQ,Nitrogen Dioxide', 'CO2,' + tables[2][ii][4] + ',GQ,Carbon Monoxide', 'O3,' + tables[2][ii][5] + ',GQ,Ozone']}]; result.push(entry); } module.exports = result; }"
+      },
+      "entity_type": "AirQualityObserved",
+      "entity_name": "malaga_airq_elatabal",
+      "schedule": "0 */1 * * * *",
+      "staticAttributes": [
+        {
+          "name": "location",
+          "type": "geo:json",
+          "value": {
+            "type": "Point",
+            "coordinates": [
+              -4.46553495908059,
+              36.7295574570493
+            ]
+          }
+        },
+        {
+          "name": "source",
+          "type": "URL",
+          "value": "http://www.juntadeandalucia.es"
+        }
+      ]
+    },
+    {
+      "external": {
+        "retry": {
+          "times": 10,
+          "interval": 1000
+        },
+        "method": "GET",
+        "url": "http://www.juntadeandalucia.es/medioambiente/atmosfera/informes_siva/{mmm}@es{YY}/nma{YY}{MM}{DD-1}.htm",
+        "headers": {
+          "Cache-Control": "no-cache"
+        },
+        "collector": "var tabletojson = require('tabletojson'); function getDate(dateString) { return new Date('20' + dateString.substring(6,8), dateString.substring(3,5) - 1, dateString.substring(0,2), dateString.substring(9,11), dateString.substring(12));} if (external.response.statusCode === 200) { var tables = tabletojson.convert(external.response.body); var result = []; for (var ii = 1; ii < tables[4].length - 1; ii++) { var entry = [{'name': 'address', 'type': 'Address', 'value': {'addressCountry': 'ES', 'addressLocality': tables[3][1][1], 'streetAddress': tables[3][3][1]}}, {'name': 'dateObserved', 'type': 'DateTime', 'value': getDate(tables[4][ii][0]).toISOString()}, {'name': 'S02', 'type': 'Number', 'value': tables[4][ii][1]}, {'name': 'PM10', 'type': 'Number', 'value': tables[4][ii][2]}, {'name': 'NO2', 'type': 'Number', 'value': tables[4][ii][3]}, {'name': 'CO2', 'type': 'Number', 'value': tables[4][ii][4]}, {'name': 'O3', 'type': 'Number', 'value': tables[4][ii][5]}, {'name': 'measurand', 'type': 'List', 'value': ['SO2,' + tables[4][ii][1] + ',GQ,Sulfur Dioxide', 'PM10,' + tables[4][ii][2] + ',GQ,Suspended Particles', 'NO2,' + tables[4][ii][3] + ',GQ,Nitrogen Dioxide', 'CO2,' + tables[4][ii][4] + ',GQ,Carbon Monoxide', 'O3,' + tables[4][ii][5] + ',GQ,Ozone']}]; result.push(entry); } module.exports = result; }"
+      },
+      "entity_type": "AirQualityObserved",
+      "entity_name": "malaga_airq_carranque",
+      "schedule": "0 */1 * * * *",
+      "staticAttributes": [
+        {
+          "name": "location",
+          "type": "geo:json",
+          "value": {
+            "type": "Point",
+            "coordinates": [
+              -4.44749849600678,
+              36.7196374482505
+            ]
+          }
+        },
+        {
+          "name": "source",
+          "type": "URL",
+          "value": "http://www.juntadeandalucia.es"
+        }
+      ]
+    },
+    {
+      "external": {
+        "retry": {
+          "times": 10,
+          "interval": 1000
+        },
+        "method": "GET",
+        "url": "http://www.juntadeandalucia.es/medioambiente/atmosfera/informes_siva/{mmm}@es{YY}/nma{YY}{MM}{DD-1}.htm",
+        "headers": {
+          "Cache-Control": "no-cache"
+        },
+        "collector": "var tabletojson = require('tabletojson'); function getDate(dateString) { return new Date('20' + dateString.substring(6,8), dateString.substring(3,5) - 1, dateString.substring(0,2), dateString.substring(9,11), dateString.substring(12));} if (external.response.statusCode === 200) { var tables = tabletojson.convert(external.response.body); var result = []; for (var ii = 1; ii < tables[6].length - 1; ii++) { var entry = [{'name': 'address', 'type': 'Address', 'value': {'addressCountry': 'ES', 'addressLocality': tables[5][1][1], 'streetAddress': tables[5][3][1]}}, {'name': 'dateObserved', 'type': 'DateTime', 'value': getDate(tables[6][ii][0]).toISOString()}, {'name': 'S02', 'type': 'Number', 'value': tables[6][ii][1]}, {'name': 'PM10', 'type': 'Number', 'value': tables[6][ii][2]}, {'name': 'NO2', 'type': 'Number', 'value': tables[6][ii][3]}, {'name': 'CO2', 'type': 'Number', 'value': tables[6][ii][4]}, {'name': 'O3', 'type': 'Number', 'value': tables[6][ii][5]}, {'name': 'measurand', 'type': 'List', 'value': ['SO2,' + tables[6][ii][1] + ',GQ,Sulfur Dioxide', 'PM10,' + tables[6][ii][2] + ',GQ,Suspended Particles', 'NO2,' + tables[6][ii][3] + ',GQ,Nitrogen Dioxide', 'CO2,' + tables[6][ii][4] + ',GQ,Carbon Monoxide', 'O3,' + tables[6][ii][5] + ',GQ,Ozone']}]; result.push(entry); } module.exports = result; }"
+      },
+      "entity_type": "AirQualityObserved",
+      "entity_name": "malaga_airq_campanillas",
+      "schedule": "0 */1 * * * *",
+      "staticAttributes": [
+        {
+          "name": "location",
+          "type": "geo:json",
+          "value": {
+            "type": "Point",
+            "coordinates": [
+              -4.56095497889189,
+              36.7278572726192
+            ]
+          }
+        },
+        {
+          "name": "source",
+          "type": "URL",
+          "value": "http://www.juntadeandalucia.es"
+        }
+      ]
+    },
+    {
+      "external": {
+        "retry": {
+          "times": 10,
+          "interval": 1000
+        },
+        "method": "GET",
+        "url": "http://www.juntadeandalucia.es/medioambiente/atmosfera/informes_siva/{mmm}@es{YY}/nma{YY}{MM}{DD-1}.htm",
+        "headers": {
+          "Cache-Control": "no-cache"
+        },
+        "collector": "var tabletojson = require('tabletojson'); function getDate(dateString) { return new Date('20' + dateString.substring(6,8), dateString.substring(3,5) - 1, dateString.substring(0,2), dateString.substring(9,11), dateString.substring(12));} if (external.response.statusCode === 200) { var tables = tabletojson.convert(external.response.body); var result = []; for (var ii = 1; ii < tables[10].length - 1; ii++) { var entry = [{'name': 'address', 'type': 'Address', 'value': {'addressCountry': 'ES', 'addressLocality': tables[9][1][1], 'streetAddress': tables[9][3][1]}}, {'name': 'dateObserved', 'type': 'DateTime', 'value': getDate(tables[10][ii][0]).toISOString()}, {'name': 'S02', 'type': 'Number', 'value': tables[10][ii][1]}, {'name': 'PM10', 'type': 'Number', 'value': tables[10][ii][2]}, {'name': 'NO2', 'type': 'Number', 'value': tables[10][ii][3]}, {'name': 'CO2', 'type': 'Number', 'value': tables[10][ii][4]}, {'name': 'O3', 'type': 'Number', 'value': tables[10][ii][5]}, {'name': 'measurand', 'type': 'List', 'value': ['SO2,' + tables[10][ii][1] + ',GQ,Sulfur Dioxide', 'PM10,' + tables[10][ii][2] + ',GQ,Suspended Particles', 'NO2,' + tables[10][ii][3] + ',GQ,Nitrogen Dioxide', 'CO2,' + tables[10][ii][4] + ',GQ,Carbon Monoxide', 'O3,' + tables[10][ii][5] + ',GQ,Ozone']}]; result.push(entry); } module.exports = result; }"
+      },
+      "entity_type": "AirQualityObserved",
+      "entity_name": "malaga_airq_campanillas",
+      "schedule": "0 */1 * * * *",
+      "staticAttributes": [
+        {
+          "name": "location",
+          "type": "geo:json",
+          "value": {
+            "type": "Point",
+            "coordinates": [
+              -4.56095497889189,
+              36.7278572726192
+            ]
+          }
+        },
+        {
+          "name": "source",
+          "type": "URL",
+          "value": "http://www.juntadeandalucia.es"
+        }
+      ]
+    }
+  ]
+}

@@ -26,7 +26,6 @@
 var should = require('should');
 
 var ROOT_PATH = require('app-root-path');
-var path = require('path');
 var nock = require('nock');
 var fdsErrors = require(ROOT_PATH + '/lib/errors/fdsErrors');
 var attributeFunctionInterpolator = require(ROOT_PATH + '/lib/interpolators/attributeFunctionInterpolator');

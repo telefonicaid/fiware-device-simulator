@@ -27,7 +27,7 @@
       "headers": {
         "propietary-header": "propietary-value"
       },
-      "url": "https://www.external-source.com/data",
+      "url": "https://www.external-source.com/{YY}{YYYY}{MM}{DD}{hh}/data",
       "json": true,
       "collector": "module.exports = external.response.body;"
     }

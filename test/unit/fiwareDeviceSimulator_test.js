@@ -109,6 +109,7 @@ function toDecimalHours(date) {
 
 describe('fiwareDeviceSimulator tests', function() {
   /* jshint camelcase: false */
+  var now = new Date();
   var ACTIVE_1 = 'active1',
       ATTRIBUTE_1 = 'attribute1',
       ENTITY_NAME_1 = 'EntityName1',
@@ -117,7 +118,13 @@ describe('fiwareDeviceSimulator tests', function() {
       SOME_TEXT = 'Some text',
       TEXT = 'Text',
       THE_SERVICE = 'theService',
-      THE_SUBSERVICE = '/theSubService';
+      THE_SUBSERVICE = '/theSubService',
+      EXTERNAL_SOURCE_URL = 'https://www.external-source.com/' + now.getFullYear().toString().substring(2, 4) +
+        now.getFullYear() + ((now.getMonth() + 1) < 10 ? '0' + (now.getMonth() + 1) : now.getMonth() + 1) +
+        now.getDate() + now.getHours();
+  
+  console.log();
+  console.log(EXTERNAL_SOURCE_URL);
 
   var idm,
       externalSource,
@@ -131,7 +138,7 @@ describe('fiwareDeviceSimulator tests', function() {
   idm = nock(simulationConfiguration.authentication.protocol + '://' + simulationConfiguration.authentication.host +
     ':' + simulationConfiguration.authentication.port);
 
-  externalSource = nock('https://www.external-source.com');
+  externalSource = nock(EXTERNAL_SOURCE_URL);
 
   describe('simulation configuration validation', function() {
     it('should notify an "error" event if no domain configuration information is provided and ' +
@@ -5642,7 +5649,7 @@ describe('fiwareDeviceSimulator tests', function() {
           isError = true;
         });
         simulationProgress.on('end', function() {
-          isError ? done() : done(new Error('No error was thrown'))
+          isError ? done() : done(new Error('No error was thrown'));
         });
     });
 
@@ -5767,7 +5774,7 @@ describe('fiwareDeviceSimulator tests', function() {
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('the mandatory \'method\' subproperty is missing')).not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -5831,7 +5838,7 @@ describe('fiwareDeviceSimulator tests', function() {
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('the mandatory \'method\' subproperty is not an string')).not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -5896,7 +5903,7 @@ describe('fiwareDeviceSimulator tests', function() {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('(the mandatory \'method\' subproperty is not equal to \'GET\' or \'POST\'')).
             not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -5960,7 +5967,7 @@ describe('fiwareDeviceSimulator tests', function() {
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('the mandatory \'url\' subproperty is missing')).not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -6024,8 +6031,9 @@ describe('fiwareDeviceSimulator tests', function() {
         );
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
-          should(ev.error.message.indexOf('the mandatory \'url\' subproperty does not seem to be a valid URL')).not.equal(-1);
-          isError = true
+          should(ev.error.message.indexOf('the mandatory \'url\' subproperty does not seem to be a valid URL')).
+            not.equal(-1);
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -6035,6 +6043,8 @@ describe('fiwareDeviceSimulator tests', function() {
     it('should notify an "error" event if an invalid headers property is provided in the external information',
       function(done) {
         var isError = false;
+        var externalURL = 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?' +
+          'k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24';
         simulationProgress = fiwareDeviceSimulator.start(
           {
             domain: {
@@ -6081,7 +6091,7 @@ describe('fiwareDeviceSimulator tests', function() {
                     interval: 1000
                   },
                   method: 'GET',
-                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  url: externalURL,
                   headers: 'invalid-headers-information'
                 }
               }
@@ -6091,7 +6101,7 @@ describe('fiwareDeviceSimulator tests', function() {
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('the optional \'headers\' subproperty is not an object')).not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -6101,6 +6111,8 @@ describe('fiwareDeviceSimulator tests', function() {
     it('should notify an "error" event if an invalid body property is provided in the external information',
       function(done) {
         var isError = false;
+        var externalURL = 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?' +
+          'k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24';
         simulationProgress = fiwareDeviceSimulator.start(
           {
             domain: {
@@ -6147,7 +6159,7 @@ describe('fiwareDeviceSimulator tests', function() {
                     interval: 1000
                   },
                   method: 'GET',
-                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  url: externalURL,
                   headers: {
                     'Cache-Control': 'no-cache'
                   },
@@ -6160,7 +6172,7 @@ describe('fiwareDeviceSimulator tests', function() {
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('the optional \'body\' subproperty is not an object')).not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -6170,6 +6182,8 @@ describe('fiwareDeviceSimulator tests', function() {
     it('should notify an "error" event if an invalid json property is provided in the external information',
       function(done) {
         var isError = false;
+        var externalURL = 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?' +
+          'k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24';
         simulationProgress = fiwareDeviceSimulator.start(
           {
             domain: {
@@ -6216,7 +6230,7 @@ describe('fiwareDeviceSimulator tests', function() {
                     interval: 1000
                   },
                   method: 'GET',
-                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  url: externalURL,
                   headers: {
                     'Cache-Control': 'no-cache'
                   },
@@ -6232,7 +6246,7 @@ describe('fiwareDeviceSimulator tests', function() {
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('the optional \'json\' subproperty is not an boolean')).not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -6242,6 +6256,8 @@ describe('fiwareDeviceSimulator tests', function() {
     it('should notify an "error" event if the collector property is missing in the external information',
       function(done) {
         var isError = false;
+        var externalURL = 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?' +
+          'k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24';
         simulationProgress = fiwareDeviceSimulator.start(
           {
             domain: {
@@ -6288,7 +6304,7 @@ describe('fiwareDeviceSimulator tests', function() {
                     interval: 1000
                   },
                   method: 'GET',
-                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  url: externalURL,
                   headers: {
                     'Cache-Control': 'no-cache'
                   },
@@ -6303,7 +6319,7 @@ describe('fiwareDeviceSimulator tests', function() {
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('the \'collector\' subproperty is missing')).not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -6313,6 +6329,8 @@ describe('fiwareDeviceSimulator tests', function() {
     it('should notify an "error" event if an invalid collector property is provided in the external information',
       function(done) {
         var isError = false;
+        var externalURL = 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?' +
+          'k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24';
         simulationProgress = fiwareDeviceSimulator.start(
           {
             domain: {
@@ -6359,7 +6377,7 @@ describe('fiwareDeviceSimulator tests', function() {
                     interval: 1000
                   },
                   method: 'GET',
-                  url: 'http://www.aemet.es/es/eltiempo/observacion/ultimosdatos_6156X_datos-horarios.csv?k=and&l=6156X&datos=det&w=0&f=temperatura&x=h24',
+                  url: externalURL,
                   headers: {
                     'Cache-Control': 'no-cache'
                   },
@@ -6375,7 +6393,7 @@ describe('fiwareDeviceSimulator tests', function() {
         simulationProgress.on('error', function(ev) {
           should(ev.error).instanceof(fdsErrors.SimulationConfigurationNotValid);
           should(ev.error.message.indexOf('the \'collector\' subproperty is not a string')).not.equal(-1);
-          isError = true
+          isError = true;
         });
         simulationProgress.on('end', function() {
           isError ? done() : done(new Error('No error was thrown'));
@@ -6506,7 +6524,7 @@ describe('fiwareDeviceSimulator tests', function() {
           externalSource.post('/data').reply(
             function(uri, requestBody) {
               should(this.req.headers['propietary-header']).equal('propietary-value');
-              should(requestBody).deepEqual({"property1": "value1"});
+              should(requestBody).deepEqual({'property1': 'value1'});
               return [
                 200,
                 [[{name: ATTRIBUTE_1, type: TEXT, value: SOME_TEXT}]],
@@ -7360,10 +7378,9 @@ describe('fiwareDeviceSimulator tests', function() {
             should(ev.expires_at.toISOString()).equal(tokenResponseBody.token.expires_at);
           });
           simulationProgress.on('update-request', function(ev) {
-            if (ev.request.url === 'https://www.external-source.com/data') {
+            if (ev.request.url === EXTERNAL_SOURCE_URL + '/data') {
               ++updateRequests;
             } else {
-              var now = new Date();
               if (type === 'entities') {
                 if (options.ngsiVersion === '1.0') {
                   should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ATTRIBUTE_1)).
@@ -7385,7 +7402,7 @@ describe('fiwareDeviceSimulator tests', function() {
             }
           });
           simulationProgress.on('update-response', function(ev) {
-            if (ev.request.url !== 'https://www.external-source.com/data') {
+            if (ev.request.url !== EXTERNAL_SOURCE_URL + '/data') {
               ++updateResponses;
             }
           });
@@ -7424,10 +7441,9 @@ describe('fiwareDeviceSimulator tests', function() {
             should(ev.expires_at.toISOString()).equal(tokenResponseBody.token.expires_at);
           });
           simulationProgress.on('update-request', function(ev) {
-            if (ev.request.url === 'https://www.external-source.com/data') {
+            if (ev.request.url === EXTERNAL_SOURCE_URL + '/data') {
               ++updateRequests;
             } else {
-              var now = new Date();
               if (type === 'entities') {
                 if (options.ngsiVersion === '1.0') {
                   should(getAttributeValue(options.destination, ev.request.body, ENTITY_NAME_1, ATTRIBUTE_1)).
@@ -7449,7 +7465,7 @@ describe('fiwareDeviceSimulator tests', function() {
             }
           });
           simulationProgress.on('update-response', function(ev) {
-            if (ev.request.url !== 'https://www.external-source.com/data') {
+            if (ev.request.url !== EXTERNAL_SOURCE_URL + '/data') {
               ++updateResponses;
             }
           });

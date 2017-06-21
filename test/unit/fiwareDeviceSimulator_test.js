@@ -121,7 +121,7 @@ describe('fiwareDeviceSimulator tests', function() {
       THE_SUBSERVICE = '/theSubService',
       EXTERNAL_SOURCE_URL = 'https://www.external-source.com/' + now.getFullYear().toString().substring(2, 4) +
         now.getFullYear() + ((now.getMonth() + 1) < 10 ? '0' + (now.getMonth() + 1) : now.getMonth() + 1) +
-        now.getDate() + now.getHours();
+        now.getDate() + ((now.getHours() < 10) ? '0' + now.getHours() : now.getHours());
   
   console.log();
   console.log(EXTERNAL_SOURCE_URL);

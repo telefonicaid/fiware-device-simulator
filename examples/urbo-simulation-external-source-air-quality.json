@@ -38,7 +38,7 @@
       },
       "entity_type": "AirQualityObserved",
       "entity_name": "malaga_airq_elatabal",
-      "schedule": "0 */1 * * * *",
+      "schedule": "0 0 8 * * *",
       "staticAttributes": [
         {
           "name": "location",
@@ -73,7 +73,7 @@
       },
       "entity_type": "AirQualityObserved",
       "entity_name": "malaga_airq_carranque",
-      "schedule": "0 */1 * * * *",
+      "schedule": "0 0 8 * * *",
       "staticAttributes": [
         {
           "name": "location",
@@ -108,7 +108,7 @@
       },
       "entity_type": "AirQualityObserved",
       "entity_name": "malaga_airq_campanillas",
-      "schedule": "0 */1 * * * *",
+      "schedule": "0 0 8 * * *",
       "staticAttributes": [
         {
           "name": "location",
@@ -142,8 +142,8 @@
         "collector": "var tabletojson = require('tabletojson'); function getDate(dateString) { return new Date('20' + dateString.substring(6,8), dateString.substring(3,5) - 1, dateString.substring(0,2), dateString.substring(9,11), dateString.substring(12));} if (external.response.statusCode === 200) { var tables = tabletojson.convert(external.response.body); var result = []; for (var ii = 1; ii < tables[10].length - 1; ii++) { var entry = [{'name': 'address', 'type': 'Address', 'value': {'addressCountry': 'ES', 'addressLocality': tables[9][1][1], 'streetAddress': tables[9][3][1]}}, {'name': 'dateObserved', 'type': 'DateTime', 'value': getDate(tables[10][ii][0]).toISOString()}, {'name': 'S02', 'type': 'Number', 'value': tables[10][ii][1]}, {'name': 'PM10', 'type': 'Number', 'value': tables[10][ii][2]}, {'name': 'NO2', 'type': 'Number', 'value': tables[10][ii][3]}, {'name': 'CO2', 'type': 'Number', 'value': tables[10][ii][4]}, {'name': 'O3', 'type': 'Number', 'value': tables[10][ii][5]}, {'name': 'measurand', 'type': 'List', 'value': ['SO2,' + tables[10][ii][1] + ',GQ,Sulfur Dioxide', 'PM10,' + tables[10][ii][2] + ',GQ,Suspended Particles', 'NO2,' + tables[10][ii][3] + ',GQ,Nitrogen Dioxide', 'CO2,' + tables[10][ii][4] + ',GQ,Carbon Monoxide', 'O3,' + tables[10][ii][5] + ',GQ,Ozone']}]; result.push(entry); } module.exports = result; }"
       },
       "entity_type": "AirQualityObserved",
-      "entity_name": "malaga_airq_campanillas",
-      "schedule": "0 */1 * * * *",
+      "entity_name": "malaga_airq_avdajuanxxiii",
+      "schedule": "0 0 8 * * *",
       "staticAttributes": [
         {
           "name": "location",
@@ -151,8 +151,8 @@
           "value": {
             "type": "Point",
             "coordinates": [
-              -4.56095497889189,
-              36.7278572726192
+              -4.44468102271592,
+              36.7090982156429
             ]
           }
         },

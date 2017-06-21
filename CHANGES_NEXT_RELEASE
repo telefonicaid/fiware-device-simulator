@@ -1,1 +1,2 @@
 - [TASK] Updating the time NPM package to the 0.12 version.
+- [FEATURE] Dynamic generation of external data sources URLs based on date templates.

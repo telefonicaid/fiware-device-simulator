@@ -19,7 +19,7 @@
 # For those usages not covered by the GNU Affero General Public License
 # please contact with: [german.torodelvalle@telefonica.com]
 
-FROM node:0.12
+FROM node:4.8.4
 
 RUN mkdir -p /opt/fiware-device-simulator
 WORKDIR /opt/fiware-device-simulator

@@ -2386,7 +2386,7 @@
          ]
       },
       {
-         "entity_name": "azalea-01",
+         "entity_name": "azalea-02",
          "entity_type": "StreetlightControlCabinet",
          "schedule": "23 */15 * * * *",
          "active": [

@@ -1,1 +1,2 @@
 Using precise dependencies (~=) in packages.json
+Update minimum node version to 4.8.4

@@ -17,7 +17,7 @@
   },
   "main": "bin/fiwareDeviceSimulatorCLI",
   "engines": {
-    "node": ">=0.10"
+    "node": ">=4.8.4"
   },
   "scripts": {
     "test": "grunt test"

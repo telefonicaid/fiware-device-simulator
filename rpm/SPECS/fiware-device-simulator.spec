@@ -61,8 +61,9 @@ mkdir -p %{_build_root_project}/conf
 echo "[INFO] Building RPM"
 cd %{_build_root_project}
 
+# We have found that --force is required to make this work for Node v8
 rm -fR node_modules/
-npm cache clear
+npm cache clear --force
 npm install
 
 # -------------------------------------------------------------------------------------------- #

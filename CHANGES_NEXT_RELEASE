@@ -1,2 +1,4 @@
 Set Nodejs 8.12.0 as minimum version in packages.json
+Remove grunt and grunt related dependencies (replaced by npm scripts)
+Remove chai and sinon-chai dependencies (unused)
 Using precise dependencies (~=) in packages.json

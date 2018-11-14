@@ -1,2 +1,2 @@
+Set Nodejs 8.12.0 as minimum version in packages.json
 Using precise dependencies (~=) in packages.json
-Update minimum node version to 4.8.4

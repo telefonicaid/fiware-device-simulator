@@ -1,4 +1,5 @@
 Set Nodejs 8.12.0 as minimum version in packages.json
+Upgrade logops dependency from ~1.0.1 to 2.1.0
 Remove grunt and grunt related dependencies (replaced by npm scripts)
 Remove chai and sinon-chai dependencies (unused)
 Using precise dependencies (~=) in packages.json

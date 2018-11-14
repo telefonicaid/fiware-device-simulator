@@ -53,7 +53,7 @@
     "google-spreadsheet": "~2.0.3",
     "humanize-duration": "~3.9.1",
     "linear-interpolator": "~1.0.2",
-    "logops": "~1.0.1",
+    "logops": "2.1.0",
     "lolex": "~1.5.1",
     "mqtt": "~1.14.0",
     "node-schedule": "~1.2.0",

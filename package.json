@@ -29,7 +29,7 @@
   },
   "devDependencies": {
     "istanbul": "~0.4.5",
-    "mocha": "~3.2.0",
+    "mocha": "5.2.0",
     "nock": "~8.0.0",
     "proxyquire": "~1.7.10",
     "should": "~10.0.0",
@@ -58,7 +58,7 @@
     "mqtt": "~1.14.0",
     "node-schedule": "~1.2.0",
     "npm-install-package": "~1.1.0",
-    "request": "~2.78.0",
+    "request": "2.88.0",
     "time": "~0.12",
     "turf-along": "~3.0.12",
     "turf-bearing": "~3.0.12",

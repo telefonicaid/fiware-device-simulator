@@ -17,32 +17,23 @@
   },
   "main": "bin/fiwareDeviceSimulatorCLI",
   "engines": {
-    "node": ">=4.8.4"
+    "node": ">=8.12.0"
   },
   "scripts": {
-    "test": "grunt test"
+    "clean": "rm -rf package-lock.json && rm -rf node_modules && rm -rf coverage",
+    "test": "mocha --recursive 'test/**/*.js' --reporter spec --timeout 3000 --ui bdd --exit",
+    "test:watch": "npm run test -- -w ./lib",
+    "lint": "jshint lib/ --config .jshintrc && jshint test/ --config test/.jshintrc",
+    "test:coverage": "istanbul cover _mocha -- --recursive 'test/**/*.js' --reporter spec --exit",
+    "watch": "watch 'npm test && npm run lint' ./lib ./test"
   },
   "devDependencies": {
-    "chai": "~3.5.0",
-    "grunt": "~0.4.5",
-    "grunt-contrib-clean": "~1.0.0",
-    "grunt-contrib-jshint": "~1.1.0",
-    "grunt-contrib-watch": "~1.0.0",
-    "grunt-dox": "~0.5.0",
-    "grunt-exec": "~1.0.0",
-    "grunt-githooks": "~0.6.0",
-    "grunt-github-pages": "~0.0.4",
-    "grunt-gjslint": "~0.2.1",
-    "grunt-mkdir": "~1.0.0",
-    "grunt-mocha-test": "~0.13.2",
-    "grunt-plato": "~1.4.0",
     "istanbul": "~0.4.5",
-    "mocha": "~3.2.0",
+    "mocha": "5.2.0",
     "nock": "~8.0.0",
     "proxyquire": "~1.7.10",
     "should": "~10.0.0",
-    "sinon": "~1.17.6",
-    "sinon-chai": "~2.8.0"
+    "sinon": "~1.17.6"
   },
   "keywords": [
     "fiware",
@@ -62,12 +53,12 @@
     "google-spreadsheet": "~2.0.3",
     "humanize-duration": "~3.9.1",
     "linear-interpolator": "~1.0.2",
-    "logops": "~1.0.1",
+    "logops": "2.1.0",
     "lolex": "~1.5.1",
     "mqtt": "~1.14.0",
     "node-schedule": "~1.2.0",
     "npm-install-package": "~1.1.0",
-    "request": "~2.78.0",
+    "request": "2.88.0",
     "time": "~0.12",
     "turf-along": "~3.0.12",
     "turf-bearing": "~3.0.12",

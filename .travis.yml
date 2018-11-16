@@ -24,3 +24,6 @@ addons:
       - g++
   code_climate:
     repo_token: 3af78c71b999d36106cc3ec8761fa5d664515fef7b8c8698e9d5f091a9d5c5a3
+
+before_script:
+  - npm run lint

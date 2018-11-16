@@ -29,11 +29,13 @@
   },
   "devDependencies": {
     "istanbul": "~0.4.5",
+    "jshint": "~2.9.6",
     "mocha": "5.2.0",
     "nock": "~8.0.0",
     "proxyquire": "~1.7.10",
     "should": "~10.0.0",
-    "sinon": "~1.17.6"
+    "sinon": "~1.17.6",
+    "watch": "~1.0.2"
   },
   "keywords": [
     "fiware",

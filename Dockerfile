@@ -22,7 +22,7 @@
 ARG  NODE_VERSION=8.12.0-slim
 FROM node:${NODE_VERSION}
 
-MAINTAINER FIWARE STH Team. Telefónica I+D
+MAINTAINER FIWARE Device Simulator Team. Telefónica I+D
 
 COPY . /opt/fiware-device-simulator
 WORKDIR /opt/fiware-device-simulator

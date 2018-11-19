@@ -26,7 +26,7 @@ WORKDIR /opt/fiware-device-simulator
 
 RUN \
     apt-get update && \
-    apt-get install -y bzip2 python make
+    apt-get install -y bzip2 python make gcc g++
 
 COPY package.json /opt/fiware-device-simulator
 RUN npm install

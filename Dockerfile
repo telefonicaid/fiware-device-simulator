@@ -19,17 +19,20 @@
 # For those usages not covered by the GNU Affero General Public License
 # please contact with: [german.torodelvalle@telefonica.com]
 
-FROM node:8.12.0-slim
+ARG  NODE_VERSION=8.12.0-slim
+FROM node:${NODE_VERSION}
 
-RUN mkdir -p /opt/fiware-device-simulator
+MAINTAINER FIWARE Device Simulator Team. Telefónica I+D
+
+COPY . /opt/fiware-device-simulator
 WORKDIR /opt/fiware-device-simulator
 
 RUN \
     apt-get update && \
-    apt-get install -y bzip2 python make gcc g++
+    apt-get install -y bzip2 python make gcc g++ && \
+    npm install && \
+    # Clean apt cache
+    apt-get clean && \
+    apt-get remove -y bzip2 python make gcc g++ && \
+    apt-get -y autoremove
 
-COPY package.json /opt/fiware-device-simulator
-RUN npm install
-
-COPY bin /opt/fiware-device-simulator/bin
-COPY lib /opt/fiware-device-simulator/lib

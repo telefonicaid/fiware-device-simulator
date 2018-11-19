@@ -23,13 +23,17 @@ FROM node:8.12.0-slim
 
 RUN mkdir -p /opt/fiware-device-simulator
 WORKDIR /opt/fiware-device-simulator
+COPY package.json /opt/fiware-device-simulator
+
 
 RUN \
     apt-get update && \
-    apt-get install -y bzip2 python make gcc g++
-
-COPY package.json /opt/fiware-device-simulator
-RUN npm install
+    apt-get install -y bzip2 python make gcc g++ && \
+    npm install && \
+    # Clean apt cache
+    apt-get clean && \
+    apt-get remove -y gcc g++ make && \
+    apt-get -y autoremove
 
 COPY bin /opt/fiware-device-simulator/bin
 COPY lib /opt/fiware-device-simulator/lib

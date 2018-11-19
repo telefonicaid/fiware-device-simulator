@@ -24,6 +24,10 @@ FROM node:8.12.0-slim
 RUN mkdir -p /opt/fiware-device-simulator
 WORKDIR /opt/fiware-device-simulator
 
+RUN \
+    apt-get update && \
+    apt-get install -y bzip2 python
+
 COPY package.json /opt/fiware-device-simulator
 RUN npm install
 

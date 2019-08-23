@@ -438,6 +438,14 @@ function executeCommand() {
     commander.help();
   }
 
+  if(commander.from) {
+    commander.from = new Date(commander.from);
+  }
+
+  if(commander.to) {
+    commander.to = new Date(commander.to);
+  }
+
   if (commander.to) {
     if (!commander.from && commander.to <= new Date()) {
       logops.error('If no fromDate is provided, the toDate must be beyond the current time and date');

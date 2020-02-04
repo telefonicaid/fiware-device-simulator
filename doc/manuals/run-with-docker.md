@@ -7,6 +7,6 @@ Simply navigate to the docker directory of the fiware-device-simulator code (if 
         docker-compose up
 
 
-Then, in a new shell script command cline you can invoke the simulator CLI by typing
+Then, in a new shell script command line you can invoke the simulator CLI by typing
 
         docker exec iot-device-simulator bash -c "./bin/fiwareDeviceSimulatorCLI <youroptions>"

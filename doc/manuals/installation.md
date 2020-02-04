@@ -62,12 +62,12 @@ sudo rpm -e fiware-device-simulator
 
 ## Automatic deployment using Docker
 
-To ease the testing and deployment of the FIWARE Device Simulator, there also exists Docker images hosted at the [FIWARE Docker Hub](https://hub.docker.com/r/fiware/device-simulator/), including all the information needed to deploy and to try the FIWARE Device Simulator via the execution of a simple Docker command.
+To ease the testing and deployment of the FIWARE Device Simulator, there also exists Docker images hosted at the [Telefonica Docker Hub](https://hub.docker.com/repository/docker/telefonicaiot/fiware-device-simulator/), including all the information needed to deploy and to try the FIWARE Device Simulator via the execution of a simple Docker command.
 
 To run a Docker instance including a FIWARE Device Simulator instance, please run the following commands:
 ```bash
-docker pull fiware/device-simulator
-docker run -t -i fiware/device-simulator /bin/bash
+docker pull telefonicaiot/fiware-device-simulator
+docker run -t -i telefonicaiot/fiware-device-simulator /bin/bash
 ```
 
 At this point, you will be inside the Docker container with a FIWARE Device Simulator ready to be used.

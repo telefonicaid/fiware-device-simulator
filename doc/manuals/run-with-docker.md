@@ -1,4 +1,4 @@
-# To run with docker
+# To run with docker-compose
 
 A Docker Compose file is provided for convenience. You must install [Docker Compose](https://docs.docker.com/compose/install/) for this method to work.
 

@@ -18,8 +18,8 @@ More concretely, the FIWARE Device Simulator includes the following capabilities
 
 For further information please visit: the official [FIWARE Device Simulator documentation](https://fiware-device-simulator.readthedocs.io) at ReadTheDocs.
 
-## Run it with docker
-* [Docker instructions](doc/manuals/run-with-docker.md)
+## Run it with docker compose
+* [Docker compose instructions](doc/manuals/run-with-docker.md)
 
 ## Licence
 

@@ -25,7 +25,9 @@ RUN mkdir -p /opt/fiware-device-simulator
 WORKDIR /opt/fiware-device-simulator
 
 COPY package.json /opt/fiware-device-simulator
-RUN npm install
+RUN apt-get update && apt-get install -y python make gcc g++ \
+  && npm install --only=production \
+  && apt-get remove -y python make gcc g++
 
 COPY bin /opt/fiware-device-simulator/bin
 COPY lib /opt/fiware-device-simulator/lib

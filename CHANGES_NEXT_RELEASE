@@ -1,2 +1,3 @@
 - Set Nodejs 10 as minimum version in packages.json (effectively removing Nodev8 from supported versions)
 - Upgrade from 8.15.1-slim to 10.21-slim in Dockerfile
+- Compatibility for nodejs version 12 #76

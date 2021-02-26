@@ -61,7 +61,7 @@
     "node-schedule": "~1.2.0",
     "npm-install-package": "~1.1.0",
     "request": "2.88.0",
-    "time": "github:riyadshauk/node-time",
+    "time": "github:riyadshauk/node-time#b77fe204c31854a9b1dd9930f189ead813bc9d4c",
     "turf-along": "~3.0.12",
     "turf-bearing": "~3.0.12",
     "turf-line-distance": "~3.0.12",

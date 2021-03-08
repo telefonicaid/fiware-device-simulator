@@ -121,7 +121,8 @@ describe('fiwareDeviceSimulator tests', function() {
       THE_SUBSERVICE = '/theSubService',
       EXTERNAL_SOURCE_URL = 'https://www.external-source.com/' + now.getFullYear().toString().substring(2, 4) +
         now.getFullYear() + ((now.getMonth() + 1) < 10 ? '0' + (now.getMonth() + 1) : now.getMonth() + 1) +
-        now.getDate() + ((now.getHours() < 10) ? '0' + now.getHours() : now.getHours());
+        ((now.getDate() < 10) ? '0' + now.getDate() : now.getDate()) +
+        ((now.getHours() < 10) ? '0' + now.getHours() : now.getHours());
   
   console.log();
   console.log(EXTERNAL_SOURCE_URL);
@@ -6509,7 +6510,7 @@ describe('fiwareDeviceSimulator tests', function() {
 
           externalSource.get('/data').reply(
             function(uri, requestBody) {
-              // FIXME: the next line was making some test to fail with Node v8
+              // FIXME: the next line was making some test to fail with Node v10
               // I think it has no impact in the test logic but given I don't understand the original
               // purpose of the line I prefer leave it commented that removing by the moment.
               // It is significative that if you search in all the code base for 'propietary-header' or
@@ -6529,7 +6530,7 @@ describe('fiwareDeviceSimulator tests', function() {
 
           externalSource.post('/data').reply(
             function(uri, requestBody) {
-              // FIXME: the next line was making some test to fail with Node v8
+              // FIXME: the next line was making some test to fail with Node v10
               // I think it has no impact in the test logic but given I don't understand the original
               // purpose of the line I prefer leave it commented that removing by the moment
               // It is significative that if you search in all the code base for 'propietary-header' or

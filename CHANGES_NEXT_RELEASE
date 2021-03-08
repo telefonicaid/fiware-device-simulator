@@ -1,2 +1,3 @@
-- Set Nodejs 10 as minimum version in packages.json (effectively removing Nodev8 from supported versions)
-- Upgrade from 8.15.1-slim to 10.21-slim in Dockerfile
+- Set Nodejs 12 as minimum version in packages.json (effectively removing Nodev8 from supported versions)
+- Update time dependency from official 0.12.0 to riyadshauk fork to gain compatibility with Node v12
+- Upgrade from 8.15.1-slim to 12.21.0-slim in Dockerfile

@@ -1,110 +1,10 @@
-# Simulation configuration
-
-## Environment variables file
-
-The simulation configuration file may use an .env file to set certain configuration on simulation.json file, this is used to avoid set sensitive information, and be executed in whatever environment, having different configurations and not been needed to change anything on code.
-
-Here's an example of `.env` file with the commonly environment variables used:
-
-```json
-AUTH_PASS="pass"
-AUTH_USER="user"
-AUTH_PORT=5001
-AUTH_HOST="localhost"
-
-DOMAIN_SERVICE="service"
-DOMAIN_SUBSERVICE="/subservice"
-
-CB_HOST="localhost"
-CB_PORT=1026
-
-IOTA_ULTRALIGHT_API="1ifhm6o0kp4ew7fi377mpyc3c"
-IOTA_ULTRALIGHT_HTTP_HOST="localhost"
-IOTA_ULTRALIGHT_HTTP_PORT=8085
-IOTA_ULTRALIGHT_MQTT_HOST="localhost"
-IOTA_ULTRALIGHT_MQTT_PORT=1833
-IOTA_ULTRALIGHT_MQTT_USER="mqttUser"
-IOTA_ULTRALIGHT_MQTT_PASS="mqttPassword"
-
-IOTA_JSON_API="83ut64ib3gzs6km6izubjyenu"
-IOTA_JSON_HTTP_HOST="localhost"
-IOTA_JSON_HTTP_PORT=8185
-IOTA_JSON_MQTT_HOST="localhost"
-IOTA_JSON_MQTT_PORT=1883
-IOTA_JSON_MQTT_USER="mqttUser"
-IOTA_JSON_MQTT_PASS="mqttPassword"
-```
-
-To use a environment variable on the configuration file, it's needed to be setted around `${}` having as result `${VARIABLE}`.
-
-An example simulation configuration file using environment variables is shown next to give you a glimpse of its shape:
-
-```json
-{
-  "domain": {
-    "service": "${DOMAIN_SERVICE}",
-    "subservice": "${DOMAIN_SUBSERVICE}"
-  },
-  "contextBroker": {
-    "protocol": "http",
-    "host": "${CB_HOST}",
-    "port": "${CB_PORT}",
-    "ngsiVersion": "2.0"
-  },
-  "authentication": {
-    "provider": "keystone",
-    "protocol": "http",
-    "host": "${AUTH_HOST}",
-    "port": "${AUTH_PORT}",
-    "user": "${AUTH_USER}",
-    "password": "${AUTH_PASS}",
-    "retry": {
-      "times": 10,
-      "interval": 1000
-    }
-  },
-  "iota": {
-    "ultralight": {
-      "api_key": "${IOTA_ULTRALIGHT_API}",
-      "http": {
-        "protocol": "http",
-        "host": "${IOTA_ULTRALIGHT_HTTP_HOST}",
-        "port": "${IOTA_ULTRALIGHT_HTTP_PORT}"
-      },
-      "mqtt": {
-        "protocol": "mqtt",
-        "host": "${IOTA_ULTRALIGHT_MQTT_HOST}",
-        "port": "${IOTA_ULTRALIGHT_MQTT_PORT}",
-        "user": "${IOTA_ULTRALIGHT_MQTT_USER}",
-        "password": "${IOTA_ULTRALIGHT_MQTT_PASS}"
-      }
-    },
-    "json": {
-      "api_key": "${IOTA_JSON_API",
-      "http": {
-        "protocol": "http",
-        "host": "${IOTA_JSON_HTTP_HOST}",
-        "port": "${IOTA_JSON_HTTP_PORT}"
-      },
-      "mqtt": {
-        "protocol": "mqtt",
-        "host": "${IOTA_JSON_MQTT_HOST}",
-        "port": "${IOTA_JSON_MQTT_PORT}",
-        "user": "${IOTA_JSON_MQTT_USER}",
-        "password": "${IOTA_JSON_MQTT_PASS}"
-      }
-    }
-  }
-}
-```
-
 ## Simulation configuration file
 
 As mentioned in the description of the FIWARE Device Simulator command line tool, a simulation is described by a simulation configuration file (which is passed to the command line tool using the `-c` option).
 
 The simulation configuration file is a JSON-formatted text file detailing the characteristics of the simulation to run.
 
-As it is mentioned before, this simulation configuration file can use environment variables, but, this can be overridden and be setted with different configuration if it is necessary.
+This simulation configuration file can use environment variables, as described in [a specific section](#using-environment-variables-in-simulation-file).
 
 An example simulation configuration file is shown next to give you a glimpse of its shape. After it, the accepted properties and options are properly detailed.
 
@@ -617,3 +517,102 @@ Obviously, if an import directive refers to a template not declared either in th
 Although the FIWARE Device Simulator command line tool (i.e., [`fiwareDeviceSimulatorCLI`](https://github.com/telefonicaid/fiware-device-simulator/blob/master/bin/fiwareDeviceSimulatorCLI)) includes support for the import mechanism just described, we have also included a specific command line tool for the import mechanism which transpiles an input simulation configuration file into an output configuration file including the resolved imports (i.e., [`fiwareDeviceSimulatorTranspilerCLI`](https://github.com/telefonicaid/fiware-device-simulator/blob/master/bin/fiwareDeviceSimulatorTranspilerCLI)). Check the `Command line tools` section for further details on both command line tools.
 
 Last but not least, the [`./examples`](https://github.com/telefonicaid/fiware-device-simulator/tree/master/examples) directory includes some real examples of simulation configuration files used to simulate distinct scenarios.
+
+## Using environment variables in simulation file
+
+The simulation configuration file may use an `.env` file to set configuration in the form of environment variables. This can be used to avoid setting
+sensitive information, and be executed in whatever environment, having different configurations and not been needed to change anything on code.
+
+Here's an example of `.env` file with the commonly environment variables used:
+
+```json
+AUTH_PASS="pass"
+AUTH_USER="user"
+AUTH_PORT=5001
+AUTH_HOST="localhost"
+
+DOMAIN_SERVICE="service"
+DOMAIN_SUBSERVICE="/subservice"
+
+CB_HOST="localhost"
+CB_PORT=1026
+
+IOTA_ULTRALIGHT_API="1ifhm6o0kp4ew7fi377mpyc3c"
+IOTA_ULTRALIGHT_HTTP_HOST="localhost"
+IOTA_ULTRALIGHT_HTTP_PORT=8085
+IOTA_ULTRALIGHT_MQTT_HOST="localhost"
+IOTA_ULTRALIGHT_MQTT_PORT=1833
+IOTA_ULTRALIGHT_MQTT_USER="mqttUser"
+IOTA_ULTRALIGHT_MQTT_PASS="mqttPassword"
+
+IOTA_JSON_API="83ut64ib3gzs6km6izubjyenu"
+IOTA_JSON_HTTP_HOST="localhost"
+IOTA_JSON_HTTP_PORT=8185
+IOTA_JSON_MQTT_HOST="localhost"
+IOTA_JSON_MQTT_PORT=1883
+IOTA_JSON_MQTT_USER="mqttUser"
+IOTA_JSON_MQTT_PASS="mqttPassword"
+```
+
+To use a environment variable on the configuration file, it's needed to be setted around `${}` having as result `${VARIABLE}`.
+
+An example simulation configuration file using environment variables is shown next to give you a glimpse of its shape:
+
+```json
+{
+  "domain": {
+    "service": "${DOMAIN_SERVICE}",
+    "subservice": "${DOMAIN_SUBSERVICE}"
+  },
+  "contextBroker": {
+    "protocol": "http",
+    "host": "${CB_HOST}",
+    "port": "${CB_PORT}",
+    "ngsiVersion": "2.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "http",
+    "host": "${AUTH_HOST}",
+    "port": "${AUTH_PORT}",
+    "user": "${AUTH_USER}",
+    "password": "${AUTH_PASS}",
+    "retry": {
+      "times": 10,
+      "interval": 1000
+    }
+  },
+  "iota": {
+    "ultralight": {
+      "api_key": "${IOTA_ULTRALIGHT_API}",
+      "http": {
+        "protocol": "http",
+        "host": "${IOTA_ULTRALIGHT_HTTP_HOST}",
+        "port": "${IOTA_ULTRALIGHT_HTTP_PORT}"
+      },
+      "mqtt": {
+        "protocol": "mqtt",
+        "host": "${IOTA_ULTRALIGHT_MQTT_HOST}",
+        "port": "${IOTA_ULTRALIGHT_MQTT_PORT}",
+        "user": "${IOTA_ULTRALIGHT_MQTT_USER}",
+        "password": "${IOTA_ULTRALIGHT_MQTT_PASS}"
+      }
+    },
+    "json": {
+      "api_key": "${IOTA_JSON_API",
+      "http": {
+        "protocol": "http",
+        "host": "${IOTA_JSON_HTTP_HOST}",
+        "port": "${IOTA_JSON_HTTP_PORT}"
+      },
+      "mqtt": {
+        "protocol": "mqtt",
+        "host": "${IOTA_JSON_MQTT_HOST}",
+        "port": "${IOTA_JSON_MQTT_PORT}",
+        "user": "${IOTA_JSON_MQTT_USER}",
+        "password": "${IOTA_JSON_MQTT_PASS}"
+      }
+    }
+  }
+}
+```

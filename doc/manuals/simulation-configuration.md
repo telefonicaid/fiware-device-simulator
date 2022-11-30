@@ -1,8 +1,94 @@
-# Simulation configuration file
+# Simulation configuration
+
+## Environment variables file
+
+The simulation configuration file may use an .env file to set certain configuration on simulation.json file, this is used to avoid set sensitive information, and be executed in whatever environment, having different configurations and not been needed to change anything on code.
+
+Here's an example of `.env` file with the commonly environment variables used:
+
+```json
+AUTH_PASS="pass"
+AUTH_USER="user"
+AUTH_PORT=5001
+AUTH_HOST="localhost"
+
+DOMAIN_SERVICE="service"
+DOMAIN_SUBSERVICE="/subservice"
+
+CB_HOST="localhost"
+CB_PORT=1026
+```
+
+To use a environment variable on the configuration file, it's needed to set the prefix `process.env.` and right after the variable name `{VARIABLE}` having as result `process.env.{VARIABLE}`.
+
+An example simulation configuration file using environment variables is shown next to give you a glimpse of its shape:
+
+```json
+{
+  "domain": {
+    "service": "process.env.DOMAIN_SERVICE",
+    "subservice": "process.env.DOMAIN_SUBSERVICE"
+  },
+  "contextBroker": {
+    "protocol": "http",
+    "host": "process.env.CB_HOST",
+    "port": "process.env.CB_PORT",
+    "ngsiVersion": "2.0"
+  },
+  "authentication": {
+    "provider": "keystone",
+    "protocol": "http",
+    "host": "process.env.AUTH_HOST",
+    "port": "process.env.AUTH_PORT",
+    "user": "process.env.AUTH_USER",
+    "password": "process.env.AUTH_PASS",
+    "retry": {
+      "times": 10,
+      "interval": 1000
+    }
+  },
+  "iota": {
+    "ultralight": {
+      "api_key": "1ifhm6o0kp4ew7fi377mpyc3c",
+      "http": {
+        "protocol": "http",
+        "host": "localhost",
+        "port": 8085
+      },
+      "mqtt": {
+        "protocol": "mqtt",
+        "host": "localhost",
+        "port": 1883,
+        "user": "mqttUser",
+        "password": "mqttPassword"
+      }
+    },
+    "json": {
+      "api_key": "83ut64ib3gzs6km6izubjyenu",
+      "http": {
+        "protocol": "http",
+        "host": "localhost",
+        "port": 8185
+      },
+      "mqtt": {
+        "protocol": "mqtt",
+        "host": "localhost",
+        "port": 1883,
+        "user": "mqttUser",
+        "password": "mqttPassword"
+      }
+    }
+  }
+}
+```
+
+## Simulation configuration file
 
 As mentioned in the description of the FIWARE Device Simulator command line tool, a simulation is described by a simulation configuration file (which is passed to the command line tool using the `-c` option).
 
 The simulation configuration file is a JSON-formatted text file detailing the characteristics of the simulation to run.
+
+As it is mentioned before, this simulation configuration file can use environment variables, but, this can be overridden and be setted with different configuration if it is necessary.
 
 An example simulation configuration file is shown next to give you a glimpse of its shape. After it, the accepted properties and options are properly detailed.
 

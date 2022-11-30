@@ -12,5 +12,5 @@ pages:
   - 'Home': 'index.md'
   - 'Installation': 'installation.md'
   - 'Command line tools': 'command-line-tools.md'
-  - 'Simulation configuration file': 'simulation-configuration-file.md'
+  - 'Simulation configuration': 'simulation-configuration.md'
   - 'FIWARE Device Simulator library': 'simulator-library.md'

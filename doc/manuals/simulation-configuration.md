@@ -35,29 +35,29 @@ IOTA_JSON_MQTT_USER="mqttUser"
 IOTA_JSON_MQTT_PASS="mqttPassword"
 ```
 
-To use a environment variable on the configuration file, it's needed to set the prefix `process.env.` and right after the variable name `{VARIABLE}` having as result `process.env.{VARIABLE}`.
+To use a environment variable on the configuration file, it's needed to be setted around `${}` having as result `${VARIABLE}`.
 
 An example simulation configuration file using environment variables is shown next to give you a glimpse of its shape:
 
 ```json
 {
   "domain": {
-    "service": "process.env.DOMAIN_SERVICE",
-    "subservice": "process.env.DOMAIN_SUBSERVICE"
+    "service": "${DOMAIN_SERVICE}",
+    "subservice": "${DOMAIN_SUBSERVICE}"
   },
   "contextBroker": {
     "protocol": "http",
-    "host": "process.env.CB_HOST",
-    "port": "process.env.CB_PORT",
+    "host": "${CB_HOST}",
+    "port": "${CB_PORT}",
     "ngsiVersion": "2.0"
   },
   "authentication": {
     "provider": "keystone",
     "protocol": "http",
-    "host": "process.env.AUTH_HOST",
-    "port": "process.env.AUTH_PORT",
-    "user": "process.env.AUTH_USER",
-    "password": "process.env.AUTH_PASS",
+    "host": "${AUTH_HOST}",
+    "port": "${AUTH_PORT}",
+    "user": "${AUTH_USER}",
+    "password": "${AUTH_PASS}",
     "retry": {
       "times": 10,
       "interval": 1000
@@ -65,33 +65,33 @@ An example simulation configuration file using environment variables is shown ne
   },
   "iota": {
     "ultralight": {
-      "api_key": "process.env.IOTA_ULTRALIGHT_API",
+      "api_key": "${IOTA_ULTRALIGHT_API}",
       "http": {
         "protocol": "http",
-        "host": "process.env.IOTA_ULTRALIGHT_HTTP_HOST",
-        "port": "process.env.IOTA_ULTRALIGHT_HTTP_PORT"
+        "host": "${IOTA_ULTRALIGHT_HTTP_HOST}",
+        "port": "${IOTA_ULTRALIGHT_HTTP_PORT}"
       },
       "mqtt": {
         "protocol": "mqtt",
-        "host": "process.env.IOTA_ULTRALIGHT_MQTT_HOST",
-        "port": "process.env.IOTA_ULTRALIGHT_MQTT_PORT",
-        "user": "process.env.IOTA_ULTRALIGHT_MQTT_USER",
-        "password": "process.env.IOTA_ULTRALIGHT_MQTT_PASS"
+        "host": "${IOTA_ULTRALIGHT_MQTT_HOST}",
+        "port": "${IOTA_ULTRALIGHT_MQTT_PORT}",
+        "user": "${IOTA_ULTRALIGHT_MQTT_USER}",
+        "password": "${IOTA_ULTRALIGHT_MQTT_PASS}"
       }
     },
     "json": {
-      "api_key": "process.env.IOTA_JSON_API",
+      "api_key": "${IOTA_JSON_API",
       "http": {
         "protocol": "http",
-        "host": "process.env.IOTA_JSON_HTTP_HOST",
-        "port": "process.env.IOTA_JSON_HTTP_PORT"
+        "host": "${IOTA_JSON_HTTP_HOST}",
+        "port": "${IOTA_JSON_HTTP_PORT}"
       },
       "mqtt": {
         "protocol": "mqtt",
-        "host": "process.env.IOTA_JSON_MQTT_HOST",
-        "port": "process.env.IOTA_JSON_MQTT_PORT",
-        "user": "process.env.IOTA_JSON_MQTT_USER",
-        "password": "process.env.IOTA_JSON_MQTT_PASS"
+        "host": "${IOTA_JSON_MQTT_HOST}",
+        "port": "${IOTA_JSON_MQTT_PORT}",
+        "user": "${IOTA_JSON_MQTT_USER}",
+        "password": "${IOTA_JSON_MQTT_PASS}"
       }
     }
   }

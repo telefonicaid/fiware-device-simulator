@@ -337,9 +337,11 @@ function getEnvVariables(file) {
     if (typeof element === 'object' && element.length === undefined) {
       file[key] = getEnvVariables(element);
     } else if (typeof element === 'string') {
-      const split = element.split('.');
-      if (split.length > 0 && split[0] === 'process') {
-        result[key] = eval(element);
+      const match = element.match(/^\${[A-Z_]+}/g);
+      if (match && match.length > 0) {
+        let command = match[0].replace('${', '').replace('}', '');
+        command = `process.env.${command}`;
+        result[key] = eval(command);
       }
     }
   }

@@ -339,12 +339,16 @@ function applyEnvVars(file) {
     if (typeof element === 'object' && element.length === undefined) {
       file[key] = applyEnvVars(element);
     } else if (typeof element === 'string') {
-      const match = element.match(/^\${[A-Z_]+}/g);
+      const match = element.match(/^\${[A-Za-z_-]+}/g);
       if (match && match.length > 0) {
         let command = match[0].replace('${', '').replace('}', '');
         command = `process.env.${command}`;
-        result[key] = eval(command);
+        result[key] = eval(command) ? eval(command) : '';
       }
+    } else if (typeof element === 'object' && element.length > 0) {
+      element.forEach((item, index) => {
+        element[index] = applyEnvVars(item);
+      });
     }
   }
   return result;
@@ -355,6 +359,7 @@ function applyEnvVars(file) {
  */
 function startSimulation() {
   const file = applyEnvVars(require(resolvePath(commander.configuration)));
+    console.log(file.entities[0]);
   var progressEmitter = deviceSimulator.start(
     file, commander.from, commander.to,
     commander.progressInfoInterval, commander.maximumNotRespondedRequests, commander.delay || 1000);

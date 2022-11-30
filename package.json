@@ -28,7 +28,7 @@
     "watch": "watch 'npm test && npm run lint' ./lib ./test"
   },
   "devDependencies": {
-    "dotenv": "^16.0.3",
+    "dotenv": "~16.0.3",
     "istanbul": "~0.4.5",
     "jshint": "~2.9.6",
     "mocha": "5.2.0",

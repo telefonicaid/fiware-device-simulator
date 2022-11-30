@@ -328,31 +328,21 @@ function updateScheduledJobsInGoogleSheet() {
 }
 
 /**
- * Check if it is a .env variable
+ * Get .env variables
  */
-function checkIfIsEnv(section) {
-  const sectionResult = section;
-  for (const key in section) {
-    if (typeof section[key] == 'string') {
-      const split = section[key].split('.');
+function getEnvVariables(file) {
+  const result = file;
+  for (const key in result) {
+    const element = result[key];
+    if (typeof element === 'object' && element.length === undefined) {
+      file[key] = getEnvVariables(element);
+    } else if (typeof element === 'string') {
+      const split = element.split('.');
       if (split.length > 0 && split[0] === 'process') {
-        sectionResult[key] = eval(section[key]);
+        result[key] = eval(element);
       }
     }
   }
-  return sectionResult;
-}
-
-/**
- * Get .env variables
- */
-function getEnvVar(file) {
-  const result = file;
-  if ("domain" in result) result.domain = checkIfIsEnv(result.domain);
-  if ("contextBroker" in result)
-    result.contextBroker = checkIfIsEnv(file.contextBroker);
-  if ("authentication" in result)
-    result.authentication = checkIfIsEnv(file.authentication);
   return result;
 }
 
@@ -360,7 +350,7 @@ function getEnvVar(file) {
  * Starts the simulation
  */
 function startSimulation() {
-  const file = getEnvVar(require(resolvePath(commander.configuration)));
+  const file = getEnvVariables(require(resolvePath(commander.configuration)));
   var progressEmitter = deviceSimulator.start(
     file, commander.from, commander.to,
     commander.progressInfoInterval, commander.maximumNotRespondedRequests, commander.delay || 1000);

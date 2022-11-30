@@ -17,6 +17,22 @@ DOMAIN_SUBSERVICE="/subservice"
 
 CB_HOST="localhost"
 CB_PORT=1026
+
+IOTA_ULTRALIGHT_API="1ifhm6o0kp4ew7fi377mpyc3c"
+IOTA_ULTRALIGHT_HTTP_HOST="localhost"
+IOTA_ULTRALIGHT_HTTP_PORT=8085
+IOTA_ULTRALIGHT_MQTT_HOST="localhost"
+IOTA_ULTRALIGHT_MQTT_PORT=1833
+IOTA_ULTRALIGHT_MQTT_USER="mqttUser"
+IOTA_ULTRALIGHT_MQTT_PASS="mqttPassword"
+
+IOTA_JSON_API="83ut64ib3gzs6km6izubjyenu"
+IOTA_JSON_HTTP_HOST="localhost"
+IOTA_JSON_HTTP_PORT=8185
+IOTA_JSON_MQTT_HOST="localhost"
+IOTA_JSON_MQTT_PORT=1883
+IOTA_JSON_MQTT_USER="mqttUser"
+IOTA_JSON_MQTT_PASS="mqttPassword"
 ```
 
 To use a environment variable on the configuration file, it's needed to set the prefix `process.env.` and right after the variable name `{VARIABLE}` having as result `process.env.{VARIABLE}`.
@@ -49,33 +65,33 @@ An example simulation configuration file using environment variables is shown ne
   },
   "iota": {
     "ultralight": {
-      "api_key": "1ifhm6o0kp4ew7fi377mpyc3c",
+      "api_key": "process.env.IOTA_ULTRALIGHT_API",
       "http": {
         "protocol": "http",
-        "host": "localhost",
-        "port": 8085
+        "host": "process.env.IOTA_ULTRALIGHT_HTTP_HOST",
+        "port": "process.env.IOTA_ULTRALIGHT_HTTP_PORT"
       },
       "mqtt": {
         "protocol": "mqtt",
-        "host": "localhost",
-        "port": 1883,
-        "user": "mqttUser",
-        "password": "mqttPassword"
+        "host": "process.env.IOTA_ULTRALIGHT_MQTT_HOST",
+        "port": "process.env.IOTA_ULTRALIGHT_MQTT_PORT",
+        "user": "process.env.IOTA_ULTRALIGHT_MQTT_USER",
+        "password": "process.env.IOTA_ULTRALIGHT_MQTT_PASS"
       }
     },
     "json": {
-      "api_key": "83ut64ib3gzs6km6izubjyenu",
+      "api_key": "process.env.IOTA_JSON_API",
       "http": {
         "protocol": "http",
-        "host": "localhost",
-        "port": 8185
+        "host": "process.env.IOTA_JSON_HTTP_HOST",
+        "port": "process.env.IOTA_JSON_HTTP_PORT"
       },
       "mqtt": {
         "protocol": "mqtt",
-        "host": "localhost",
-        "port": 1883,
-        "user": "mqttUser",
-        "password": "mqttPassword"
+        "host": "process.env.IOTA_JSON_MQTT_HOST",
+        "port": "process.env.IOTA_JSON_MQTT_PORT",
+        "user": "process.env.IOTA_JSON_MQTT_USER",
+        "password": "process.env.IOTA_JSON_MQTT_PASS"
       }
     }
   }

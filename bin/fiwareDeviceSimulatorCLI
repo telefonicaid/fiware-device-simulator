@@ -37,6 +37,7 @@ var path = require('path');
 var request = require('request');
 var time = require('time');
 var deviceSimulator = require(ROOT_PATH + '/lib/fiwareDeviceSimulator');
+require('dotenv').config()
 
 /**
  * Array with the last 10 emitted errors
@@ -327,11 +328,39 @@ function updateScheduledJobsInGoogleSheet() {
 }
 
 /**
+ * Check if it is a .env variable
+ */
+function checkIfIsEnv(section) {
+  const sectionResult = section;
+  for (const key in section) {
+    if (typeof section[key] == 'string') {
+      const split = section[key].split('.');
+      if (split.length > 0 && split[0] === 'process') {
+        sectionResult[key] = eval(section[key]);
+      }
+    }
+  }
+  return sectionResult;
+}
+
+/**
+ * Get .env variables
+ */
+function getEnvVar(file) {
+  const result = file;
+  result.domain = checkIfIsEnv(result.domain);
+  result.contextBroker = checkIfIsEnv(file.contextBroker);
+  result.authentication = checkIfIsEnv(file.authentication);
+  return result;
+}
+
+/**
  * Starts the simulation
  */
 function startSimulation() {
+  const file = getEnvVar(require(resolvePath(commander.configuration)));
   var progressEmitter = deviceSimulator.start(
-    require(resolvePath(commander.configuration)), commander.from, commander.to,
+    file, commander.from, commander.to,
     commander.progressInfoInterval, commander.maximumNotRespondedRequests, commander.delay || 1000);
 
   progressEmitter.on('token-request', function() {

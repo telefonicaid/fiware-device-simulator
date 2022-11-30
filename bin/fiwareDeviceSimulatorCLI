@@ -337,7 +337,7 @@ function applyEnvVars(file) {
   for (const key in result) {
     const element = result[key];
     if (typeof element === 'object' && element.length === undefined) {
-      file[key] = getEnvVariables(element);
+      file[key] = applyEnvVars(element);
     } else if (typeof element === 'string') {
       const match = element.match(/^\${[A-Z_]+}/g);
       if (match && match.length > 0) {
@@ -354,7 +354,7 @@ function applyEnvVars(file) {
  * Starts the simulation
  */
 function startSimulation() {
-  const file = getEnvVariables(require(resolvePath(commander.configuration)));
+  const file = applyEnvVars(require(resolvePath(commander.configuration)));
   var progressEmitter = deviceSimulator.start(
     file, commander.from, commander.to,
     commander.progressInfoInterval, commander.maximumNotRespondedRequests, commander.delay || 1000);

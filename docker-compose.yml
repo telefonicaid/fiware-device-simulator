@@ -25,6 +25,7 @@ services:
     hostname: iot-device-simulator
     image: telefonicaiot/fiware-device-simulator:latest
     command: sleep 10000000
-    # log_driver: json-file
-    # log_opt:
-    #   max-size: "250m"
+    logging:
+      driver: json-file
+      options:
+        max-size: "250m"

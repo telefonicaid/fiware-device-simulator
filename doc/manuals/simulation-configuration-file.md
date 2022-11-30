@@ -525,6 +525,7 @@ sensitive information, and be executed in whatever environment, having different
 
 Here's an example of `.env` file with the commonly environment variables used:
 
+```
 AUTH_PASS="pass"
 AUTH_USER="user"
 AUTH_PORT=5001

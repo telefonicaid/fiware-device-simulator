@@ -37,6 +37,7 @@ var path = require('path');
 var request = require('request');
 var time = require('time');
 var deviceSimulator = require(ROOT_PATH + '/lib/fiwareDeviceSimulator');
+require('dotenv').config()
 
 /**
  * Array with the last 10 emitted errors
@@ -327,11 +328,39 @@ function updateScheduledJobsInGoogleSheet() {
 }
 
 /**
+ * Process the elements of the simulation JSON (starting by the root element in a recursive way) and replace
+ * each ${...} token by the corresponding environment variable value (supposedly defined in .env file, otherwise
+ * the token is replaced by a blank).
+ */
+function applyEnvVars(file) {
+  const result = file;
+  for (const key in result) {
+    const element = result[key];
+    if (typeof element === 'object' && element.length === undefined) {
+      file[key] = applyEnvVars(element);
+    } else if (typeof element === 'object' && element.length > 0) {
+      element.forEach((item, index) => {
+        element[index] = applyEnvVars(item);
+      });
+    } else if (typeof element === 'string') {
+      const match = element.match(/^\${[A-Za-z_-]+}/g);
+      if (match && match.length > 0) {
+        let command = match[0].replace('${', '').replace('}', '');
+        command = `process.env.${command}`;
+        result[key] = eval(command) ? eval(command) : '';
+      }
+    }
+  }
+  return result;
+}
+
+/**
  * Starts the simulation
  */
 function startSimulation() {
+  const file = applyEnvVars(require(resolvePath(commander.configuration)));
   var progressEmitter = deviceSimulator.start(
-    require(resolvePath(commander.configuration)), commander.from, commander.to,
+    file, commander.from, commander.to,
     commander.progressInfoInterval, commander.maximumNotRespondedRequests, commander.delay || 1000);
 
   progressEmitter.on('token-request', function() {

@@ -18,12 +18,14 @@
 #
 # For those usages not covered by the GNU Affero General Public License
 # please contact with sc_support at telefonica dot com
-
-iot-device-simulator:
-  container_name: iot-device-simulator
-  hostname: iot-device-simulator
-  image: telefonicaiot/fiware-device-simulator:latest
-  command: sleep 10000000
-  log_driver: json-file
-  log_opt:
-    max-size: "250m"
+version: "3.9"
+services:
+  iot-device-simulator:
+    container_name: iot-device-simulator
+    hostname: iot-device-simulator
+    image: telefonicaiot/fiware-device-simulator:latest
+    command: sleep 10000000
+    logging:
+      driver: json-file
+      options:
+        max-size: "250m"

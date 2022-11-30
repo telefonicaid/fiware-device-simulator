@@ -1,4 +1,4 @@
-## Simulation configuration file
+# Simulation configuration file
 
 As mentioned in the description of the FIWARE Device Simulator command line tool, a simulation is described by a simulation configuration file (which is passed to the command line tool using the `-c` option).
 

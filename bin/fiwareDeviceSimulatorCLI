@@ -328,9 +328,11 @@ function updateScheduledJobsInGoogleSheet() {
 }
 
 /**
- * Get .env variables
+ * Process the elements of the simulation JSON (starting by the root element in a recursive way) and replace
+ * each ${...} token by the corresponding environment variable value (supposedly defined in .env file, otherwise
+ * the token is replaced by a blank).
  */
-function getEnvVariables(file) {
+function applyEnvVars(file) {
   const result = file;
   for (const key in result) {
     const element = result[key];

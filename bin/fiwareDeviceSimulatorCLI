@@ -338,6 +338,10 @@ function applyEnvVars(file) {
     const element = result[key];
     if (typeof element === 'object' && element.length === undefined) {
       file[key] = applyEnvVars(element);
+    } else if (typeof element === 'object' && element.length > 0) {
+      element.forEach((item, index) => {
+        element[index] = applyEnvVars(item);
+      });
     } else if (typeof element === 'string') {
       const match = element.match(/^\${[A-Za-z_-]+}/g);
       if (match && match.length > 0) {
@@ -345,10 +349,6 @@ function applyEnvVars(file) {
         command = `process.env.${command}`;
         result[key] = eval(command) ? eval(command) : '';
       }
-    } else if (typeof element === 'object' && element.length > 0) {
-      element.forEach((item, index) => {
-        element[index] = applyEnvVars(item);
-      });
     }
   }
   return result;

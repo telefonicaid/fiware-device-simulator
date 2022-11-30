@@ -348,9 +348,11 @@ function checkIfIsEnv(section) {
  */
 function getEnvVar(file) {
   const result = file;
-  result.domain = checkIfIsEnv(result.domain);
-  result.contextBroker = checkIfIsEnv(file.contextBroker);
-  result.authentication = checkIfIsEnv(file.authentication);
+  if ("domain" in result) result.domain = checkIfIsEnv(result.domain);
+  if ("contextBroker" in result)
+    result.contextBroker = checkIfIsEnv(file.contextBroker);
+  if ("authentication" in result)
+    result.authentication = checkIfIsEnv(file.authentication);
   return result;
 }
 

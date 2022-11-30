@@ -359,7 +359,6 @@ function applyEnvVars(file) {
  */
 function startSimulation() {
   const file = applyEnvVars(require(resolvePath(commander.configuration)));
-    console.log(file.entities[0]);
   var progressEmitter = deviceSimulator.start(
     file, commander.from, commander.to,
     commander.progressInfoInterval, commander.maximumNotRespondedRequests, commander.delay || 1000);

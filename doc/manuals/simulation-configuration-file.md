@@ -527,12 +527,12 @@ It is important to know that, to use environmet variables is neccessary to creat
 
 ``` tree
 ├── electricvehicle         # Subservice directory (simulation has to have the same configuration)
-│   ├── .env.json           # Environment variables (just for this directory and all the inner simulation)
+│   ├── .env                # Environment variables (just for the simulations in this directory)
 │   ├── simulation1.json    # simulation1.json tests
 │   └── simulation2.json    # simulation2.json tests
 │   └── ...
 ├── bathwaters              # Subservice directory (simulation has to have the same configuration)
-│   ├── .env.json           # Environment variables (just for this directory and all the inner simulation)
+│   ├── .env                # Environment variables (just for the simulations in this directory)
 │   ├── simulation1.json    # simulation1.json tests
 │   └── simulation2.json    # simulation2.json tests
 │   └── ...

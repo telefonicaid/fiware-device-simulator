@@ -541,6 +541,7 @@ Note that the `.env` file used by a given simulation file is the one that is loc
 
 Here's an example of `.env` file with the commonly environment variables used:
 
+```
 AUTH_PASS="pass"
 AUTH_USER="user"
 AUTH_PORT=5001

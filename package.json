@@ -1,7 +1,7 @@
 {
   "name": "fiware-device-simulator",
   "description": "Simulator of FIWARE-compatible devices",
-  "version": "1.7.0",
+  "version": "1.7.0-next",
   "licence": "AGPL-3.0",
   "homepage": "https://github.com/gtorodelvalle/fiware-device-simulator",
   "author": {

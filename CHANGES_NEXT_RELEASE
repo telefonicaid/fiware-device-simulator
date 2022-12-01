@@ -1,2 +1,1 @@
-- Add: environment variables based configuration using .env files
-- Upgrade logops dep from 2.1.0 to 2.1.2 due to colors dependency corruption
+- Fix: per-directory .env files

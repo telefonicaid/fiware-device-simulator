@@ -523,6 +523,22 @@ Last but not least, the [`./examples`](https://github.com/telefonicaid/fiware-de
 The simulation configuration file may use an `.env` file to set configuration in the form of environment variables. This can be used to avoid setting
 sensitive information, and be executed in whatever environment, having different configurations and not been needed to change anything on code.
 
+It is important to know that, to use environmet variables is neccessary to create an .env file with all the environment variables that the simulation file will use at the same directory root, having a result as next:
+
+``` tree
+├── electricvehicle         # Subservice directory (simulation has to have the same configuration)
+│   ├── .env.json           # Environment variables (just for this directory and all the inner simulation)
+│   ├── simulation1.json    # simulation1.json tests
+│   └── simulation2.json    # simulation2.json tests
+│   └── ...
+├── bathwaters              # Subservice directory (simulation has to have the same configuration)
+│   ├── .env.json           # Environment variables (just for this directory and all the inner simulation)
+│   ├── simulation1.json    # simulation1.json tests
+│   └── simulation2.json    # simulation2.json tests
+│   └── ...
+└── ...
+```
+
 Here's an example of `.env` file with the commonly environment variables used:
 
 AUTH_PASS="pass"

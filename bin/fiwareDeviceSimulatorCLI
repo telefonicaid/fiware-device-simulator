@@ -37,7 +37,20 @@ var path = require('path');
 var request = require('request');
 var time = require('time');
 var deviceSimulator = require(ROOT_PATH + '/lib/fiwareDeviceSimulator');
-require('dotenv').config()
+
+require('dotenv').config({ path: getPathEnv() });
+
+/**
+ * Helper function to search and set .env path, setting root where it will be searched the .env file, this has to be at the same level as the simulation.json file
+ * @return {String}        .env Path
+ */
+function getPathEnv() {
+  const args = process.argv;
+  let simulationIndex = args.findIndex(item => item === '-c');
+  simulationIndex = args[simulationIndex + 1];
+  const path = simulationIndex.replace(/\/[a-zA-Z_-]+.json/g, '/.env');
+  return path;
+}
 
 /**
  * Array with the last 10 emitted errors

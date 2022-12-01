@@ -523,7 +523,7 @@ Last but not least, the [`./examples`](https://github.com/telefonicaid/fiware-de
 The simulation configuration file may use an `.env` file to set configuration in the form of environment variables. This can be used to avoid setting
 sensitive information, and be executed in whatever environment, having different configurations and not been needed to change anything on code.
 
-It is important to know that, to use environmet variables is neccessary to create an .env file with all the environment variables that the simulation file will use at the same directory root, having a result as next:
+Note that the `.env` file used by a given simulation file is the one that is located in the same directory where the simulation file is. For instance:
 
 ``` tree
 ├── electricvehicle         # Subservice directory (simulation has to have the same configuration)
